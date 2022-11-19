@@ -1,0 +1,5 @@
+Tailwind Doc : https://tailwindcss.com/docs/guides/create-react-app
+
+1. Creating the app
+npx create-react-app my-tdchra-nga
+cd create-react-app my-tdchra-nga
