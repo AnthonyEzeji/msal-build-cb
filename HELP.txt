@@ -3,3 +3,16 @@ Tailwind Doc : https://tailwindcss.com/docs/guides/create-react-app
 1. Creating the app
 npx create-react-app my-tdchra-nga
 cd create-react-app my-tdchra-nga
+==========================================
+2 . Install tailwind
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+==========================================
+3. Configure your template paths
+Add the paths to all of your template files in your tailwind.config.js file.
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
