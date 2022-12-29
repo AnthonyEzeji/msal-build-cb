@@ -14,6 +14,9 @@ import {
   Squares2X2Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import {
+  Link
+} from "react-router-dom";
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const features = [
@@ -24,16 +27,16 @@ const features = [
     icon: ChartBarIcon,
   },
   {
-    name: 'Engagement',
+    name: 'Patient Safety And Risk Management',
     href: '#',
-    description: 'Speak directly to your customers in a more meaningful way.',
+    description: 'Patient Safety And Risk Management.',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Security', href: '#', description: "Your customers' data will be safe and secure.", icon: ShieldCheckIcon },
+  { name: 'Risk Transfer', href: '#', description: "Risk Transfer.", icon: ShieldCheckIcon },
   {
-    name: 'Integrations',
+    name: 'Claims And Litigation Services',
     href: '#',
-    description: "Connect with third-party tools that you're already using.",
+    description: "Claims And Litigation Services.",
     icon: Squares2X2Icon,
   },
   {
@@ -88,8 +91,8 @@ export default function Example() {
               <a href="#">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  className="h-8 w-auto sm:h-10  text-white"
+                  src="https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png"
                   alt=""
                 />
               </a>
@@ -246,9 +249,10 @@ export default function Example() {
               </Popover>
             </Popover.Group>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-              <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link to="/aboutus" className="whitespace-nowrap text-base font-medium
+             text-white hover:text-gray-900">
                 Sign in
-              </a>
+              </Link>
               <a
                 href="#"
                 className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
