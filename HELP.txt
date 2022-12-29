@@ -1,0 +1,42 @@
+Tailwind Doc : https://tailwindcss.com/docs/guides/create-react-app
+
+1. Creating the app
+npx create-react-app my-tdchra-nga
+cd create-react-app my-tdchra-nga
+==========================================
+2 . Install tailwind
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+==========================================
+3. Configure your template paths
+Add the paths to all of your template files in your tailwind.config.js file.
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+
+
+==========================================
+4.Add the Tailwind directives to your CSS
+Add the @tailwind directives for each of Tailwind’s layers to 
+your ./src/index.css file.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+-------------------------------------------
+ npm install @tailwindcss/forms
+ npm install @tailwindcss/aspect-ratio
+==========================================
+5. Start your build process
+Run your build process with npm run start.
+=========================
+6. Install
+npm i @headlessui/react
+npm install @heroicons/react
+===========================
+7. npm install react-router-dom
+=========================
+Add Router to index.js
+
