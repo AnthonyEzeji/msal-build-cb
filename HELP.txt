@@ -1,3 +1,7 @@
+setting git remote
+user.name
+user.email
+
 Tailwind Doc : https://tailwindcss.com/docs/guides/create-react-app
 
 1. Creating the app
