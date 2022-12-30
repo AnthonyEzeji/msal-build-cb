@@ -4,14 +4,26 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
-  BrowserRouter as Router
+  BrowserRouter as Router,
+
 } from "react-router-dom";
 //import { Router } from 'express';
+
+import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalProvider } from '@azure/msal-react';
+import { msalConfig } from './authConfig';
+
+// Adding login Info
+const msalInstance = new PublicClientApplication(msalConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <Router><App /></Router>
+    <MsalProvider instance={msalInstance}>
+      <Router>
+        <App />
+      </Router>
+    </MsalProvider>
   </React.StrictMode>
 );
 

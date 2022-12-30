@@ -19,6 +19,10 @@ import {
 } from "react-router-dom";
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
+import { useMsal } from '@azure/msal-react'
+import { loginRequest } from '../authConfig';
+
+
 const features = [
   {
     name: 'Analytics',
@@ -28,20 +32,20 @@ const features = [
   },
   {
     name: 'Patient Safety And Risk Management',
-    href: '#',
+    href: 'http://test.com',
     description: 'Patient Safety And Risk Management.',
     icon: CursorArrowRaysIcon,
   },
   { name: 'Risk Transfer', href: '#', description: "Risk Transfer.", icon: ShieldCheckIcon },
   {
     name: 'Claims And Litigation Services',
-    href: '#',
+    href: 'http://test.com',
     description: "Claims And Litigation Services.",
     icon: Squares2X2Icon,
   },
   {
     name: 'Automations',
-    href: '#',
+    href: 'http://test.com',
     description: 'Build strategic funnels that will drive your customers to convert',
     icon: ArrowPathIcon,
   },
@@ -82,6 +86,15 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const { instance } = useMsal();
+  const handleLogin = () => {
+    /* instance.loginPopup(loginRequest).catch(e => {
+         console.log(e);
+     }); */
+     instance.loginRedirect(loginRequest).catch(e => {
+       console.log(e);
+   });
+ }
   return (
     <div className="relative bg-gray-50">
       <Popover className="relative bg-gray-800 shadow">
@@ -250,7 +263,7 @@ export default function Example() {
             </Popover.Group>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link to="/aboutus" className="whitespace-nowrap text-base font-medium
-             text-white hover:text-gray-900">
+             text-white hover:text-gray-900" onClick={handleLogin}>
                 Sign in
               </Link>
               <a
