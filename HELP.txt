@@ -1,6 +1,6 @@
 setting git remote
 user.name
-user.email
+user.email -> sthomas@thedoctors.com
 
 Tailwind Doc : https://tailwindcss.com/docs/guides/create-react-app
 
