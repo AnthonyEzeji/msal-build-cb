@@ -7,6 +7,8 @@ import {
   Link
 } from "react-router-dom";
 import HomePage from "./components/HomePage";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
+import { callMsGraph } from "./graph";
 
 const About = () => {
   return <h1>About</h1>
@@ -16,14 +18,14 @@ const About = () => {
 function App() {
   return (
     <div>
+      <UnauthenticatedTemplate>
+        <HomePage></HomePage>
+      </UnauthenticatedTemplate>
+      <AuthenticatedTemplate>
+        <Dashboards></Dashboards>
+      </AuthenticatedTemplate>
+    </div>
 
-    <HomePage></HomePage>
-    <Routes>
-            <Route exact path='/aboutus' element={<Dashboards></Dashboards>}></Route>
-    </Routes>
-    
-    </div> 
-    
   );
 }
 
