@@ -1,5 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+
+import { useMsal } from '@azure/msal-react'
 import {
   Bars3Icon,
   CalendarIcon,
@@ -10,7 +12,9 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-
+import {
+  Link
+} from "react-router-dom";
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -26,6 +30,17 @@ function classNames(...classes) {
 
 export default function Dashboards() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { instance } = useMsal();
+
+  const handleLogout = () => {
+     /* instance.logoutPopup({
+          postLogoutRedirectUri: "/",
+          mainWindowRedirectUri: "/"
+      });*/
+      instance.logoutRedirect({
+          postLogoutRedirectUri: "/",
+      });
+  }
 
   return (
     <>
@@ -126,8 +141,10 @@ export default function Dashboards() {
                           />
                         </div>
                         <div className="ml-3">
-                          <p className="text-base font-medium text-white">Tom Cook</p>
-                          <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
+                          <Link to="/aboutus" className="whitespace-nowrap text-base font-medium
+             text-white hover:text-gray-900" onClick={handleLogout}>
+                            Sign Out
+                          </Link>
                         </div>
                       </div>
                     </a>
@@ -184,8 +201,10 @@ export default function Dashboards() {
                     />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm font-medium text-white">Tom Cook</p>
-                    <p className="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p>
+                    <Link  className="whitespace-nowrap text-base font-medium
+             text-white hover:text-gray-900" onClick={handleLogout} >
+                      Sign Out
+                    </Link>
                   </div>
                 </div>
               </a>
