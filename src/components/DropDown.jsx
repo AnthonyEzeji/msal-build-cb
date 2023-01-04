@@ -3,8 +3,8 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 const people = [
-  { name: 'Wade Cooper', username: '@wadecooper' },
-  { name: 'Arlene Mccoy', username: '@arlenemccoy' },
+  { name: 'Claim Evaluation', username: 'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8' },
+  { name: 'Surgical Losses', username: 'aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1' }
 ]
 
 function classNames(...classes) {
@@ -12,7 +12,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [selected, setSelected] = useState(people[3])
+  const [selected, setSelected] = useState(people[1])
 
   return (
     <Listbox value={selected} onChange={setSelected}>
