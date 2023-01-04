@@ -262,7 +262,7 @@ export default function Example() {
               </Popover>
             </Popover.Group>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link to="/aboutus" className="whitespace-nowrap text-base font-medium
+            <Link to="/dashbaords" className="whitespace-nowrap text-base font-medium
              text-white hover:text-gray-900" onClick={handleLogin}>
                 Sign in
               </Link>
