@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
-
+import "./Embed.css"
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { models } from 'powerbi-client';
 import { PowerBIEmbed } from 'powerbi-client-react';
