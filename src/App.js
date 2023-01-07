@@ -22,6 +22,7 @@ function App() {
         <HomePage></HomePage>
       </UnauthenticatedTemplate>
       <AuthenticatedTemplate>
+      
         <Dashboards></Dashboards>
       </AuthenticatedTemplate>
     </div>
