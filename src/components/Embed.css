@@ -1,0 +1,33 @@
+.bg-navbar {
+    background-color:#243749;
+    
+  }
+  .my-menu {
+    /*Sets all the content of dropdown div to center*/
+                    text-align: center; 
+                }
+  .logo
+  {
+    margin-left: 10px;
+  }
+  .content {
+    margin-top: 5px;
+    padding: 12px;
+    height:3000px;
+  }
+  .mx {
+    margin: 0 5px;
+  }
+  .body_container {
+    height:100%;
+    width: 70%;
+    padding: 30px 20px;
+    background-color: white;
+  }
+  
+  .report-style-class {
+      height: 80vh;
+      margin: 1% auto;
+      width: 90%;
+  }
+
