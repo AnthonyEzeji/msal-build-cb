@@ -23,7 +23,7 @@ import { AiOutlineMedicineBox } from 'react-icons/ai';
 import {BsFileText} from 'react-icons/bs'
 import { useMsal } from '@azure/msal-react'
 import { loginRequest } from '../authConfig';
-
+import callMsGraph from '../graph'
 
 const features = [
   {
@@ -97,6 +97,8 @@ export default function Example() {
        console.log(e);
    });
  }
+ 
+
   return (
     <div className="relative bg-slate-50">
       <Popover className="relative bg-slate-800 shadow">

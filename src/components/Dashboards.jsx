@@ -5,6 +5,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { models } from 'powerbi-client';
 import { PowerBIEmbed } from 'powerbi-client-react';
 import { useMsal } from '@azure/msal-react'
+import '../css/Embed.css'
 import {
   Bars3Icon,
   CalendarIcon,
@@ -20,6 +21,9 @@ import {
 } from "react-router-dom";
 import DropDown from './DropDown';
 import { useEffect } from 'react';
+
+import { loginRequest } from '../authConfig';
+import callMsGraph from '../graph'
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -33,6 +37,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+ 
 export default function Dashboards() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { instance } = useMsal();
@@ -72,11 +77,61 @@ export default function Dashboards() {
       //setMessage('The report is rendered')
     }]
   ]);
+  const [accessToken, setAccessToken] = useState(null);
+const [userGroups, setUserGroups] = useState([])
+const [selectedUserGroup, setSelectedUserGroup] = useState({})
+
+ function RequestAccessToken() {
+  console.log(instance.getAllAccounts()[0])
+     const request = {
+         ...loginRequest,
+         account: instance.getAllAccounts()[0]
+     };
+
+     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+     instance.acquireTokenSilent(request).then((response) => {
+         setAccessToken(response.accessToken);
+     }).catch((e) => {
+         instance.acquireTokenPopup(request).then((response) => {
+             setAccessToken(response.accessToken);
+         });
+     });
+ }
+ useEffect(() => {
+  
+   RequestAccessToken()
+ 
+   
+ }, [])
+ 
+ useEffect(() => {
+   console.log('this is the access token ----> ' + accessToken)
+   callMsGraph(accessToken).then(response=>{
+    console.log(response.value)
+    setUserGroups((response.value))
+   })
+ }, [accessToken])
+ useEffect(() => {
+  console.log(userGroups?.length)
+  if(userGroups?.length>0){
+    setSelectedUserGroup(userGroups[0])
+  }
+   
+ }, [userGroups])
+ useEffect(() => {
+   //powerbi api call to get reports in specified group
+/*fetch(` https://api.powerbi.com/v1.0/thedoctors/groups/${selectedUserGroup.id}/reports`).then(response=>{
+  console.log(response)
+}).catch(e=>console.log(e))*/
+   console.log(selectedUserGroup)
+ }, [selectedUserGroup])
+ 
+ 
   // ---------Sign in -------------------
   const mockSignIn = async () => {
 
     const reportConfigResponse = await fetch(sampleReportUrl+selectedPerson.reportId);
-    console.log(reportConfigResponse);
+
 
     if (!reportConfigResponse.ok) {
       console.error(`Failed to fetch config for report. Status: ${reportConfigResponse.status} ${reportConfigResponse.statusText}`);
@@ -84,8 +139,7 @@ export default function Dashboards() {
     }
 
     const reportConfig = await reportConfigResponse.json();
-    console.log("Report Retrieved Successfully");
-    console.log(reportConfig);
+    
     setReportConfig({
       ...pbiReportConfig,
       //embedUrl: reportConfig.EmbedUrl,
@@ -107,13 +161,16 @@ export default function Dashboards() {
 function handleChange(e){
   console.log(e)
   setSelectedPerson(e)
-  mockSignIn()
+
 }
+
+
+
 useEffect(() => {
   
 
   mockSignIn()
-}, [])
+}, [selectedPerson])
 
   return (
     <>
@@ -303,7 +360,53 @@ useEffect(() => {
               <div className="mx-auto max-w-7xl  px-4 sm:px-6 md:px-8 w-full">
                 {/* Replace with your content */}
                 <div className="py-4">
+                {selectedUserGroup?.hasOwnProperty('id')&&    <Combobox as="div" value={selectedUserGroup} onChange={(e)=>handleChange(e)}>
+                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select a group</Combobox.Label>
+                    <div className="relative mt-1">
+                      <Combobox.Input
+                        className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                        onChange={(event) => setQuery(event.target.value)}
+                        displayValue={(selectedUserGroup) => selectedUserGroup.displayName + '-' + selectedUserGroup?.id}
+                      />
+                      <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                        <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                      </Combobox.Button>
 
+                      
+                        <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                          {userGroups.map((group) => (
+                            <Combobox.Option
+                              key={group.id}
+                              value={group}
+                              className={({ active }) =>
+                                classNames(
+                                  'relative cursor-default select-none py-2 pl-3 pr-9',
+                                  active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                                )
+                              }
+                            >
+                              {({ active, selected }) => (
+                                <>
+                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{group.id}</span>
+
+                                  {selected && (
+                                    <span
+                                      className={classNames(
+                                        'absolute inset-y-0 right-0 flex items-center pr-4',
+                                        active ? 'text-white' : 'text-indigo-600'
+                                      )}
+                                    >
+                                      <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                    </span>
+                                  )}
+                                </>
+                              )}
+                            </Combobox.Option>
+                          ))}
+                        </Combobox.Options>
+                      
+                    </div>
+                  </Combobox> }
                   <Combobox as="div" value={selectedPerson} onChange={(e)=>handleChange(e)}>
                     <Combobox.Label className="block text-sm font-medium text-gray-700">Select Your Report</Combobox.Label>
                     <div className="relative mt-1">
@@ -351,6 +454,8 @@ useEffect(() => {
                       )}
                     </div>
                   </Combobox>
+                  
+                  
 
 
                   {/*<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
@@ -360,7 +465,7 @@ useEffect(() => {
               
                 embedConfig={pbiReportConfig}
                 eventHandlers={eventHandlersMap}
-                cssClassName={"h-[75vh]"}
+                cssClassName="report-style-class"
                 getEmbeddedComponent={
                   (embeddedReport) => {
                     window.report = embeddedReport;
