@@ -1,53 +1,57 @@
+import { Link } from "react-router-dom"
+import BlogImg1 from '../assets/blog images/malpractice-lawsuits-data--400x250.jpg'
+import BlogImg2 from '../assets/blog images/bigstock-modern-medical-technologies-c-3825074062.jpg'
+import BlogImg3 from '../assets/blog images/bigstock-business-people-shake-hands-to-371829652-400x250.jpg'
 const posts = [
     {
-      title: 'Boost your conversion rate',
+      title: 'How Data Can Reduce the Chance for Medical Malpractice Lawsuits',
       href: '#',
       category: { name: 'Article', href: '#' },
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.',
-      date: 'Mar 16, 2020',
-      datetime: '2020-03-16',
+        'When it comes to understanding risk profiles for medical malpractice insurance, organizations have long been limited to little more than the data which comes only after an adverse event or lawsuit has been filed...',
+      date: 'Jan 6, 2022',
+      datetime: '2020-01-06',
       imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
+        BlogImg1,
       readingTime: '6 min',
       author: {
-        name: 'Roel Aufderehar',
+        name: 'Healthcare Risk Advisors',
         href: '#',
         imageUrl:
           'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
     },
     {
-      title: 'How to use search engine optimization to drive sales',
+      title: 'Healthcare’s Digital Revolution: (Finally) a Time for Optimism” Webinar Presented by HRA',
       href: '#',
-      category: { name: 'Video', href: '#' },
+      category: { name: 'Article', href: '#' },
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.',
-      date: 'Mar 10, 2020',
-      datetime: '2020-03-10',
+        'Recently, I was fortunate enough to host an HRA webinar featuring Robert M. Wachter, MD—Professor and Chair of the Department of Medicine at the University of California, San Francisco (UCSF)...',
+      date: 'Jun 9, 2021',
+      datetime: '2021-06-09',
       imageUrl:
-        'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
+        BlogImg2,
       readingTime: '4 min',
       author: {
-        name: 'Brenna Goyette',
+        name: 'Healthcare Risk Advisors',
         href: '#',
         imageUrl:
           'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
     },
     {
-      title: 'Improve your customer experience',
+      title: 'Communication is the Key to Prevail in a Medical Lawsuit',
       href: '#',
-      category: { name: 'Case Study', href: '#' },
+      category: { name: 'Article', href: '#' },
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.',
+        'Recently, HRA Senior Vice President and Chief Claims Officer Peter Kolbert joined in a discussion about risk management in healthcare...',
       date: 'Feb 12, 2020',
-      datetime: '2020-02-12',
+      datetime: '2021-05-17',
       imageUrl:
-        'https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
+       BlogImg3,
       readingTime: '11 min',
       author: {
-        name: 'Daniela Metz',
+        name: 'Healthcare Risk Advisors',
         href: '#',
         imageUrl:
           'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
@@ -57,8 +61,8 @@ const posts = [
   
   export default function BlogList() {
     return (
-      <div className="relative bg-gray-50 px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
-        <div className="absolute inset-0">
+      <div className="relative bg-gray-50 px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28 flex flex-col items center">
+        <div className="absolute inset-0 relative">
           <div className="h-1/3 bg-white sm:h-2/3" />
         </div>
         <div className="relative mx-auto max-w-7xl">
@@ -110,7 +114,9 @@ const posts = [
               </div>
             ))}
           </div>
+          <Link to='/blog' className =' w-full text-center py-2 text-white bg-indigo-600 mt-5 rounded-sm absolute'>More</Link>
         </div>
+      
       </div>
     )
   }
