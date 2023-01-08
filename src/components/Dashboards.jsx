@@ -4,7 +4,7 @@ import HRALogo from '../assets/hra logo white.png'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { models } from 'powerbi-client';
 import { PowerBIEmbed } from 'powerbi-client-react';
-import { useMsal } from '@azure/msal-react'
+import { AuthenticatedTemplate, useIsAuthenticated, useMsal } from '@azure/msal-react'
 import '../css/Embed.css'
 import {
   Bars3Icon,
@@ -29,7 +29,7 @@ const navigation = [
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
 ]
-const people = [
+const reports= [
   { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8' },
   { id: 2, name: 'Risk Management Analysis', reportId:"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1" },
 ]
@@ -44,13 +44,13 @@ export default function Dashboards() {
   const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
   // --------- Set State -------------------
 
-  const [selectedPerson, setSelectedPerson] = useState(people[0])
+  const [selectedReport, setSelectedReport] = useState(reports[0])
   const [query, setQuery] = useState('')
-  const filteredPeople =
+  const filteredReports =
     query === ''
-      ? people
-      : people.filter((person) => {
-        return person?.name.toLowerCase().includes(query.toLowerCase())
+      ? reports
+      : reports.filter((report) => {
+        return report?.name.toLowerCase().includes(query.toLowerCase())
       })
   const [pbiReportConfig, setReportConfig] = useState({
     type: 'report',
@@ -80,36 +80,47 @@ export default function Dashboards() {
   const [accessToken, setAccessToken] = useState(null);
 const [userGroups, setUserGroups] = useState([])
 const [selectedUserGroup, setSelectedUserGroup] = useState({})
+const isAuthenticated = useIsAuthenticated()
+
 
  function RequestAccessToken() {
-  console.log(instance.getAllAccounts()[0])
-     const request = {
-         ...loginRequest,
-         account: instance.getAllAccounts()[0]
-     };
+  if(isAuthenticated){
+    console.log(instance.getAllAccounts()[0])
+    const request = {
+        ...loginRequest,
+        account: instance.getAllAccounts()[0]
+    };
 
-     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-     instance.acquireTokenSilent(request).then((response) => {
-         setAccessToken(response.accessToken);
-     }).catch((e) => {
-         instance.acquireTokenPopup(request).then((response) => {
-             setAccessToken(response.accessToken);
-         });
-     });
+    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+    instance.acquireTokenSilent(request).then((response) => {
+     console.log('this is the instance response on login' + response)
+        setAccessToken(response.accessToken);
+    }).catch((e) => {
+        instance.acquireTokenPopup(request).then((response) => {
+            setAccessToken(response.accessToken);
+        });
+    });
+  }
+  
  }
  useEffect(() => {
   
    RequestAccessToken()
- 
+
    
- }, [])
+ }, [isAuthenticated])
  
  useEffect(() => {
-   console.log('this is the access token ----> ' + accessToken)
-   callMsGraph(accessToken).then(response=>{
-    console.log(response.value)
-    setUserGroups((response.value))
-   })
+  if(isAuthenticated){
+    console.log('this is the access token ----> ' + accessToken)
+    async function getUserGroups(){
+     await callMsGraph(accessToken).then(response=>{
+       console.log(response.value)
+       setUserGroups((response.value))
+      })
+    }
+    getUserGroups()
+  }
  }, [accessToken])
  useEffect(() => {
   console.log(userGroups?.length)
@@ -130,7 +141,7 @@ const [selectedUserGroup, setSelectedUserGroup] = useState({})
   // ---------Sign in -------------------
   const mockSignIn = async () => {
 
-    const reportConfigResponse = await fetch(sampleReportUrl+selectedPerson.reportId);
+    const reportConfigResponse = await fetch(sampleReportUrl+selectedReport.reportId);
 
 
     if (!reportConfigResponse.ok) {
@@ -158,22 +169,26 @@ const [selectedUserGroup, setSelectedUserGroup] = useState({})
       postLogoutRedirectUri: "/",
     });
   }
-function handleChange(e){
+function handleReportChange(e){
   console.log(e)
-  setSelectedPerson(e)
+  setSelectedReport(e)
 
 }
 
+function handleGroupChange(e){
+  console.log(e)
+  setSelectedUserGroup(e)
 
+}
 
 useEffect(() => {
   
 
   mockSignIn()
-}, [selectedPerson])
+}, [selectedReport])
 
   return (
-    <>
+    <AuthenticatedTemplate>
       {/*
         This example requires updating your template:
 
@@ -360,20 +375,20 @@ useEffect(() => {
               <div className="mx-auto max-w-7xl  px-4 sm:px-6 md:px-8 w-full">
                 {/* Replace with your content */}
                 <div className="py-4">
-                {selectedUserGroup?.hasOwnProperty('id')&&    <Combobox as="div" value={selectedUserGroup} onChange={(e)=>handleChange(e)}>
+                <Combobox as="div" value={selectedUserGroup} onChange={(e)=>handleGroupChange(e)}>
                     <Combobox.Label className="block text-sm font-medium text-gray-700">Select a group</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
                         className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
-                        displayValue={(selectedUserGroup) => selectedUserGroup.displayName + '-' + selectedUserGroup?.id}
+                        displayValue={(selectedUserGroup) => selectedUserGroup?.displayName + ' - ' + selectedUserGroup?.id}
                       />
                       <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                         <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                       </Combobox.Button>
 
                       
-                        <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                      {userGroups?.length>0&&     <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                           {userGroups.map((group) => (
                             <Combobox.Option
                               key={group.id}
@@ -387,7 +402,7 @@ useEffect(() => {
                             >
                               {({ active, selected }) => (
                                 <>
-                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{group.id}</span>
+                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{group.displayname + ' - ' + group.id}</span>
 
                                   {selected && (
                                     <span
@@ -403,28 +418,28 @@ useEffect(() => {
                               )}
                             </Combobox.Option>
                           ))}
-                        </Combobox.Options>
+                        </Combobox.Options>}
                       
                     </div>
-                  </Combobox> }
-                  <Combobox as="div" value={selectedPerson} onChange={(e)=>handleChange(e)}>
+                  </Combobox> 
+                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)}>
                     <Combobox.Label className="block text-sm font-medium text-gray-700">Select Your Report</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
                         className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
-                        displayValue={(selectedPerson) => selectedPerson?.name}
+                        displayValue={(selectedReport) => selectedReport?.name}
                       />
                       <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                         <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                       </Combobox.Button>
 
-                      {filteredPeople.length > 0 && (
+                      {filteredReports.length > 0 && (
                         <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                          {filteredPeople.map((person) => (
+                          {filteredReports.map((report) => (
                             <Combobox.Option
-                              key={person.id}
-                              value={person}
+                              key={report.id}
+                              value={report}
                               className={({ active }) =>
                                 classNames(
                                   'relative cursor-default select-none py-2 pl-3 pr-9',
@@ -434,7 +449,7 @@ useEffect(() => {
                             >
                               {({ active, selected }) => (
                                 <>
-                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{person.name}</span>
+                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{report.name}</span>
 
                                   {selected && (
                                     <span
@@ -479,6 +494,6 @@ useEffect(() => {
           </main>
         </div>
       </div>
-    </>
+    </AuthenticatedTemplate>
   )
 }
