@@ -5,7 +5,7 @@ import BlogImg3 from '../assets/blog images/bigstock-business-people-shake-hands
 const posts = [
     {
       title: 'How Data Can Reduce the Chance for Medical Malpractice Lawsuits',
-      href: '#',
+      href: '/firstblog',
       category: { name: 'Article', href: '#' },
       description:
         'When it comes to understanding risk profiles for medical malpractice insurance, organizations have long been limited to little more than the data which comes only after an adverse event or lawsuit has been filed...',
@@ -23,7 +23,7 @@ const posts = [
     },
     {
       title: 'Healthcare’s Digital Revolution: (Finally) a Time for Optimism” Webinar Presented by HRA',
-      href: '#',
+      href: '/firstblog',
       category: { name: 'Article', href: '#' },
       description:
         'Recently, I was fortunate enough to host an HRA webinar featuring Robert M. Wachter, MD—Professor and Chair of the Department of Medicine at the University of California, San Francisco (UCSF)...',
@@ -34,7 +34,7 @@ const posts = [
       readingTime: '4 min',
       author: {
         name: 'Healthcare Risk Advisors',
-        href: '#',
+        href: '/firstblog',
         imageUrl:
           'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
       },
