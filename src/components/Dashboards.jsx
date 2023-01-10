@@ -3,9 +3,12 @@ import { Dialog, Transition, Combobox } from '@headlessui/react'
 import HRALogo from '../assets/hra logo white.png'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { models } from 'powerbi-client';
+import {AiOutlineCloseCircle} from 'react-icons/ai'
 import { PowerBIEmbed } from 'powerbi-client-react';
 import { AuthenticatedTemplate, useIsAuthenticated, useMsal } from '@azure/msal-react'
 import '../css/Embed.css'
+import axios from 'axios'
+import Avatar from '@mui/material/Avatar';
 import {
   Bars3Icon,
   CalendarIcon,
@@ -45,6 +48,7 @@ export default function Dashboards() {
   // --------- Set State -------------------
 
   const [selectedReport, setSelectedReport] = useState(reports[0])
+  const [reportNotes, setReportNotes] = useState([])
   const [query, setQuery] = useState('')
   const filteredReports =
     query === ''
@@ -81,7 +85,7 @@ export default function Dashboards() {
 const [userGroups, setUserGroups] = useState([])
 const [selectedUserGroup, setSelectedUserGroup] = useState({})
 const isAuthenticated = useIsAuthenticated()
-
+const [showCreateInsight, setShowCreateInsight] = useState(false)
 
  function RequestAccessToken() {
   if(isAuthenticated){
@@ -183,7 +187,14 @@ function handleGroupChange(e){
 
 useEffect(() => {
   
+async function getReportNotes(){
+  console.log(selectedReport)
+  await axios.get(`http://localhost:5000/notes/${selectedReport?.reportId}`).then(res=>{
+    setReportNotes(res.data)
 
+  })
+}
+  getReportNotes()
   mockSignIn()
 }, [selectedReport])
 
@@ -488,8 +499,50 @@ useEffect(() => {
                 }
               />
                 {/* /End replace */}
-              </div>
+                <div className = 'w-full h-screen  flex flex-col  mt-20  '>
+                <div className = 'w-full flex items-center'>
+                <h1 className = 'text-2xl  text-left mr-2 font-semibold'>Insights & Notes: </h1>
+                <h5 className='text-2xl font-light'>
+                {selectedReport.name} 
+                </h5>
               
+                </div>
+               
+                {showCreateInsight===false&&<button onClick={()=>{setShowCreateInsight(true)}} className = 'bg-indigo-600 p-2 text-white font-semibold hover:border-[1px] hover:border-indigo-600 hover:bg-transparent hover:text-indigo-600 my-5 w-fit rounded-xl'>
+                  Create +
+                </button>}
+             <div className={`w-full relative ${showCreateInsight ? 'flex' : 'hidden'}  py-6 flex-col `}>
+              <div className = {`relative items-center p-1 border-[1px] bg-slate-600 text-white rounded-t-xl border-gray-500 flex `}>
+                <Avatar src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" className='border-2 border-gray-400'/>
+                <p className = 'ml-2 font-light'>John Doe</p>
+                <AiOutlineCloseCircle onClick={()=>{setShowCreateInsight(false)}} className='text-white text-xl absolute right-5 hover:text-red-600'/>
+              </div>
+              <textarea type="text" className = '' placeholder='  Share your insights with others' />
+              <button className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Sumbit</button>
+             </div>
+                  <ul className ='w-full p-10 bg-gray-300 overflow-y-scroll rounded-xl h-[50%]'>
+                    {reportNotes.map(note=>{
+                      return <div className = 'w-full flex flex-col bg-gray-100 p-4 rounded-md drop-shadow-md'>
+                        <div className='flex items-center'>
+                          <Avatar src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+                          <h1 className ='w-full pl-2 '>John Doe</h1>
+                          
+                    
+                        </div>
+                      
+                        <p className ='py-2 my-4 ml-4 pl-2 border-l-[1px] border-gray-400'>
+                        {note.text}
+                        </p>
+                        <p  className ='w-full pl-2 font-light'>2m ago</p>
+                    
+                      </div>
+                    })}
+                  </ul>
+                
+               
+              </div>
+              </div>
+           
             </div>
           </main>
         </div>
