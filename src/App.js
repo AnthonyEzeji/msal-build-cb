@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { callMsGraph } from "./graph";
 
 const About = () => {
@@ -18,13 +18,11 @@ const About = () => {
 function App() {
   return (
     <div>
-      <UnauthenticatedTemplate>
-        <HomePage></HomePage>
-      </UnauthenticatedTemplate>
-      <AuthenticatedTemplate>
-      
-        <Dashboards></Dashboards>
-      </AuthenticatedTemplate>
+      <Routes>
+        <Route path='/' element = {<HomePage/>}/>
+        <Route path='/dashboard' element = {<Dashboards/>}/>
+      </Routes>
+     
     </div>
 
   );
