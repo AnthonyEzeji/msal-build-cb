@@ -189,7 +189,7 @@ useEffect(() => {
   
 async function getReportNotes(){
   console.log(selectedReport)
-  await axios.get(`http://localhost:5000/notes/${selectedReport?.reportId}`).then(res=>{
+  await axios.get(`https://hra-backend-ou85.vercel.app/notes/${selectedReport?.reportId}`).then(res=>{
     setReportNotes(res.data)
 
   })
