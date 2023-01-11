@@ -21,11 +21,13 @@ import {
 } from "react-router-dom";
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { AiOutlineMedicineBox } from 'react-icons/ai';
-import {BsFileText} from 'react-icons/bs'
-import { useMsal } from '@azure/msal-react'
+import {BsBoxArrowInRight, BsFileText} from 'react-icons/bs'
+import { useMsal,useIsAuthenticated } from '@azure/msal-react'
 import { loginRequest } from '../authConfig';
 import callMsGraph from '../graph'
-
+import { Avatar } from '@mui/material';
+import { useState } from 'react';
+import HRALogo from '../assets/hra logo white.png'
 const features = [
   {
     name: 'Analytics',
@@ -90,6 +92,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const { instance } = useMsal();
+  let isAuthenticated = useIsAuthenticated()
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
          console.log(e);
@@ -98,8 +101,17 @@ export default function Example() {
        console.log(e);
    });
  }
- 
-
+ const handleLogout = () => {
+  /* instance.logoutPopup({
+       postLogoutRedirectUri: "/",
+       mainWindowRedirectUri: "/"
+   });*/
+  instance.logoutRedirect({
+    postLogoutRedirectUri: "/",
+  });
+}
+ let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
+const [showLogout, setShowLogout] = useState(false)
   return (
     <div className="relative bg-slate-50">
       <Popover className="relative bg-slate-800 shadow">
@@ -110,7 +122,7 @@ export default function Example() {
                 <span className="sr-only">Your Company</span>
                 <img
                   className="h-8 w-auto sm:h-10  text-white"
-                  src="https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png"
+                  src={HRALogo}
                   alt=""
                 />
               </a>
@@ -405,7 +417,7 @@ export default function Example() {
                 )}
               </Popover>
             </Popover.Group>
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+           {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
              text-white hover:text-slate-900" onClick={handleLogin}>
                 Sign in
@@ -416,7 +428,7 @@ export default function Example() {
               >
                 Sign up
               </a>
-            </div>
+            </div>:<div  onClick={()=>setShowLogout(!showLogout)} className='hover:bg-zinc-400 hidden md:flex items-center relative bg-zinc-200 p-2 rounded-sm w-fit'>{showLogout&&<div className = 'rounded-md absolute left-0 top-20 z-20 bg-zinc-200 p-4 flex flex-col justify-center'><p className = 'border-b-[1px] border-gray-400 pb-2 mb-2'>{instance.getActiveAccount().username}</p><Link className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex  flex-row  items-center' to ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></Link><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar  ></Avatar><p className ='text-slate-700 font-semibold px-2 w-fit'>{instance.getActiveAccount().name}</p><ChevronDownIcon /></div>}
           </div>
         </div>
 
@@ -439,7 +451,7 @@ export default function Example() {
                   <div>
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src={imgs[0]}
                       alt="Your Company"
                     />
                   </div>
@@ -537,10 +549,10 @@ export default function Example() {
         <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
           <img
             className="absolute inset-0 h-full w-full object-cover"
-            src={HeroImage}
-            alt=""
+
+            src={HeroImage}alt=""
           />
-        </div>
+        </div> 
       </main>
     </div>
   )

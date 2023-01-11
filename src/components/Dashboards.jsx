@@ -1,8 +1,10 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
-import "./Embed.css"
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+
 import HRALogo from '../assets/hra logo white.png'
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+
+
 import { models } from 'powerbi-client';
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import { PowerBIEmbed } from 'powerbi-client-react';
@@ -34,8 +36,9 @@ const navigation = [
   { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
 ]
 const reports= [
-  { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8' },
-  { id: 2, name: 'Risk Management Analysis', reportId:"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1" },
+  { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8',groupId:'8f324dbc-a380-4ccc-8e06-53579d35d24b', groupName:'NGA_HRA_CLM_POWER_USERS' },
+  { id: 2, name: 'Risk Management Analysis', reportId:"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1",groupId:"d98a2020-a2a9-43ef-a6f6-77a2ab244e01", groupName:"NGA_HRA_RIM_POWER_USERS"},
+
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -48,15 +51,17 @@ export default function Dashboards() {
   const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
   // --------- Set State -------------------
 
-  const [selectedReport, setSelectedReport] = useState(reports[0])
+  const [filteredReports, setFilteredReports] = useState([])
+  const [selectedReport, setSelectedReport] = useState(filteredReports[0])
   const [reportNotes, setReportNotes] = useState([])
   const [query, setQuery] = useState('')
-  const filteredReports =
+  const filteredReportsToDisplay =
     query === ''
-      ? reports
-      : reports.filter((report) => {
+      ? filteredReports
+      : filteredReports
+      /*.filter((report) => {
         return report?.name.toLowerCase().includes(query.toLowerCase())
-      })
+      })*/
   const [pbiReportConfig, setReportConfig] = useState({
     type: 'report',
     embedUrl: undefined,
@@ -76,7 +81,7 @@ export default function Dashboards() {
       console.log('Report has loaded');
     }],
     ['rendered', function () {
-      console.log('Report has rendered');
+    console.log('Report has rendered');
 
       // Update display message
       //setMessage('The report is rendered')
@@ -90,16 +95,20 @@ const [showCreateInsight, setShowCreateInsight] = useState(false)
 
  function RequestAccessToken() {
   if(isAuthenticated){
-    console.log(instance.getAllAccounts()[0])
+instance.setActiveAccount(instance.getAllAccounts()[0])
+let account = instance.getActiveAccount()
+    
+  console.log(account)
     const request = {
         ...loginRequest,
-        account: instance.getAllAccounts()[0]
+        account: account
     };
 
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
     instance.acquireTokenSilent(request).then((response) => {
      console.log('this is the instance response on login' + response)
         setAccessToken(response.accessToken);
+        console.log(response.accessToken)
     }).catch((e) => {
         instance.acquireTokenPopup(request).then((response) => {
             setAccessToken(response.accessToken);
@@ -109,10 +118,7 @@ const [showCreateInsight, setShowCreateInsight] = useState(false)
   
  }
  useEffect(() => {
-  
    RequestAccessToken()
-
-   
  }, [isAuthenticated])
  
  useEffect(() => {
@@ -134,19 +140,33 @@ const [showCreateInsight, setShowCreateInsight] = useState(false)
   }
    
  }, [userGroups])
+ function filterReports(report){
+  console.log(report)
+  return report?.groupId === selectedUserGroup.id
+ }
+
  useEffect(() => {
    //powerbi api call to get reports in specified group
 /*fetch(` https://api.powerbi.com/v1.0/thedoctors/groups/${selectedUserGroup.id}/reports`).then(response=>{
   console.log(response)
 }).catch(e=>console.log(e))*/
-   console.log(selectedUserGroup)
+   setFilteredReports(reports.filter(filterReports))
  }, [selectedUserGroup])
  
+ useEffect(() => {
+  console.log(filteredReports)
+  if(filteredReports.length<=0){
+    setSelectedReport(null)
+  }else{
+    setSelectedReport(filteredReports[0])
+  }
+  
+ }, [filteredReports])
  
   // ---------Sign in -------------------
   const mockSignIn = async () => {
 
-    const reportConfigResponse = await fetch(sampleReportUrl+selectedReport.reportId);
+    const reportConfigResponse = await fetch(sampleReportUrl+selectedReport?.reportId);
 
 
     if (!reportConfigResponse.ok) {
@@ -190,7 +210,7 @@ useEffect(() => {
   
 async function getReportNotes(){
   console.log(selectedReport)
-  await axios.get(`http://localhost:5000/notes/${selectedReport?.reportId}`).then(res=>{
+  await axios.get(`https://hra-backend-ou85.vercel.app/notes/${selectedReport?.reportId}`).then(res=>{
     setReportNotes(res.data)
 
   })
@@ -319,11 +339,15 @@ async function getReportNotes(){
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
               <div className="flex flex-shrink-0 items-center px-4">
+                <a href='/'>
                 <img
                   className="h-8 w-auto"
                   src={HRALogo}
                   alt="Your Company"
+
                 />
+                </a>
+             
               </div>
               <nav className="mt-5 flex-1 space-y-1 px-2">
                 {navigation.map((item) => (
@@ -434,21 +458,21 @@ async function getReportNotes(){
                       
                     </div>
                   </Combobox> 
-                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)}>
-                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select Your Report</Combobox.Label>
+                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)} className='mt-4'>
+                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select a report</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
                         className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
-                        displayValue={(selectedReport) => selectedReport?.name}
+                        displayValue={(selectedReport) => filteredReports.length>0?selectedReport?.name:'NO REPORTS RETURNED'}
                       />
                       <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                         <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                       </Combobox.Button>
 
-                      {filteredReports.length > 0 && (
+                      {filteredReportsToDisplay.length > 0 && (
                         <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                          {filteredReports.map((report) => (
+                          {filteredReportsToDisplay.map((report) => (
                             <Combobox.Option
                               key={report.id}
                               value={report}
@@ -488,7 +512,7 @@ async function getReportNotes(){
                   {/*<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
                   */}
                 </div>
-                <PowerBIEmbed
+                {selectedReport&&<PowerBIEmbed
               
                 embedConfig={pbiReportConfig}
                 eventHandlers={eventHandlersMap}
@@ -498,13 +522,13 @@ async function getReportNotes(){
                     window.report = embeddedReport;
                   }
                 }
-              />
+              />}
                 {/* /End replace */}
                 <div className = 'w-full h-screen  flex flex-col  mt-20  '>
                 <div className = 'w-full flex items-center'>
                 <h1 className = 'text-2xl  text-left mr-2 font-semibold'>Insights & Notes: </h1>
                 <h5 className='text-2xl font-light'>
-                {selectedReport.name} 
+                {selectedReport?.name} 
                 </h5>
               
                 </div>
