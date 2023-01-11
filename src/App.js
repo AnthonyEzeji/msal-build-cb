@@ -1,5 +1,7 @@
 
 import Dashboards from "./components/Dashboards";
+import FirstBlog from "./components/blogs/FirstBlog";
+import CustomerCalendar from "./components/customer/CustomerCalendar";
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,6 +23,8 @@ function App() {
       <Routes>
         <Route path='/' element = {<HomePage/>}/>
         <Route path='/dashboard' element = {<Dashboards/>}/>
+        <Route path='/firstblog' element = {<FirstBlog/>}/>
+        <Route path='/calendar' element = {<CustomerCalendar/>}/>     
       </Routes>
      
     </div>

@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+import HeroImage from '../assets/blog images/HeroHealthCare.jpg';
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -548,10 +549,10 @@ const [showLogout, setShowLogout] = useState(false)
         <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
           <img
             className="absolute inset-0 h-full w-full object-cover"
-            src={imgs[1]}
-            alt=""
+
+            src={HeroImage}alt=""
           />
-        </div>
+        </div> 
       </main>
     </div>
   )

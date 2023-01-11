@@ -1,7 +1,10 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
+
 import HRALogo from '../assets/hra logo white.png'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+
+
 import { models } from 'powerbi-client';
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import { PowerBIEmbed } from 'powerbi-client-react';
@@ -30,7 +33,7 @@ import callMsGraph from '../graph'
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
 ]
 const reports= [
   { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8',groupId:'8f324dbc-a380-4ccc-8e06-53579d35d24b', groupName:'NGA_HRA_CLM_POWER_USERS' },
