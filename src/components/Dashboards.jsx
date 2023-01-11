@@ -31,7 +31,7 @@ import callMsGraph from '../graph'
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
 ]
 const reports= [
   { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8' },
