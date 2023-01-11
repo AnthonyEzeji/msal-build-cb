@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
-
+//MS Auth
 import { AuthenticatedTemplate, useIsAuthenticated, useMsal } from '@azure/msal-react'
 
 const days = [
