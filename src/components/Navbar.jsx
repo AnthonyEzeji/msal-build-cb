@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -19,16 +20,25 @@ import {
   Link
 } from "react-router-dom";
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { AiOutlineMedicineBox } from 'react-icons/ai';
-import {BsFileText} from 'react-icons/bs'
-import { useMsal } from '@azure/msal-react'
+import { AiOutlineInfoCircle, AiOutlineMedicineBox } from 'react-icons/ai';
+import {BsBoxArrowInRight, BsFileText} from 'react-icons/bs'
+import { useMsal,useIsAuthenticated } from '@azure/msal-react'
 import { loginRequest } from '../authConfig';
 import callMsGraph from '../graph'
+import { Avatar } from '@mui/material';
+import { useState } from 'react';
+import HRALogo from '../assets/hra logo white.png'
+import Hero from './Hero';
+import { useEffect } from 'react';
+import { VscPerson } from 'react-icons/vsc';
+import * as  tb from 'react-icons/tb'
+import * as  md from 'react-icons/md'
+import * as  bi from 'react-icons/bi'
 
 const features = [
   {
     name: 'Analytics',
-    href: '#',
+    href: '/solutions/hospitals/data-analytics',
     description: 'Get a better understanding of where your traffic is coming from.',
     icon: ChartBarIcon,
   },
@@ -46,10 +56,10 @@ const features = [
     icon: Squares2X2Icon,
   },
   {
-    name: 'Automations',
+    name: 'Self-Insurance',
     href: 'http://test.com',
-    description: 'Build strategic funnels that will drive your customers to convert',
-    icon: ArrowPathIcon,
+    description: 'Design, setup and self-insurance administration services.',
+    icon: VscPerson,
   },
 ]
 const callsToAction = [
@@ -58,24 +68,24 @@ const callsToAction = [
 ]
 const resources = [
   {
-    name: 'Help Center',
-    description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
-    icon: LifebuoyIcon,
+    name: 'About Us',
+    description: 'What we offer.',
+    href: '/about',
+    icon: AiOutlineInfoCircle,
   },
   {
-    name: 'Guides',
-    description: 'Learn how to maximize our platform to get the most out of it.',
-    href: '#',
-    icon: BookmarkSquareIcon,
+    name: 'Leadership',
+    description: 'Learn more about the leadership team behind Healthcare Risk Advisors.',
+    href: '/about/leadership',
+    icon: tb.TbPyramid,
   },
   {
-    name: 'Events',
-    description: 'See what meet-ups and other events we might be planning near you.',
-    href: '#',
-    icon: CalendarIcon,
+    name: 'Careers',
+    description: 'Interested in joining the Healthcare Risk Advisors team?',
+    href: '/about/careers',
+    icon: md.MdOutlineWorkOutline,
   },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
+  { name: 'News and Events', description: 'Keep up with the latest news and press releases from HRA.', href: '/about/news-events', icon: bi.BiNews },
 ]
 const recentPosts = [
   { id: 1, name: 'Boost your conversion rate', href: '#' },
@@ -89,6 +99,10 @@ function classNames(...classes) {
 
 export default function Example() {
   const { instance } = useMsal();
+  let isAuthenticated = useIsAuthenticated()
+
+
+  
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
          console.log(e);
@@ -97,31 +111,40 @@ export default function Example() {
        console.log(e);
    });
  }
- 
-
+ const handleLogout = () => {
+  /* instance.logoutPopup({
+       postLogoutRedirectUri: "/",
+       mainWindowRedirectUri: "/"
+   });*/
+  instance.logoutRedirect({
+    postLogoutRedirectUri: "/",
+  });
+}
+ let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
+const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="relative bg-slate-50">
+    <div className="fixed w-full z-40 top-0">
       <Popover className="relative bg-slate-800 shadow">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-800">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-800 sticky">
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
-            <div className="flex justify-start lg:w-0 lg:flex-1">
-              <a href="#">
+            <div className="flex justify-start lg:w-0 lg:flex-1  ">
+              <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
                   className="h-8 w-auto sm:h-10  text-white"
-                  src="https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png"
+                  src={HRALogo}
                   alt=""
                 />
-              </a>
+              </Link>
             </div>
-            <div className="-my-2 -mr-2 md:hidden">
+            <div className="-my-2 -mr-2 lg:hidden ">
             <Popover.Button className="inline-flex items-center justify-center rounded-md bg-slate-800 p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-300  border-[1px] border-slate-400">
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
             </div>
-            <Popover.Group as="nav" className="hidden space-x-10 lg:flex absolute left-[30%]">
-              <Popover className="relative">
+            <Popover.Group as="nav" className="hidden space-x-10 lg:flex absolute left-[30%] ">
+              <Popover className="relative" >
                 {({ open }) => (
                   <>
                     <Popover.Button
@@ -341,7 +364,7 @@ export default function Example() {
                         'group inline-flex items-center rounded-md bg-slate-800 text-base font-medium hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                       )}
                     >
-                      <span>More</span>
+                      <span>About Us</span>
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-white' : 'text-white',
@@ -404,7 +427,7 @@ export default function Example() {
                 )}
               </Popover>
             </Popover.Group>
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+           {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
              text-white hover:text-slate-900" onClick={handleLogin}>
                 Sign in
@@ -415,7 +438,7 @@ export default function Example() {
               >
                 Sign up
               </a>
-            </div>
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute left-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex  flex-row  items-center' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 
@@ -430,7 +453,7 @@ export default function Example() {
         >
           <Popover.Panel
             focus
-            className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden"
+            className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition lg:hidden"
           >
             <div className="divide-y-2 divide-slate-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="px-5 pt-5 pb-6">
@@ -438,7 +461,7 @@ export default function Example() {
                   <div>
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      src={imgs[0]}
                       alt="Your Company"
                     />
                   </div>
@@ -502,45 +525,8 @@ export default function Example() {
           </Popover.Panel>
         </Transition>
       </Popover>
-       
-      <main className="lg:relative">
-        <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
-          <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl">
-              <span className="block xl:inline">Creating Partnerships to </span>{' '}
-              <span className="block text-indigo-600 xl:inline">Advance, Protect and Reward Superior Healthcare</span>
-            </h1>
-            <p className="mx-auto mt-3 max-w-md text-lg text-slate-800 sm:text-xl md:mt-5 md:max-w-3xl">
-              Healthcare Risk Advisors partners with healthcare organizations to identify and solve their unique challenges in services for self-insurance programs, risk transfer, risk management, and claims and litigation.
-            </p>
-            <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
-              <div className="rounded-md shadow">
-                <a
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
-                >
-                  Get started
-                </a>
-              </div>
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <a
-                  href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 hover:bg-slate-50 md:py-4 md:px-10 md:text-lg"
-                >
-                  Live demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
-          <img
-            className="absolute inset-0 h-full w-full object-cover"
-            src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"
-            alt=""
-          />
-        </div>
-      </main>
+      
+    
     </div>
   )
 }

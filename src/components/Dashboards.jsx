@@ -1,7 +1,10 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition, Combobox } from '@headlessui/react'
+
 import HRALogo from '../assets/hra logo white.png'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+
+
 import { models } from 'powerbi-client';
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import { PowerBIEmbed } from 'powerbi-client-react';
@@ -28,13 +31,14 @@ import { useEffect } from 'react';
 import { loginRequest } from '../authConfig';
 import callMsGraph from '../graph'
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
 ]
 const reports= [
-  { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8' },
-  { id: 2, name: 'Risk Management Analysis', reportId:"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1" },
+  { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8',groupId:'8f324dbc-a380-4ccc-8e06-53579d35d24b', groupName:'NGA_HRA_CLM_POWER_USERS' },
+  { id: 2, name: 'Risk Management Analysis', reportId:"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1",groupId:"d98a2020-a2a9-43ef-a6f6-77a2ab244e01", groupName:"NGA_HRA_RIM_POWER_USERS"},
+
 ]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -47,15 +51,17 @@ export default function Dashboards() {
   const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
   // --------- Set State -------------------
 
-  const [selectedReport, setSelectedReport] = useState(reports[0])
+  const [filteredReports, setFilteredReports] = useState([])
+  const [selectedReport, setSelectedReport] = useState(filteredReports[0])
   const [reportNotes, setReportNotes] = useState([])
   const [query, setQuery] = useState('')
-  const filteredReports =
+  const filteredReportsToDisplay =
     query === ''
-      ? reports
-      : reports.filter((report) => {
+      ? filteredReports
+      : filteredReports
+      /*.filter((report) => {
         return report?.name.toLowerCase().includes(query.toLowerCase())
-      })
+      })*/
   const [pbiReportConfig, setReportConfig] = useState({
     type: 'report',
     embedUrl: undefined,
@@ -75,7 +81,7 @@ export default function Dashboards() {
       console.log('Report has loaded');
     }],
     ['rendered', function () {
-      console.log('Report has rendered');
+    console.log('Report has rendered');
 
       // Update display message
       //setMessage('The report is rendered')
@@ -89,16 +95,20 @@ const [showCreateInsight, setShowCreateInsight] = useState(false)
 
  function RequestAccessToken() {
   if(isAuthenticated){
-    console.log(instance.getAllAccounts()[0])
+instance.setActiveAccount(instance.getAllAccounts()[0])
+let account = instance.getActiveAccount()
+    
+  console.log(account)
     const request = {
         ...loginRequest,
-        account: instance.getAllAccounts()[0]
+        account: account
     };
 
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
     instance.acquireTokenSilent(request).then((response) => {
      console.log('this is the instance response on login' + response)
         setAccessToken(response.accessToken);
+        console.log(response.accessToken)
     }).catch((e) => {
         instance.acquireTokenPopup(request).then((response) => {
             setAccessToken(response.accessToken);
@@ -108,10 +118,7 @@ const [showCreateInsight, setShowCreateInsight] = useState(false)
   
  }
  useEffect(() => {
-  
    RequestAccessToken()
-
-   
  }, [isAuthenticated])
  
  useEffect(() => {
@@ -133,19 +140,33 @@ const [showCreateInsight, setShowCreateInsight] = useState(false)
   }
    
  }, [userGroups])
+ function filterReports(report){
+  console.log(report)
+  return report?.groupId === selectedUserGroup.id
+ }
+
  useEffect(() => {
    //powerbi api call to get reports in specified group
 /*fetch(` https://api.powerbi.com/v1.0/thedoctors/groups/${selectedUserGroup.id}/reports`).then(response=>{
   console.log(response)
 }).catch(e=>console.log(e))*/
-   console.log(selectedUserGroup)
+   setFilteredReports(reports.filter(filterReports))
  }, [selectedUserGroup])
  
+ useEffect(() => {
+  console.log(filteredReports)
+  if(filteredReports.length<=0){
+    setSelectedReport(null)
+  }else{
+    setSelectedReport(filteredReports[0])
+  }
+  
+ }, [filteredReports])
  
   // ---------Sign in -------------------
   const mockSignIn = async () => {
 
-    const reportConfigResponse = await fetch(sampleReportUrl+selectedReport.reportId);
+    const reportConfigResponse = await fetch(sampleReportUrl+selectedReport?.reportId);
 
 
     if (!reportConfigResponse.ok) {
@@ -318,11 +339,15 @@ async function getReportNotes(){
           <div className="flex min-h-0 flex-1 flex-col bg-gray-800">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
               <div className="flex flex-shrink-0 items-center px-4">
+                <a href='/'>
                 <img
                   className="h-8 w-auto"
                   src={HRALogo}
                   alt="Your Company"
+
                 />
+                </a>
+             
               </div>
               <nav className="mt-5 flex-1 space-y-1 px-2">
                 {navigation.map((item) => (
@@ -350,11 +375,7 @@ async function getReportNotes(){
               <a href="#" className="group block w-full flex-shrink-0">
                 <div className="flex items-center">
                   <div>
-                    <img
-                      className="inline-block h-9 w-9 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
+                  <Avatar  className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar>
                   </div>
                   <div className="ml-3">
                     <Link to="/" className="whitespace-nowrap text-base font-medium
@@ -433,21 +454,21 @@ async function getReportNotes(){
                       
                     </div>
                   </Combobox> 
-                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)}>
-                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select Your Report</Combobox.Label>
+                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)} className='mt-4'>
+                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select a report</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
                         className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
-                        displayValue={(selectedReport) => selectedReport?.name}
+                        displayValue={(selectedReport) => filteredReports.length>0?selectedReport?.name:'NO REPORTS RETURNED'}
                       />
                       <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                         <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                       </Combobox.Button>
 
-                      {filteredReports.length > 0 && (
+                      {filteredReportsToDisplay.length > 0 && (
                         <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                          {filteredReports.map((report) => (
+                          {filteredReportsToDisplay.map((report) => (
                             <Combobox.Option
                               key={report.id}
                               value={report}
@@ -487,7 +508,7 @@ async function getReportNotes(){
                   {/*<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
                   */}
                 </div>
-                <PowerBIEmbed
+                {selectedReport&&<PowerBIEmbed
               
                 embedConfig={pbiReportConfig}
                 eventHandlers={eventHandlersMap}
@@ -497,13 +518,13 @@ async function getReportNotes(){
                     window.report = embeddedReport;
                   }
                 }
-              />
+              />}
                 {/* /End replace */}
-                <div className = 'w-full h-screen  flex flex-col  mt-20  '>
+                {filteredReports.length>0?<div className = 'w-full h-screen  flex flex-col  mt-20  '>
                 <div className = 'w-full flex items-center'>
                 <h1 className = 'text-2xl  text-left mr-2 font-semibold'>Insights & Notes: </h1>
                 <h5 className='text-2xl font-light'>
-                {selectedReport.name} 
+                {selectedReport?.name} 
                 </h5>
               
                 </div>
@@ -513,34 +534,34 @@ async function getReportNotes(){
                 </button>}
              <div className={`w-full relative ${showCreateInsight ? 'flex' : 'hidden'}  py-6 flex-col `}>
               <div className = {`relative items-center p-1 border-[1px] bg-slate-600 text-white rounded-t-xl border-gray-500 flex `}>
-                <Avatar src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" className='border-2 border-gray-400'/>
-                <p className = 'ml-2 font-light'>John Doe</p>
+              <Avatar className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar>
+                <p className = 'ml-2 font-light'>{instance.getActiveAccount().name.trim().split(',')[1]+" "+ instance.getActiveAccount().name.trim().split(',')[0]}</p>
                 <AiOutlineCloseCircle onClick={()=>{setShowCreateInsight(false)}} className='text-white text-xl absolute right-5 hover:text-red-600'/>
               </div>
               <textarea type="text" className = '' placeholder='  Share your insights with others' />
               <button className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Sumbit</button>
              </div>
-                  <ul className ='w-full p-10 bg-gray-300 overflow-y-scroll rounded-xl h-[50%]'>
+                 {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-300 overflow-y-scroll rounded-xl h-[50%]'>
                     {reportNotes.map(note=>{
-                      return <div className = 'w-full flex flex-col bg-gray-100 p-4 rounded-md drop-shadow-md'>
+                      return <div className = 'w-full flex flex-col bg-gray-100 p-2 rounded-md drop-shadow-md'>
                         <div className='flex items-center'>
-                          <Avatar src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+                        <Avatar  className="hover:opacity-50"  ></Avatar>
                           <h1 className ='w-full pl-2 '>John Doe</h1>
                           
                     
                         </div>
                       
-                        <p className ='py-2 my-4 ml-4 pl-2 border-l-[1px] border-gray-400'>
+                        <p className ='py-2 my-1 ml-4 pl-2 border-l-[1px] border-gray-400'>
                         {note.text}
                         </p>
                         <p  className ='w-full pl-2 font-light'>2m ago</p>
                     
                       </div>
                     })}
-                  </ul>
+                  </ul>:<div className='w-full h-[50%] flex justify-center items-center'><p>Be the first to create an insight for this report!</p></div>}
                 
                
-              </div>
+              </div>:<div className='w-full h-screen flex mt-10 items-start justify-center'><p>No report found!</p></div>}
               </div>
            
             </div>
