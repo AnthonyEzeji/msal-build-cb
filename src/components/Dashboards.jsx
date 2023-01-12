@@ -375,7 +375,7 @@ async function getReportNotes(){
               <a href="#" className="group block w-full flex-shrink-0">
                 <div className="flex items-center">
                   <div>
-                  <Avatar  className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar>
+                  <Avatar  className="hover:opacity-50"  >{<p>{instance.getActiveAccount()?.name?.split(',')[1][1]+instance.getActiveAccount()?.name?.split(',')[0][0]}</p>}</Avatar>
                   </div>
                   <div className="ml-3">
                     <Link to="/" className="whitespace-nowrap text-base font-medium
