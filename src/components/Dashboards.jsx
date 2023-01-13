@@ -141,8 +141,12 @@ let account = instance.getActiveAccount()
    
  }, [userGroups])
  function filterReports(report){
-  console.log(report)
-  return report?.groupId === selectedUserGroup.id
+  for(var i =0; i<userGroups.length; i++){
+    if(report.groupId == userGroups[i].id){
+      return true
+    }
+  }
+ 
  }
 
  useEffect(() => {
@@ -151,7 +155,7 @@ let account = instance.getActiveAccount()
   console.log(response)
 }).catch(e=>console.log(e))*/
    setFilteredReports(reports.filter(filterReports))
- }, [selectedUserGroup])
+ }, [])
  
  useEffect(() => {
   console.log(filteredReports)
@@ -407,53 +411,7 @@ async function getReportNotes(){
               <div className="mx-auto max-w-7xl  px-4 sm:px-6 md:px-8 w-full">
                 {/* Replace with your content */}
                 <div className="py-4">
-                <Combobox as="div" value={selectedUserGroup} onChange={(e)=>handleGroupChange(e)}>
-                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select a group</Combobox.Label>
-                    <div className="relative mt-1">
-                      <Combobox.Input
-                        className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                        onChange={(event) => setQuery(event.target.value)}
-                        displayValue={(selectedUserGroup) => selectedUserGroup?.displayName + ' - ' + selectedUserGroup?.id}
-                      />
-                      <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-                        <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                      </Combobox.Button>
-
-                      
-                      {userGroups?.length>0&&     <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                          {userGroups.map((group) => (
-                            <Combobox.Option
-                              key={group.id}
-                              value={group}
-                              className={({ active }) =>
-                                classNames(
-                                  'relative cursor-default select-none py-2 pl-3 pr-9',
-                                  active ? 'bg-indigo-600 text-white' : 'text-gray-900'
-                                )
-                              }
-                            >
-                              {({ active, selected }) => (
-                                <>
-                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{group.displayname + ' - ' + group.id}</span>
-
-                                  {selected && (
-                                    <span
-                                      className={classNames(
-                                        'absolute inset-y-0 right-0 flex items-center pr-4',
-                                        active ? 'text-white' : 'text-indigo-600'
-                                      )}
-                                    >
-                                      <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                                    </span>
-                                  )}
-                                </>
-                              )}
-                            </Combobox.Option>
-                          ))}
-                        </Combobox.Options>}
-                      
-                    </div>
-                  </Combobox> 
+               
                   <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)} className='mt-4'>
                     <Combobox.Label className="block text-sm font-medium text-gray-700">Select a report</Combobox.Label>
                     <div className="relative mt-1">
@@ -522,8 +480,8 @@ async function getReportNotes(){
                 {/* /End replace */}
                 {filteredReports.length>0?<div className = 'w-full h-screen  flex flex-col  mt-20  '>
                 <div className = 'w-full flex items-center'>
-                <h1 className = 'text-2xl  text-left mr-2 font-semibold'>Insights & Notes: </h1>
-                <h5 className='text-2xl font-light'>
+                <h1 className = 'text-xl  text-left mr-2 font-semibold'>Comments: </h1>
+                <h5 className='text-xl font-light'>
                 {selectedReport?.name} 
                 </h5>
               
@@ -541,7 +499,7 @@ async function getReportNotes(){
               <textarea type="text" className = '' placeholder='  Share your insights with others' />
               <button className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Sumbit</button>
              </div>
-                 {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-300 overflow-y-scroll rounded-xl h-[50%]'>
+                 {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-100 overflow-y-scroll rounded-xl h-[50%]'>
                     {reportNotes.map(note=>{
                       return <div className = 'w-full flex flex-col bg-gray-100 p-2 rounded-md drop-shadow-md'>
                         <div className='flex items-center'>

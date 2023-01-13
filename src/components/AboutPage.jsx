@@ -14,7 +14,7 @@ function AboutPage() {
              
                 <div className = 'flex flex-col lg:w-[70%] md:w-[80%] '>
                 <div className = 'flex xl:flex-col flex-col h-fit items-center '>
-<img className = ' p-3 ' src="https://www.healthcareriskadvisors.com/SysSiteAssets/images/about-us-images/about-us-image.jpg" alt="" />
+<img className = ' p-3 w-[600px] ' src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="" />
 <div className='w-full '>
 <p className='p-3 flex flex-1 prose prose-lg prose-indigo mx-auto text-gray-500 w-full'>Healthcare Risk Advisors (HRA) offers insurance and risk management services, including consulting focused on self-insurance, risk transfer methods, the reduction of liability and improvement of patient outcomes, and more. With an overall goal of ensuring appropriate levels of coverage and access to best-in-class risk mitigation services and resources, HRA is focused on allowing our members to focus their time and effort on the communities they serve. 
 Healthcare Risk Advisors (HRA) offers insurance and risk management services, including consulting focused on self-insurance, risk transfer methods, the reduction of liability and improvement of patient outcomes, and more. With an overall goal of ensuring appropriate levels of coverage and access to best-in-class risk mitigation services and resources, HRA is focused on allowing our members to focus their time and effort on the communities they serve. 
@@ -27,7 +27,7 @@ Healthcare Risk Advisors (HRA) offers insurance and risk management services, in
 
                     </div>
                 <div className = 'flex xl:flex-row-reverse flex-col h-fit mt-20 '>
-<img className = ' p-3  ' src="https://www.healthcareriskadvisors.com/SysSiteAssets/images/about-us-images/careers-image.jpg" alt="" />
+<img className = ' p-3 w-[600px] ' src="https://images.unsplash.com/photo-1622675363311-3e1904dc1885?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
 <div>
 <p className='p-3 flex flex-1 prose prose-lg prose-indigo mx-auto mt-6 text-gray-500'>Today, HRA is expanding its partnerships beyond larger hospital systems to include community hospitals, Voluntary Attending Physicians, and other groups of various sizes. HRA is committed to making its services available to organizations large and small, and continuing to leverage lessons learned from decades of experience to help members gain access to best-in-class risk prevention services.
 </p>
