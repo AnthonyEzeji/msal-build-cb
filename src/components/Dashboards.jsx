@@ -133,13 +133,6 @@ let account = instance.getActiveAccount()
     getUserGroups()
   }
  }, [accessToken])
- useEffect(() => {
-  console.log(userGroups?.length)
-  if(userGroups?.length>0){
-    setSelectedUserGroup(userGroups[0])
-  }
-   
- }, [userGroups])
  function filterReports(report){
   for(var i =0; i<userGroups.length; i++){
     if(report.groupId == userGroups[i].id){
@@ -148,13 +141,21 @@ let account = instance.getActiveAccount()
   }
  
  }
+ useEffect(() => {
+  console.log(userGroups?.length)
+  if(userGroups?.length>0){
+    setFilteredReports(reports.filter(filterReports))
+  }
+   
+ }, [userGroups])
+
 
  useEffect(() => {
    //powerbi api call to get reports in specified group
 /*fetch(` https://api.powerbi.com/v1.0/thedoctors/groups/${selectedUserGroup.id}/reports`).then(response=>{
   console.log(response)
 }).catch(e=>console.log(e))*/
-   setFilteredReports(reports.filter(filterReports))
+ 
  }, [])
  
  useEffect(() => {
