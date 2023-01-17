@@ -126,7 +126,7 @@ const [showLogout, setShowLogout] = useState(false)
     <div className="fixed w-full z-40 top-0">
       <Popover className="relative bg-slate-800 shadow">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-800 sticky">
-          <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
+          <div className="flex items-center justify-between py-6 md:justify-between md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">
                 <span className="sr-only">Your Company</span>
@@ -137,7 +137,7 @@ const [showLogout, setShowLogout] = useState(false)
                 />
               </Link>
             </div>
-            <div className="-my-2 -mr-2 lg:hidden ">
+            <div className="-my-2 -mr-2 md:hidden ">
             <Popover.Button className="inline-flex items-center justify-center rounded-md bg-slate-800 p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-300  border-[1px] border-slate-400">
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -438,7 +438,7 @@ const [showLogout, setShowLogout] = useState(false)
               >
                 Sign up
               </a>
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute left-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex  flex-row  items-center' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar></div>}
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex  flex-row  items-center' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 
