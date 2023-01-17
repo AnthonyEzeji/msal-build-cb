@@ -4,7 +4,10 @@ import { Menu, Transition,Dialog } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
 //MS Auth
 
-
+import img1 from '../../assets/leadership_images/leadership-img-1.jfif'
+import img2 from '../../assets/leadership_images/leadership-img-2.jfif'
+import img3 from '../../assets/leadership_images/leadership-img-3.jfif'
+import img4 from '../../assets/leadership_images/leadership-img-4.jfif'
 
 
 import HRALogo from '../../assets/hra logo white.png'
@@ -46,8 +49,27 @@ const meetings = [
     datetime: '2022-01-10T17:00',
     name: 'Leslie Alexander',
     imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+      img1,
     location: 'Starbucks',
+  },  {
+    id: 2,
+    date: 'January 17th, 2022',
+    time: '3:15 PM',
+    datetime: '2022-01-17T15:15',
+    name: 'Bruce Demasio',
+    imageUrl:
+      img2,
+    location: 'Central Park',
+  },
+  {
+    id: 3,
+    date: 'January 15th, 2022',
+    time: '12:00 PM',
+    datetime: '2022-01-15T12:00',
+    name: 'Jenny Marsh',
+    imageUrl:
+      img3,
+    location: 'Zoom',
   },
   // More meetings...
 ]
