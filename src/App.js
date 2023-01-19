@@ -17,6 +17,7 @@ import AnalyticsPage from "./components/AnalyticsPage";
 import BlogsPage from "./components/blogs/BlogsPage";
 import LeadershipPage from "./components/LeadershipPage";
 import AboutPage from "./components/AboutPage";
+import SavedReports from "./components/SavedReport";
 const About = () => {
   return <h1>About</h1>
 };
@@ -30,6 +31,7 @@ function App() {
         <Route path='/' element = {<HomePage/>}/>
         <Route path='/solutions/hospitals/data-analytics' element = {<AnalyticsPage/>}/>
         <Route path='/dashboard' element = {<Dashboards/>}/>
+        <Route path='/saved-reports' element = {<SavedReports/>}/>
         <Route path='/firstblog' element = {<FirstBlog/>}/>
         <Route path='/blog' element = {<BlogsPage/>}/>
         <Route path='/about' element = {<AboutPage/>}/> 

@@ -13,7 +13,7 @@ export default function Example() {
           </p>
           <a
             href="#"
-            className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50 sm:w-auto"
+            className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-transparent hover:text-white border-[1px] hover:border-white sm:w-auto"
           >
             Request An Indication
           </a>

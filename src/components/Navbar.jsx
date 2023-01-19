@@ -30,7 +30,7 @@ import { useState } from 'react';
 import HRALogo from '../assets/hra logo white.png'
 import Hero from './Hero';
 import { useEffect } from 'react';
-import { VscPerson } from 'react-icons/vsc';
+import { VscLaw, VscPerson } from 'react-icons/vsc';
 import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
@@ -53,7 +53,7 @@ const features = [
     name: 'Claims And Litigation Services',
     href: 'http://test.com',
     description: "Claims And Litigation Services.",
-    icon: Squares2X2Icon,
+    icon: VscLaw,
   },
   {
     name: 'Self-Insurance',
@@ -438,7 +438,7 @@ const [showLogout, setShowLogout] = useState(false)
               >
                 Sign up
               </a>
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex  flex-row  items-center' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar></div>}
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 
@@ -515,9 +515,10 @@ const [showLogout, setShowLogout] = useState(false)
                   </a>
                   <p className="mt-6 text-center text-base font-medium text-slate-800">
                     Existing customer?
-                    <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                      Sign in
-                    </a>
+                    <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
+             text-indigo-600 ml-2 hover:text-slate-900" onClick={handleLogin}>
+                Sign in
+              </Link>
                   </p>
                 </div>
               </div>
