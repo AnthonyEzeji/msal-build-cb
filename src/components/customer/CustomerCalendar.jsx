@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ClockIcon, EllipsisHorizontalIcon, MapPinIcon } from '@heroicons/react/20/solid'
 import { Menu, Transition,Dialog } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
+import { EllipsisVerticalIcon, StarIcon } from '@heroicons/react/24/outline'
 //MS Auth
 
 import img1 from '../../assets/leadership_images/leadership-img-1.jfif'
@@ -77,6 +77,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
   { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: true },
+  { name: 'Favorites', href: '/saved-reports', icon:StarIcon, current:false },
 ]
 
 function classNames(...classes) {
@@ -162,6 +163,7 @@ export default function CustomerCalendar() {
          postLogoutRedirectUri: "/",
          mainWindowRedirectUri: "/"
      });*/
+     window.sessionStorage.clear()
     instance.logoutRedirect({
       postLogoutRedirectUri: "/",
     });
@@ -425,8 +427,8 @@ export default function CustomerCalendar() {
         </div>
         <ol className="mt-4 divide-y divide-gray-100 text-sm leading-6 lg:col-span-7 xl:col-span-8">
           {meetings.map((meeting) => (
-            <li key={meeting.id} className="relative flex space-x-6 py-6 xl:static">
-              <img src={meeting.imageUrl} alt="" className="h-14 w-14 flex-none rounded-full" />
+            <li key={meeting.id} className="relative flex space-x-6 py-6 xl:static flex justify-center items-center">
+              <Avatar src='' sx={{height:55,width:55}} alt="" className="h-14 w-14 flex-none rounded-full object-cover" />
               <div className="flex-auto">
                 <h3 className="pr-10 font-semibold text-gray-900 xl:pr-0">{meeting.name}</h3>
                 <dl className="mt-2 flex flex-col text-gray-500 xl:flex-row">
