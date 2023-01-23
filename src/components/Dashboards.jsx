@@ -108,9 +108,7 @@ useEffect(() => {
 }, [])
 
 
-useEffect(() => {
-  console.log(reportNotes)
-}, [reportNotes])
+
 
 
 
@@ -124,7 +122,7 @@ function sortByTime(a,b){
   }
  const [loading, setLoading] = useState(false)
 async function handleCreateComment(){
-console.log(commentInputText)
+
  const commentsRef = collection(db,'comments')
  setLoading(true)
  await addDoc(commentsRef,{user:instance?.getActiveAccount().name, text:commentInputText, reportId:selectedReport?.reportId,timestamp:serverTimestamp()})
@@ -177,7 +175,7 @@ function timeSince(date) {
 }
 var aDay = 24*60*60*1000;
 useEffect(() => {
-  console.log(commentInputText)
+
  }, [commentInputText])
 useEffect(() => {
 async function getReports(){
@@ -282,8 +280,7 @@ async function handleSaveReport(){
  useEffect(() => {
   if(isAuthenticated){
 
-    console.log('this is the access token ----> ' + accessToken)
-    
+  
 
     async function getUserGroups(){
      await callMsGraph(accessToken).then(response=>{
@@ -315,16 +312,10 @@ async function handleSaveReport(){
  }, [userGroups])
 
 
- useEffect(() => {
-   //powerbi api call to get reports in specified group
-/*fetch(` https://api.powerbi.com/v1.0/thedoctors/groups/${selectedUserGroup.id}/reports`).then(response=>{
-  console.log(response)
-}).catch(e=>console.log(e))*/
- 
- }, [])
+
  
  useEffect(() => {
-console.log(filteredReports)
+
   if(filteredReports?.length<=0){
     
     return
@@ -340,7 +331,7 @@ console.log(filteredReports)
       }
       
     }else{
-      console.log('2')
+   
       setSelectedReport(filteredReports[0])
     }
 
@@ -400,7 +391,7 @@ useEffect(() => {
   const q = fsquery(collection(db, "comments"), where("reportId", "==", `${selectedReport?.reportId}`));
   
   const unsubscribe = onSnapshot(q, (snapshot) => {
-   console.log(snapshot.docs)
+  
    var tempNotes = snapshot.docs.sort(function(a, b){return b.data().timestamp.seconds-a.data().timestamp.seconds}).map(doc=>{return doc.data()})
     setReportNotes(tempNotes)
   });
@@ -410,7 +401,7 @@ useEffect(() => {
 
 
   if(selectedReport!==null&& selectedReport!==undefined){
-    console.log(selectedReport)
+   
     getReportNotes()
     mockSignIn()
 
@@ -433,7 +424,7 @@ useEffect(() => {
  }, [savedReportSelected])
  
  useEffect(() => {
-  console.log(reportNotes)
+
 }, [reportNotes])
   return (
     <AuthenticatedTemplate>
@@ -711,7 +702,7 @@ useEffect(() => {
              </div>
                  {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-100 overflow-y-scroll rounded-xl h-[50%]'>
                     {!loading?reportNotes.map(note=>{
-                      console.log(JSON.stringify(note.text))
+                  
                       var text = note?.text.toString().replace(/\n/g, "<br />")
                       var timeSinceComment = timeSince(note?.timestamp?.toDate())
                       return <div className = 'w-full flex flex-col bg-gray-100 p-2 rounded-md drop-shadow-md'>
