@@ -19,27 +19,24 @@ import {
   FolderIcon,
   HomeIcon,
   InboxIcon,
-  StarIcon,
   UsersIcon,
   XMarkIcon,
+     StarIcon
 } from '@heroicons/react/24/outline'
 import {
   Link
 } from "react-router-dom";
 import DropDown from './DropDown';
 import { useEffect } from 'react';
-import { addDoc, getDocs, collection, onSnapshot, where, query as fsquery, serverTimestamp, orderBy, Timestamp } from "@firebase/firestore"
-import { db } from "../firebase"
+
 import { loginRequest } from '../authConfig';
-
-import {callMsGraph} from '../graph'
-import { MdNotes, MdReport, MdSavedSearch } from 'react-icons/md';
-
+import callMsGraph from '../graph'
+import { MdNotes } from 'react-icons/md';
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
   { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
-  { name: 'Favorites', href: '/saved-reports', icon:StarIcon, current: false },
+  { name: 'Favorites', href: '/saved-reports', icon:StarIcon, current: true },
 ]
 
 function classNames(...classes) {
@@ -47,15 +44,14 @@ function classNames(...classes) {
 }
 
  
-export default function Dashboards() {
+export default function SavedReports() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { instance } = useMsal();
-  const [loggedInAcc, setLoggedInAcc] = useState(instance.getActiveAccount())
   const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
   // --------- Set State -------------------
 
   const [filteredReports, setFilteredReports] = useState([])
- 
+  const [selectedReport, setSelectedReport] = useState(filteredReports[0])
   const [reportNotes, setReportNotes] = useState([])
   const [query, setQuery] = useState('')
   const filteredReportsToDisplay =
@@ -81,10 +77,10 @@ export default function Dashboards() {
   });
   const eventHandlersMap = new Map([
     ['loaded', function () {
-
+      console.log('Report has loaded');
     }],
     ['rendered', function () {
-
+    console.log('Report has rendered');
 
       // Update display message
       //setMessage('The report is rendered')
@@ -95,257 +91,48 @@ const [userGroups, setUserGroups] = useState([])
 const [selectedUserGroup, setSelectedUserGroup] = useState({})
 const isAuthenticated = useIsAuthenticated()
 const [showCreateInsight, setShowCreateInsight] = useState(false)
-const [reports, setReports] = useState([])
-const [authenticated, setAuthenticated] = useState()
-const [savedReports, setSavedReports] = useState([])
-const [savedReportSelected, setSavedReportSelected] = useState(false)
-const [commentInputText, setCommentInputText] = useState('')
-const [selectedReport, setSelectedReport] = useState(null)
+const [userReports, setUserReports] = useState([])
+
+
+const [authenticated, setAuthenticated] = useState(false)
 useEffect(() => {
   if(isAuthenticated){
     setAuthenticated(true)
   }
 }, [])
 
-
 useEffect(() => {
-  console.log(reportNotes)
-}, [reportNotes])
-
-
-
-
-
-function sortByTime(a,b){
-  if(a.createdAt>b.createdAt){
-    return a
-  }
-
-  }
- const [loading, setLoading] = useState(false)
-async function handleCreateComment(){
-console.log(commentInputText)
- const commentsRef = collection(db,'comments')
- setLoading(true)
- await addDoc(commentsRef,{user:instance?.getActiveAccount().name, text:commentInputText, reportId:selectedReport?.reportId,timestamp:serverTimestamp()})
-
-setCommentInputText('')
-setLoading(false)
-}
-function onInputChange(e){
-
-    setCommentInputText(e.target.value)
-
-}
-
-
-
-
+   console.log(instance.getActiveAccount().idTokenClaims.oid)
  
-
-
+    console.log('authenticated')
+    async function getSavedReports(){
   
-
-
-
-function timeSince(date) {
-
-  var seconds = Math.floor((new Date() - date) / 1000);
-
-  var interval = seconds / 31536000;
-
-  if (interval > 1) {
- date.toString()
-  }
-  interval = seconds / 2592000;
-  if (interval > 1) {
-    date.toString()
-  }
-  interval = seconds / 86400;
-  if (interval > 1) {
-    return Math.floor(interval) + " day(s)";
-  }
-  interval = seconds / 3600;
-  if (interval > 1) {
-    return Math.floor(interval) + " hour(s)";
-  }
-  interval = seconds / 60;
-  if (interval > 1) {
-    return Math.floor(interval) + " minute(s)";
-  }
-  return Math.floor(seconds) + " second(s)";
-}
-var aDay = 24*60*60*1000;
-useEffect(() => {
-  console.log(commentInputText)
- }, [commentInputText])
-useEffect(() => {
-async function getReports(){
-  await axios.get('https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/reports').then(res=>{
-
-    setReports(res.data)
-    
-  })
-}
-try {
-
-  getReports()
-} catch (error) {
-  console.log(error)
-}
-
-}, [])
-useEffect(() => {
-
-   async function getSavedReports(){
- 
-       await axios.get(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`).then(res=>{
-
-         setSavedReports(res.data)
-       })
-  }
+        await axios.get(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`).then(res=>{
+          console.log(res.data)
+          setUserReports(res.data)
+        })
+   }
 getSavedReports()
 
 
 
 }, [authenticated])
-function checkIfSaved(report){
 
-for(var i = 0; i < savedReports.length; i++){
-
-    if(report?.reportId === savedReports[i]?.reportId ){
-      return true
-    }
-    
  
-}
-}
 
-
-
-
-
-
- function RequestAccessToken() {
-  if(isAuthenticated){
-instance.setActiveAccount(instance.getAllAccounts()[0])
-let account = instance.getActiveAccount()
-    
-  
-    const request = {
-        ...loginRequest,
-        account: account
-    };
-
-    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-    instance.acquireTokenSilent(request).then((response) => {
-    
-        setAccessToken(response.accessToken);
-      
-    }).catch((e) => {
-        instance.acquireTokenPopup(request).then((response) => {
-            setAccessToken(response.accessToken);
-        });
-    });
-  }
-  
- }
  
-async function handleSaveReport(){
-  await axios.post(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount().idTokenClaims?.oid}/reports`,{...selectedReport,user:instance.getActiveAccount()}).then(res=>{
-    
-    setSavedReportSelected(!savedReportSelected)
-    
-    setSavedReports([...savedReports,res.data])
-    setFilteredReports([...filteredReports])
-  })
- }
- async function removeSavedReport(){
-  
-  await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`, {data:selectedReport}).then((res)=>{
-
-  
-  setSavedReportSelected(!savedReportSelected)
- 
-  })
-  setFilteredReports(filteredReports)
-  setSavedReports(savedReports.filter(function(report){
-       
-    return report.reportId!==selectedReport.reportId
-}))
-}
- useEffect(() => {
-
-   RequestAccessToken()
- }, [isAuthenticated])
- const [userPhoto, setUserPhoto] = useState('');
- useEffect(() => {
-  if(isAuthenticated){
-
-    console.log('this is the access token ----> ' + accessToken)
-    
-
-    async function getUserGroups(){
-     await callMsGraph(accessToken).then(response=>{
-  
-       setUserGroups((response.value))
-      })
-    }
-    
-    getUserGroups()
-  }
- }, [accessToken])
- function filterReports(report){
-
-  for(var i =0; i<userGroups.length; i++){
-    if(report.groupId == userGroups[i].id){
-      return true
-    }
-    
-
-  }
-  
- }
- useEffect(() => {
-  
-  if(userGroups?.length>0&&reports.length>0){
-    setFilteredReports(reports?.filter(filterReports))
-  }
-   
- }, [userGroups])
 
 
- useEffect(() => {
-   //powerbi api call to get reports in specified group
-/*fetch(` https://api.powerbi.com/v1.0/thedoctors/groups/${selectedUserGroup.id}/reports`).then(response=>{
-  console.log(response)
-}).catch(e=>console.log(e))*/
- 
- }, [])
+
  
  useEffect(() => {
-console.log(filteredReports)
-  if(filteredReports?.length<=0){
-    
-    return
+  console.log(userReports)
+  if(userReports.length<=0){
+    setSelectedReport(null)
   }else{
-    
-    if(window.sessionStorage.hasOwnProperty('selectedReport')){
-     var sessionReport = JSON.parse(window.sessionStorage.getItem('selectedReport'))
-      if(sessionReport!==null){
-      
-        setSelectedReport(sessionReport)
-      }else if(sessionReport===null){
-        setSelectedReport(filteredReports[0])
-      }
-      
-    }else{
-      console.log('2')
-      setSelectedReport(filteredReports[0])
-    }
-
+    setSelectedReport(userReports[0])
   }
- }, [filteredReports])
+ }, [userReports])
  
   // ---------Sign in -------------------
   const mockSignIn = async () => {
@@ -380,61 +167,27 @@ console.log(filteredReports)
     });
   }
 function handleReportChange(e){
-  
+  console.log(e)
   setSelectedReport(e)
 
 }
 
-function handleGroupChange(e){
 
-  setSelectedUserGroup(e)
-
-}
 
 useEffect(() => {
-  async function getReportNotes(){
-    const commentsRef = collection(db,"comments")
   
-  
-  
-  const q = fsquery(collection(db, "comments"), where("reportId", "==", `${selectedReport?.reportId}`));
-  
-  const unsubscribe = onSnapshot(q, (snapshot) => {
-   console.log(snapshot.docs)
-   var tempNotes = snapshot.docs.sort(function(a, b){return b.data().timestamp.seconds-a.data().timestamp.seconds}).map(doc=>{return doc.data()})
-    setReportNotes(tempNotes)
-  });
-  
-  }
 
-
-
-  if(selectedReport!==null&& selectedReport!==undefined){
-    console.log(selectedReport)
-    getReportNotes()
-    mockSignIn()
-
-      setSavedReportSelected(checkIfSaved(selectedReport))
-    
-    window.sessionStorage.setItem('selectedReport', JSON.stringify(selectedReport))
-  }
- 
+  mockSignIn()
+  window.sessionStorage.setItem('selectedReport',JSON.stringify(selectedReport))
 }, [selectedReport])
-
-useEffect(() => {
-
- 
-  setSavedReportSelected(checkIfSaved(selectedReport))
-}, [savedReports])
-
-
- useEffect(() => {
- 
- }, [savedReportSelected])
- 
- useEffect(() => {
-  console.log(reportNotes)
-}, [reportNotes])
+async function removeSavedReport(){
+    setUserReports(userReports.filter(function(report){
+       
+        return report.reportId!==selectedReport.reportId
+    }))
+    
+await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`, {data:selectedReport})
+}
   return (
     <AuthenticatedTemplate>
       {/*
@@ -618,27 +371,27 @@ useEffect(() => {
           <main className="flex-1 ">
             <div className="py-6">
               <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h1 className="  text-2xl font-semibold text-gray-900">Dashboard</h1>
+                <h1 className="  text-2xl font-semibold text-gray-900">Favorites</h1>
               </div>
-              <div className="mx-auto max-w-7xl  px-4 sm:px-6 md:px-8 w-full">
+              <div className="mx-auto max-w-7xl  px-4 sm:px-6 md:px-8 w-full flex flex-col items-end">
                 {/* Replace with your content */}
-                <div className="py-4">
+                <div className="py-4 w-full">
                
-                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)} className='mt-4'>
-                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select a report</Combobox.Label>
+                  <Combobox as="div" value={selectedReport} onChange={(e)=>handleReportChange(e)} className='mt-4 '>
+                    <Combobox.Label className="block text-sm font-medium text-gray-700">Select a favorite</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
                         className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
-                        displayValue={(selectedReport) => filteredReports.length>0?selectedReport?.name:'NO REPORTS RETURNED'}
+                        displayValue={(selectedReport) =>userReports.length>0?selectedReport?.name:'NO REPORTS RETURNED'}
                       />
                       <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                         <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                       </Combobox.Button>
 
-                      {filteredReports.length > 0 && (
+                      {userReports.length > 0 && (
                         <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                          {filteredReports.map((report) => (
+                          {userReports.map((report) => (
                             <Combobox.Option
                               key={report.id}
                               value={report}
@@ -651,7 +404,7 @@ useEffect(() => {
                             >
                               {({ active, selected }) => (
                                 <>
-                                  <span className={classNames('block truncate flex items-center', selected && 'font-semibold')}><p>{checkIfSaved(report)?<StarIcon className = 'h-4 mr-2 text-indigo-500'/>:<p className=' mr-6'></p>}</p><p>{report.name}</p></span>
+                                  <span className={classNames('block truncate', selected && 'font-semibold')}>{report.name}</span>
 
                                   {selected && (
                                     <span
@@ -678,7 +431,7 @@ useEffect(() => {
                   {/*<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
                   */}
                 </div>
-               {!savedReportSelected? <button className='bg-slate-700 border-[1px] text-white hover:bg-transparent hover:text-slate-700 p-3 rounded-md border-slate-700 my-4 min-w-[120px] felx justify-center' onClick={handleSaveReport}><p className="flex justify-center h-fit text-lg items-center min-h-[26px]">Save<StarIcon className='h-6'/></p></button>:<button className='bg-green-600 border-[1px] text-white hover:bg-transparent hover:text-green-600 p-3 rounded-md border-green-600 my-4 min-w-[120px] felx justify-center' onClick={removeSavedReport}><p className="flex justify-center h-fit text-lg items-center min-h-[26px]">Saved<CheckIcon className='h-6'/></p></button>}
+{selectedReport&&<div className='w-full bg-slate-700 text-white  text-center  flex flex-row relative min-h-[70px] flex items-center justify-center rounded-md'><p className='ml-2 text-lg'>{selectedReport.name}</p>  {selectedReport&&<button className="w-fit bg-red-600 border-red-600 text-white rounded-md border-[1px]  hover:bg-transparent hover:text-white hover:border-white p-3 my-4 right-2 absolute font-semibold" onClick={removeSavedReport}>Remove</button>}</div>}
                 {selectedReport&&<PowerBIEmbed
               
                 embedConfig={pbiReportConfig}
@@ -690,49 +443,9 @@ useEffect(() => {
                   }
                 }
               />}
-             
+               
                 {/* /End replace */}
-                {filteredReports.length>0?<div className = 'w-full h-screen  flex flex-col  mt-20  '>
-                <div className = 'w-full flex items-center'>
-                <h1 className = 'text-xl  text-left mr-2 font-semibold'>Comments: </h1>
-                <h5 className='text-lg'>
-                {selectedReport?.name} 
-                </h5>
               
-                </div>
-               
-                {showCreateInsight===false&&<button onClick={()=>{setShowCreateInsight(true)}} className = 'bg-indigo-600 p-3 text-white font-semibold hover:border-[1px] hover:border-indigo-600 hover:bg-transparent hover:text-indigo-600 my-5 w-fit rounded-md'>
-                  Create
-                </button>}
-             <div className={`w-full relative ${showCreateInsight ? 'flex' : 'hidden'}  py-6 flex-col `}>
-             <AiOutlineCloseCircle onClick={()=>{setShowCreateInsight(false)}} className='text-black z-40 text-2xl  mb-1 top-0 right-5 hover:text-red-600'/>
-              <textarea id='textarea'  value ={commentInputText} type="text" className = 'rounded-t-xl relative' placeholder='  Share a comment with others' onChange={(e)=>onInputChange(e)} ></textarea>
-              <button onClick={()=>handleCreateComment()} className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Submit</button>
-             </div>
-                 {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-100 overflow-y-scroll rounded-xl h-[50%]'>
-                    {!loading?reportNotes.map(note=>{
-                      console.log(JSON.stringify(note.text))
-                      var text = note?.text.toString().replace(/\n/g, "<br />")
-                      var timeSinceComment = timeSince(note?.timestamp?.toDate())
-                      return <div className = 'w-full flex flex-col bg-gray-100 p-2 rounded-md drop-shadow-md'>
-                        <div className='flex items-center'>
-                        <Avatar  className="hover:opacity-50"  ><p className='text-md text-slate-800 '>{note.user.split(',')[1][1] + note.user.split(',')[0][0] }</p></Avatar>
-                          <h1 className ='w-full pl-2 '>{note.user}</h1>
-                          
-                    
-                        </div>
-                      
-                        <p className ='py-2 my-1 ml-4 pl-2 border-l-[1px] border-gray-400'>
-                      {text}
-                        </p>
-                        <p  className ='w-full pl-2 font-light h-fit'>{timeSinceComment[0]!=='-'?timeSinceComment:'1 second(s)'}</p>
-                    
-                      </div>
-                    }):<div className='w-full h-[50%] flex justify-center items-center'><p className='text-3xl'>Loading...</p></div>}
-                  </ul>:<div className='w-full h-[50%] flex justify-center items-center'><p>Be the first to create a comment for this report!</p></div>}
-                
-               
-              </div>:<div className='w-full h-screen flex mt-10 items-start justify-center'><p>No report found!</p></div>}
               </div>
            
             </div>
