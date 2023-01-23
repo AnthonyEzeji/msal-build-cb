@@ -1,3 +1,4 @@
 [{ "id": 1, "name": "Claim Summary Analysis","reportId":"a3ef48eb-70d7-48a9-af55-5635ab5eb9b8","groupId":"8f324dbc-a380-4ccc-8e06-53579d35d24b", "groupName":"NGA_HRA_CLM_POWER_USERS" },
-{ "id": 1, "name": "Claim Valuation Analysis","reportId":"2969af5a-c342-4e53-811c-049f86c0c188","groupId":"8f324dbc-a380-4ccc-8e06-53579d35d24b", "groupName":"NGA_HRA_CLM_POWER_USERS" },
-{ "id": 2, "name": "Risk Management Analysis", "reportId":"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1","groupId":"d98a2020-a2a9-43ef-a6f6-77a2ab244e01", "groupName":"NGA_HRA_RIM_POWER_USERS"}]
+{ "id": 2, "name": "Claim Valuation Analysis","reportId":"2969af5a-c342-4e53-811c-049f86c0c188","groupId":"8f324dbc-a380-4ccc-8e06-53579d35d24b", "groupName":"NGA_HRA_CLM_POWER_USERS" },
+{ "id": 3, "name": "KPI Dashboard","reportId":"23ac6374-3156-402d-8530-71e4c0f2e571","groupId":"8f324dbc-a380-4ccc-8e06-53579d35d24b", "groupName":"NGA_HRA_CLM_POWER_USERS" },
+{ "id": 4, "name": "Risk Management Analysis", "reportId":"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1","groupId":"d98a2020-a2a9-43ef-a6f6-77a2ab244e01", "groupName":"NGA_HRA_RIM_POWER_USERS"}]
