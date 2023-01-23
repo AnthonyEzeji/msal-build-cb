@@ -4,7 +4,7 @@ import { Dialog, Transition, Combobox } from '@headlessui/react'
 import HRALogo from '../assets/hra logo white.png'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
-
+import reports from '../reportsConfig.json'
 import { models } from 'powerbi-client';
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import { PowerBIEmbed } from 'powerbi-client-react';
@@ -36,11 +36,7 @@ const navigation = [
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
   { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
 ]
-const reports= [
-  { id: 1, name: 'Claim Summary Analysis',reportId:'a3ef48eb-70d7-48a9-af55-5635ab5eb9b8',groupId:'8f324dbc-a380-4ccc-8e06-53579d35d24b', groupName:'NGA_HRA_CLM_POWER_USERS' },
-  { id: 2, name: 'Risk Management Analysis', reportId:"aa9dff0b-d603-44fc-bd6c-c4f3cf07f6b1",groupId:"d98a2020-a2a9-43ef-a6f6-77a2ab244e01", groupName:"NGA_HRA_RIM_POWER_USERS"},
 
-]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -229,6 +225,7 @@ function handleGroupChange(e){
 
 useEffect(() => {
   
+
 async function getReportNotes(){
   const commentsRef = collection(db,"comments")
 
@@ -244,6 +241,8 @@ const unsubscribe = onSnapshot(q, (snapshot) => {
 
 }
   getReportNotes()
+
+
   mockSignIn()
 }, [selectedReport])
 

@@ -1,12 +1,15 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import img1 from '../assets/leadership_images/leadership-img-1.jfif'
+import img2 from '../assets/leadership_images/leadership-img-2.jfif'
+import img3 from '../assets/leadership_images/leadership-img-3.jfif'
+import img4 from '../assets/leadership_images/leadership-img-4.jfif'
 const people = [
     {
       name: 'Leslie Alexander',
       role: 'Co-Founder / CEO',
-      imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+      imageUrl: img1,
       bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
       twitterUrl: '#',
       linkedinUrl: '#',
@@ -15,7 +18,7 @@ const people = [
         name: 'Bob Johnson',
         role: 'Co-Founder / CFO',
         imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+          img2,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -24,7 +27,7 @@ const people = [
         name: 'Trinh Nguyen',
         role: 'Co-Founder / COO',
         imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+         img3,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
@@ -33,7 +36,7 @@ const people = [
         name: 'Samson Oliver',
         role: 'Co-Founder / CIO',
         imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+         img4,
         bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
         twitterUrl: '#',
         linkedinUrl: '#',
