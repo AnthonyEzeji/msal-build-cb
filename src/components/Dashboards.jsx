@@ -27,9 +27,10 @@ import {
 } from "react-router-dom";
 import DropDown from './DropDown';
 import { useEffect } from 'react';
-
+import { addDoc, getDocs, collection, onSnapshot, where, query as fsquery, serverTimestamp, orderBy, Timestamp } from "@firebase/firestore"
+import { db } from "../firebase"
 import { loginRequest } from '../authConfig';
-import callMsGraph from '../graph'
+import {callMsGraph,callMsGraphPhoto} from '../graph'
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
@@ -48,6 +49,7 @@ function classNames(...classes) {
 export default function Dashboards() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { instance } = useMsal();
+  const [loggedInAcc, setLoggedInAcc] = useState(instance.getActiveAccount())
   const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
   // --------- Set State -------------------
 
@@ -93,6 +95,11 @@ const [selectedUserGroup, setSelectedUserGroup] = useState({})
 const isAuthenticated = useIsAuthenticated()
 const [showCreateInsight, setShowCreateInsight] = useState(false)
 
+
+
+
+
+
  function RequestAccessToken() {
   if(isAuthenticated){
 instance.setActiveAccount(instance.getAllAccounts()[0])
@@ -120,16 +127,25 @@ let account = instance.getActiveAccount()
  useEffect(() => {
    RequestAccessToken()
  }, [isAuthenticated])
- 
+ const [userPhoto, setUserPhoto] = useState('');
  useEffect(() => {
   if(isAuthenticated){
     console.log('this is the access token ----> ' + accessToken)
+    async function getUserPhoto(){
+      await callMsGraphPhoto(accessToken).then(response=>{
+        console.log(response?.value)
+        setUserPhoto((response.value))
+       }).catch(err=>{
+        console.log(err)
+      })
+     }
     async function getUserGroups(){
      await callMsGraph(accessToken).then(response=>{
        console.log(response.value)
        setUserGroups((response.value))
       })
     }
+    getUserPhoto()
     getUserGroups()
   }
  }, [accessToken])
@@ -214,16 +230,93 @@ function handleGroupChange(e){
 useEffect(() => {
   
 async function getReportNotes(){
-  console.log(selectedReport)
-  await axios.get(`https://hra-backend-ou85.vercel.app/notes/${selectedReport?.reportId}`).then(res=>{
-    setReportNotes(res.data)
+  const commentsRef = collection(db,"comments")
 
-  })
+
+
+const q = fsquery(collection(db, "comments"), where("reportId", "==", `${selectedReport?.reportId}`));
+
+const unsubscribe = onSnapshot(q, (snapshot) => {
+ console.log(snapshot.docs)
+ var tempNotes = snapshot.docs.sort(function(a, b){return b.data().timestamp.seconds-a.data().timestamp.seconds}).map(doc=>{return doc.data()})
+  setReportNotes(tempNotes)
+});
+
 }
   getReportNotes()
   mockSignIn()
 }, [selectedReport])
 
+useEffect(() => {
+  console.log(reportNotes)
+}, [reportNotes])
+
+const [commentInputText, setCommentInputText] = useState('')
+
+useEffect(() => {
+ console.log(commentInputText)
+}, [commentInputText])
+
+function sortByTime(a,b){
+  if(a.createdAt>b.createdAt){
+    return a
+  }
+
+  }
+ const [loading, setLoading] = useState(false)
+async function handleCreateComment(){
+
+ const commentsRef = collection(db,'comments')
+ setLoading(true)
+ await addDoc(commentsRef,{user:instance.getActiveAccount().name, text:commentInputText, reportId:selectedReport.reportId,timestamp:serverTimestamp()})
+
+setCommentInputText('')
+setLoading(false)
+}
+function onInputChange(e){
+
+    setCommentInputText(e.target.value)
+
+}
+
+
+
+
+ 
+
+
+  
+
+
+
+function timeSince(date) {
+
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+ date.toString()
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    date.toString()
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " day(s)";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " hour(s)";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minute(s)";
+  }
+  return Math.floor(seconds) + " second(s)";
+}
+var aDay = 24*60*60*1000;
   return (
     <AuthenticatedTemplate>
       {/*
@@ -482,7 +575,7 @@ async function getReportNotes(){
                 {filteredReports.length>0?<div className = 'w-full h-screen  flex flex-col  mt-20  '>
                 <div className = 'w-full flex items-center'>
                 <h1 className = 'text-xl  text-left mr-2 font-semibold'>Comments: </h1>
-                <h5 className='text-xl font-light'>
+                <h5 className='text-lg'>
                 {selectedReport?.name} 
                 </h5>
               
@@ -492,32 +585,31 @@ async function getReportNotes(){
                   Create +
                 </button>}
              <div className={`w-full relative ${showCreateInsight ? 'flex' : 'hidden'}  py-6 flex-col `}>
-              <div className = {`relative items-center p-1 border-[1px] bg-slate-600 text-white rounded-t-xl border-gray-500 flex `}>
-              <Avatar className="hover:opacity-50"  >{<p>{instance.getActiveAccount().name.split(',')[1][1]+instance.getActiveAccount().name.split(',')[0][0]}</p>}</Avatar>
-                <p className = 'ml-2 font-light'>{instance.getActiveAccount().name.trim().split(',')[1]+" "+ instance.getActiveAccount().name.trim().split(',')[0]}</p>
-                <AiOutlineCloseCircle onClick={()=>{setShowCreateInsight(false)}} className='text-white text-xl absolute right-5 hover:text-red-600'/>
-              </div>
-              <textarea type="text" className = '' placeholder='  Share your insights with others' />
-              <button className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Sumbit</button>
+             <AiOutlineCloseCircle onClick={()=>{setShowCreateInsight(false)}} className='text-black z-40 text-2xl  mb-1 top-0 right-5 hover:text-red-600'/>
+              <textarea id='textarea'  value ={commentInputText} type="text" className = 'rounded-t-xl relative' placeholder='  Share a comment with others' onChange={(e)=>onInputChange(e)} ></textarea>
+              <button onClick={()=>handleCreateComment()} className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Submit</button>
              </div>
                  {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-100 overflow-y-scroll rounded-xl h-[50%]'>
-                    {reportNotes.map(note=>{
+                    {!loading?reportNotes.map(note=>{
+                      console.log(JSON.stringify(note.text))
+                      var text = note?.text.toString().replace(/\n/g, "<br />")
+                      var timeSinceComment = timeSince(note?.timestamp?.toDate())
                       return <div className = 'w-full flex flex-col bg-gray-100 p-2 rounded-md drop-shadow-md'>
                         <div className='flex items-center'>
-                        <Avatar  className="hover:opacity-50"  ></Avatar>
-                          <h1 className ='w-full pl-2 '>John Doe</h1>
+                        <Avatar  className="hover:opacity-50"  ><p className='text-md text-slate-800 '>{note.user.split(',')[1][1] + note.user.split(',')[0][0] }</p></Avatar>
+                          <h1 className ='w-full pl-2 '>{note.user}</h1>
                           
                     
                         </div>
                       
                         <p className ='py-2 my-1 ml-4 pl-2 border-l-[1px] border-gray-400'>
-                        {note.text}
+                      {text}
                         </p>
-                        <p  className ='w-full pl-2 font-light'>2m ago</p>
+                        <p  className ='w-full pl-2 font-light h-fit'>{timeSinceComment[0]!=='-'?timeSinceComment:'1 second(s)'}</p>
                     
                       </div>
-                    })}
-                  </ul>:<div className='w-full h-[50%] flex justify-center items-center'><p>Be the first to create an insight for this report!</p></div>}
+                    }):<div className='w-full h-[50%] flex justify-center items-center'><p className='text-3xl'>Loading...</p></div>}
+                  </ul>:<div className='w-full h-[50%] flex justify-center items-center'><p>Be the first to create a comment for this report!</p></div>}
                 
                
               </div>:<div className='w-full h-screen flex mt-10 items-start justify-center'><p>No report found!</p></div>}
