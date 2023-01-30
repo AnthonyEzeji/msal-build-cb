@@ -8,10 +8,10 @@ function VideoHero({video}) {
     }
   return (
 
-<div className = 'pb-[56.25%] relative '>  <iframe src={"https://player.vimeo.com/video/629769948?h=0a0bdcb35a&background=1"} webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen="true" msallowfullscreen="true" allowFullScreen={true} frameborder="0" className='w-[100%] h-[100%] absolute top-0 left-0' allow="autoplay; fullscreen">
+<div className = 'pb-[56.25%] relative '>  <iframe src={"https://player.vimeo.com/video/629769948?h=0a0bdcb35a&background=1"} webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen="true" msallowfullscreen="true" allowFullScreen={true} frameborder="0" className='w-[100%] h-[100%] absolute top-0 left-0 z-30' allow="autoplay; fullscreen">
 
   </iframe>
-  <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left z-50 absolute">
+  <div className="mx-auto w-fit max-w-7xl mt-16 pb-20 text-center lg:my-48 lg:text-left z-30 absolute ">
     <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-3xl lg:text-3xl xl:text-3xl">
         <span className="block xl:inline">Creating Partnerships to </span>{' '}
