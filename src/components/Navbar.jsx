@@ -35,6 +35,7 @@ import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
 
+
 const features = [
   {
     name: 'Analytics',
@@ -98,10 +99,21 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+
+  const [bg, setBg] = useState('bg-transparent')
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
 
-
+  
+  const changeNavbarColor = () =>{
+     if(window.scrollY >= 700){
+       setBg('rgb(51 65 85)');
+     }
+     else{
+       setBg('transparent')
+     }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
   
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
@@ -123,9 +135,9 @@ export default function Example() {
  let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
 const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="fixed w-full z-40 top-0">
-      <Popover className="relative bg-slate-800 shadow">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-800 sticky">
+    <div className="fixed w-full z-40 top-0" id='nav'>
+      <Popover className="relative  " style={{backgroundColor:bg}}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-transparent sticky">
           <div className="flex items-center justify-between py-6 md:justify-between md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">
@@ -137,8 +149,8 @@ const [showLogout, setShowLogout] = useState(false)
                 />
               </Link>
             </div>
-            <div className="-my-2 -mr-2 md:hidden ">
-            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-slate-800 p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-300  border-[1px] border-slate-400">
+            <div className="-my-2 -mr-2 flex md:hidden ">
+            <Popover.Button className="inline-flex items-center justify-center rounded-md  p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-300  border-[1px] border-slate-400">
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
@@ -150,7 +162,7 @@ const [showLogout, setShowLogout] = useState(false)
                     <Popover.Button
                       className={classNames(
                         open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md bg-slate-800 border-none text-base font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:text-white '
+                        'group inline-flex items-center rounded-md  border-none text-base  focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
                       )}
                     >
                       <span>Solutions</span>
@@ -181,7 +193,7 @@ const [showLogout, setShowLogout] = useState(false)
                                 href={item.href}
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
                               >
-                                <item.icon className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true" />
+                                <item.icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true" />
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">{item.name}</p>
                                   <p className="mt-1 text-sm text-slate-800">{item.description}</p>
@@ -214,7 +226,7 @@ const [showLogout, setShowLogout] = useState(false)
                     <Popover.Button
                       className={classNames(
                         open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md bg-slate-800 border-none text-base font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:text-white '
+                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
                       )}
                     >
                       <span>Who We Serve</span>
@@ -245,7 +257,7 @@ const [showLogout, setShowLogout] = useState(false)
                                 href='/solutions/hospitals/'
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
                               >
-                              <BuildingOffice2Icon className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true"/>
+                              <BuildingOffice2Icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">Hospitals</p>
                                   <p className="mt-1 text-sm text-slate-800">Comprehensive insurance and risk management advisory services for hospitals and healthcare organizations.
@@ -259,7 +271,7 @@ const [showLogout, setShowLogout] = useState(false)
                                 href='/solutions/ny-physicians/'
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
                               >
-                              <AiOutlineMedicineBox className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true"/>
+                              <AiOutlineMedicineBox className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">New York Physicians</p>
                                   <p className="mt-1 text-sm text-slate-800">As part of The Doctors Company, we provide New York physicians and affiliated healthcare providers with a portfolio of flexible coverage options to meet your MPL needs.
@@ -286,7 +298,7 @@ const [showLogout, setShowLogout] = useState(false)
                     <Popover.Button
                       className={classNames(
                         open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md bg-slate-800 border-none text-base font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:text-white '
+                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
                       )}
                     >
                       <span>Insights</span>
@@ -318,7 +330,7 @@ const [showLogout, setShowLogout] = useState(false)
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
                               >
                             
-                             <BsFileText className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true"/>
+                             <BsFileText className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">Blogs</p>
                                   <p className="mt-1 text-sm text-slate-800">Read blogs and insights.</p>
@@ -340,7 +352,7 @@ const [showLogout, setShowLogout] = useState(false)
                               </ul>
                             </div>
                             <div className="mt-5 text-sm">
-                              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                              <a href="#" className="font-medium text-red-600 hover:text-red-500">
                                 View all posts
                                 <span aria-hidden="true"> &rarr;</span>
                               </a>
@@ -361,7 +373,7 @@ const [showLogout, setShowLogout] = useState(false)
                     <Popover.Button
                       className={classNames(
                         open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md bg-slate-800 text-base font-medium hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                        'group inline-flex items-center rounded-md  text-base hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
                       )}
                     >
                       <span>About Us</span>
@@ -392,7 +404,7 @@ const [showLogout, setShowLogout] = useState(false)
                                 href={item.href}
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
                               >
-                                <item.icon className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true" />
+                                <item.icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true" />
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">{item.name}</p>
                                   <p className="mt-1 text-sm text-slate-800">{item.description}</p>
@@ -414,7 +426,7 @@ const [showLogout, setShowLogout] = useState(false)
                               </ul>
                             </div>
                             <div className="mt-5 text-sm">
-                              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                              <a href="#" className="font-medium text-red-600 hover:text-red-500">
                                 View all posts
                                 <span aria-hidden="true"> &rarr;</span>
                               </a>
@@ -434,11 +446,11 @@ const [showLogout, setShowLogout] = useState(false)
               </Link>
               <a
                 href="#"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700"
               >
                 Sign up
               </a>
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md font-semibold text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-indigo-600 text-white font-semibold border-[1px] rounded-md mt-2 border-indigo-600 hover:bg-transparent hover:text-indigo-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50"  >{<p>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 
@@ -466,7 +478,7 @@ const [showLogout, setShowLogout] = useState(false)
                     />
                   </div>
                   <div className="-mr-2">
-                    <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                       <span className="sr-only">Close menu</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                     </Popover.Button>
@@ -480,7 +492,7 @@ const [showLogout, setShowLogout] = useState(false)
                         href={item.href}
                         className="-m-3 flex items-center rounded-md p-3 hover:bg-slate-50"
                       >
-                        <item.icon className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true" />
+                        <item.icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true" />
                         <span className="ml-3 text-base font-medium text-slate-900">{item.name}</span>
                       </a>
                     ))}
@@ -509,14 +521,14 @@ const [showLogout, setShowLogout] = useState(false)
                 <div>
                   <a
                     href="#"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700"
                   >
                     Sign up
                   </a>
                   <p className="mt-6 text-center text-base font-medium text-slate-800">
                     Existing customer?
                     <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
-             text-indigo-600 ml-2 hover:text-slate-900" onClick={handleLogin}>
+             text-red-600 ml-2 hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
                   </p>

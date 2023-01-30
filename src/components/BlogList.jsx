@@ -90,7 +90,7 @@ const posts = [
             <BlogCard post = {post} />
             ))}
           </div>
-          {!onBlogPage&&<Link to='/blog' className ='font-semibold w-full text-center py-3 text-white bg-indigo-600 mt-5 rounded-md absolute border-[1px] hover:border-indigo-600 hover:bg-transparent hover:text-indigo-600'>More</Link>}
+          {!onBlogPage&&<Link to='/blog' className ='font-semibold w-full text-center py-3 text-white bg-red-600 mt-5 rounded-md absolute border-[1px] hover:border-red-600 hover:bg-transparent hover:text-red-600'>More</Link>}
         </div>
       
       </div>
