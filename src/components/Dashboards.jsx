@@ -95,9 +95,29 @@ const [reports, setReports] = useState([])
 const [authenticated, setAuthenticated] = useState()
 const [savedReports, setSavedReports] = useState([])
 const [savedReportSelected, setSavedReportSelected] = useState(false)
+
+async function logInUser(){
+   console.log(instance.getActiveAccount())
+   const headers = {
+    'Content-Type': 'text/plain',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin':'http://localhost:3000',
+    'Access-Control-Allow-Credentials': 'true'
+};
+axios.defaults.withCredentials=true
+  await axios.post(`http://localhost:5000/users/login`,{account:instance.getActiveAccount()}).then(res=>{
+    console.log(res.data)
+    console.log(res.headers)
+  })
+
+}
 useEffect(() => {
+
   if(isAuthenticated){
+  
+
     setAuthenticated(true)
+    
   }
 }, [])
 
@@ -117,7 +137,7 @@ try {
 
 }, [])
 useEffect(() => {
-
+  logInUser()
    async function getSavedReports(){
  
        await axios.get(`http://localhost:5000/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`).then(res=>{
