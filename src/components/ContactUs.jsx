@@ -72,7 +72,7 @@ export default function ContactUs() {
                   name="full-name"
                   id="full-name"
                   autoComplete="name"
-                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Full name"
                 />
               </div>
@@ -85,7 +85,7 @@ export default function ContactUs() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Email"
                 />
               </div>
@@ -98,7 +98,7 @@ export default function ContactUs() {
                   name="phone"
                   id="phone"
                   autoComplete="tel"
-                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Phone"
                 />
               </div>
@@ -110,7 +110,7 @@ export default function ContactUs() {
                   id="message"
                   name="message"
                   rows={4}
-                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Message"
                   defaultValue={''}
                 />
@@ -118,7 +118,7 @@ export default function ContactUs() {
               <div>
                 <button
                   type="submit"
-                  className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 border-[1px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-transparent hover:text-red-600 hover:border-red-600 border-[1px] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 >
                   Submit
                 </button>

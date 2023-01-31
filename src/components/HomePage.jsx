@@ -13,13 +13,15 @@ import ForHospitals from './ForHospitals';
 import Hero from './Hero';
 import Splide from '../components/Splide'
 import CTASection from './CTASection'
+import VideoHero from './VideoHero';
 const HomePage = () => {
   let isAuthenticated = useIsAuthenticated()
   
   return (
-    <div className=' xl:pt-[90px] pt-[90px]'>
+    <div className=' '>
     <Navbar/>
-     <Hero/>
+    <VideoHero video='https://vimeo.com/783454719'/>
+ 
      <CTASection/>
      <ClientList></ClientList>
 <Splide/>

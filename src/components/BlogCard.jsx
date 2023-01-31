@@ -8,7 +8,7 @@ function BlogCard({post}) {
     </div>
     <div className="flex flex-1 flex-col justify-between bg-white p-6">
       <div className="flex-1">
-        <p className="text-sm font-medium text-indigo-600">
+        <p className="text-sm font-medium text-red-600">
           <a href={post.category.href} className="hover:underline">
             {post.category.name}
           </a>
