@@ -117,6 +117,7 @@ axios.defaults.withCredentials=true
   })
 
 }
+//Sets auth state to true when user is authenticated
 useEffect(() => {
 
   if(isAuthenticated){
@@ -133,14 +134,17 @@ useEffect(() => {
 
 
 
-
+//Sorts comments by timestamp
 function sortByTime(a,b){
   if(a.createdAt>b.createdAt){
     return a
   }
 
   }
+
  const [loading, setLoading] = useState(false)
+
+ //Create a comment for selected report
 async function handleCreateComment(){
 
  const commentsRef = collection(db,'comments')
@@ -165,7 +169,7 @@ function onInputChange(e){
   
 
 
-
+//Gets the time elapsed since post was created (e.g. "1h ago")
 function timeSince(date) {
 
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -194,9 +198,7 @@ function timeSince(date) {
   return Math.floor(seconds) + " second(s)";
 }
 var aDay = 24*60*60*1000;
-useEffect(() => {
-
- }, [commentInputText])
+//Sets reports state to api request response for reports
 useEffect(() => {
 async function getReports(){
   await axios.get('https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/reports').then(res=>{
@@ -213,6 +215,7 @@ try {
 }
 
 }, [])
+//When a user is authenticated, an api request is sent for the users saved reports
 useEffect(() => {
   logInUser()
    async function getSavedReports(){
@@ -227,6 +230,8 @@ getSavedReports()
 
 
 }, [authenticated])
+
+//function accepts a report as a parameter and returns whether the current user has it saved
 function checkIfSaved(report){
 
 for(var i = 0; i < savedReports.length; i++){
@@ -243,7 +248,7 @@ for(var i = 0; i < savedReports.length; i++){
 
 
 
-
+//function to request access token needed for ms graph requests
  function RequestAccessToken() {
   if(isAuthenticated){
 instance.setActiveAccount(instance.getAllAccounts()[0])
@@ -268,7 +273,7 @@ let account = instance.getActiveAccount()
   }
   
  }
- 
+ //function handles a user saving a report
 async function handleSaveReport(){
   await axios.post(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount().idTokenClaims?.oid}/reports`,{...selectedReport,user:instance.getActiveAccount()}).then(res=>{
     
@@ -278,6 +283,7 @@ async function handleSaveReport(){
     setFilteredReports([...filteredReports])
   })
  }
+ //function handles user removing report from their saved reports
  async function removeSavedReport(){
   
   await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`, {data:selectedReport}).then((res)=>{
@@ -292,6 +298,7 @@ async function handleSaveReport(){
     return report.reportId!==selectedReport.reportId
 }))
 }
+//When an access token is set, we make a request to ms graph for the user's groups
  useEffect(() => {
 
    RequestAccessToken()
@@ -312,6 +319,8 @@ async function handleSaveReport(){
     getUserGroups()
   }
  }, [accessToken])
+
+ //function filters reports based on the user's groups
  function filterReports(report){
 
   for(var i =0; i<userGroups.length; i++){
@@ -323,6 +332,7 @@ async function handleSaveReport(){
   }
   
  }
+ //When the user's groups are set, we filter the reports
  useEffect(() => {
   
   if(userGroups?.length>0&&reports.length>0){
@@ -333,7 +343,7 @@ async function handleSaveReport(){
 
 
 
- 
+ //When the filtered reports are set, the current selected report to display is set to the first report in filtered reports
  useEffect(() => {
 
   if(filteredReports?.length<=0){
@@ -359,6 +369,7 @@ async function handleSaveReport(){
  }, [filteredReports])
  
   // ---------Sign in -------------------
+  //Config for power-bi based on selected report
   const mockSignIn = async () => {
 
     const reportConfigResponse = await fetch(sampleReportUrl+selectedReport?.reportId);
@@ -380,6 +391,7 @@ async function handleSaveReport(){
     });
 
   };
+  //handles msal user logout
   const handleLogout = () => {
     /* instance.logoutPopup({
          postLogoutRedirectUri: "/",
@@ -390,18 +402,15 @@ async function handleSaveReport(){
       postLogoutRedirectUri: "/",
     });
   }
+  //function handles a user selecting a report from filtered reports
 function handleReportChange(e){
   
   setSelectedReport(e)
 
 }
 
-function handleGroupChange(e){
 
-  setSelectedUserGroup(e)
-
-}
-
+//When a new report is selected, the corresponding notes/comments are requested from google firestore db
 useEffect(() => {
   async function getReportNotes(){
     const commentsRef = collection(db,"comments")
@@ -432,20 +441,15 @@ useEffect(() => {
  
 }, [selectedReport])
 
+//When a report is selected, function checkIfSaved() checks to see if the report is included in the users saved reports
 useEffect(() => {
-
- 
   setSavedReportSelected(checkIfSaved(selectedReport))
 }, [savedReports])
 
 
- useEffect(() => {
- 
- }, [savedReportSelected])
- 
- useEffect(() => {
 
-}, [reportNotes])
+ 
+
   return (
     <AuthenticatedTemplate>
       {/*

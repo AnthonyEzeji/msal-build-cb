@@ -103,9 +103,18 @@ export default function Example() {
   const [bg, setBg] = useState('bg-transparent')
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
-
+  let params = useParams()
   
-
+  const changeNavbarColor = () =>{
+   
+     if(window.scrollY >= 700){
+       setBg('rgb(51 65 85)');
+     }
+     else{
+       setBg('transparent')
+     }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
   
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
@@ -128,8 +137,8 @@ export default function Example() {
 const [showLogout, setShowLogout] = useState(false)
   return (
     <div className="fixed w-full z-40 top-0" id='nav'>
-      <Popover className="relative bg-slate-700 " style={{backgroundColor:bg}}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-700 sticky">
+      <Popover className="relative  " style={{backgroundColor:bg}}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-transparent sticky">
           <div className="flex items-center justify-between py-6 md:justify-between md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">

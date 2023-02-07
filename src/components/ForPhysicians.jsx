@@ -45,7 +45,7 @@ const features = [
 export default function Example() {
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-7xl py-24 px-6 sm:py-32 lg:px-8 lg:py-40">
+      <div className="mx-auto max-w-7xl py-24 px-6 sm:py-32 lg:px-8 lg:py-30">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">New York Physicians</h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-gray-600">
@@ -57,14 +57,14 @@ export default function Example() {
           {features.map((feature) => (
             <div key={feature.name} className="relative">
               <dt>
-                <CheckIcon className="absolute mt-1 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                <CheckIcon className="absolute mt-1 h-6 w-6 text-red-600" aria-hidden="true" />
                 <p className="ml-10 text-lg font-semibold leading-8 text-gray-900">{feature.name}</p>
               </dt>
               <dd className="mt-2 ml-10 text-base leading-7 text-gray-600">{feature.description}</dd>
             </div>
           ))}
         </dl>
-        <button className='mt-10 w-full bg-indigo-600 rounded-md p-3 font-semibold text-white border-[1px] hover:border-indigo-600 hover:bg-transparent hover:text-indigo-600'><a href="/solutions/ny-physicians">More</a></button>
+        <button className='mt-10 w-full bg-red-600 rounded-md p-3 font-semibold text-white border-[1px] hover:border-red-600 hover:bg-transparent hover:text-red-600'><a href="/solutions/ny-physicians">More</a></button>
       </div>
     </div>
   )

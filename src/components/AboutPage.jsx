@@ -117,17 +117,17 @@ function AboutPage() {
             <div className='bg-white m-2 rounded-md p-2 h-fit min-h-[220px] flex flex-col flex-1 items-center'>
              <h1 className='text-2xl px-3 text-center  block   font-bold leading-8 tracking-tight text-gray-900 '>Leadership</h1>
              <p className = 'text-center p-3 flex flex-1 prose prose-lg prose-indigo mx-auto text-gray-500'>Learn more about the leadership team behind Healthcare Risk Advisors.</p>
-             <button className='bg-indigo-600 text-white border-[1px]  m-2 rounded-md drop-shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 font-semibold w-[50%] ' ><a href='/about/leadership'><p className='w-full h-full p-4'>Learn More</p></a></button>
+             <button className='bg-red-600 text-white border-[1px]  m-2 rounded-md drop-shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 font-semibold w-[50%] ' ><a href='/about/leadership'><p className='w-full h-full p-4'>Learn More</p></a></button>
             </div>
             <div className='bg-white m-2 rounded-md p-2 h-fit min-h-[220px] flex flex-col flex-1 items-center'>
              <h1 className='text-2xl px-3 text-center block   font-bold leading-8 tracking-tight text-gray-900'>Careers</h1>
              <p className = 'text-center p-3 flex flex-1 prose prose-lg prose-indigo mx-auto text-gray-500'>Interested in joining the Healthcare Risk Advisors team?</p>
-             <button className='bg-indigo-600 text-white border-[1px] m-2 rounded-md drop-shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 font-semibold w-[50%] ' ><a href='/about/careers'><p className='w-full h-full p-4'>Learn More</p></a></button>
+             <button className='bg-red-600 text-white border-[1px] m-2 rounded-md drop-shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 font-semibold w-[50%] ' ><a href='/about/careers'><p className='w-full h-full p-4'>Learn More</p></a></button>
             </div>
             <div className='bg-white m-2 rounded-md p-2 h-fit min-h-[220px] flex flex-col flex-1 items-center'>
              <h1 className='text-2xl px-3 text-center block   font-bold leading-8 tracking-tight text-gray-900'>News and Events</h1>
              <p className = 'text-center p-3 flex flex-1 prose prose-lg prose-indigo mx-auto text-gray-500'>Keep up with the latest news and press releases from HRA..</p>
-             <button className='bg-indigo-600 text-white border-[1px] m-2 rounded-md drop-shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 font-semibold w-[50%] ' ><a href='/about/news-events'><p className='w-full h-full p-4'>Learn More</p></a></button>
+             <button className='bg-red-600 text-white border-[1px] m-2 rounded-md drop-shadow-sm hover:bg-transparent hover:text-indigo-600 hover:border-indigo-600 font-semibold w-[50%] ' ><a href='/about/news-events'><p className='w-full h-full p-4'>Learn More</p></a></button>
             </div>
           
            

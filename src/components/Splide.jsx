@@ -5,8 +5,8 @@ import ForHospitals from './ForHospitals';
 import ForPhysicians from './ForPhysicians'
 function MySplide() {
   return (
-    <Splide aria-label="My Favorite Images">
-    <SplideSlide>
+    <Splide className=''  aria-label="My Favorite Images">
+    <SplideSlide className='' >
     <ForHospitals/>
     </SplideSlide>
     <SplideSlide>
