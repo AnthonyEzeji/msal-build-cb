@@ -20,13 +20,11 @@ const HomePage = () => {
   let isAuthenticated = useIsAuthenticated()
   
   return (
-    <div className=' '>
+    <div className=' w-screen  '>
     <HomeNavbar/>
     <VideoHero video="https://player.vimeo.com/video/795597213?h=242b7d9fbe&autoplay=1&loop=1&background=1"/>
- 
      <CTASection/>
-     <Carousel/>
-    {/*<ClientList></ClientList>*/}
+    <ClientList></ClientList>
 <Splide/>
      <PPP></PPP>
      <BlogList></BlogList>

@@ -1,13 +1,13 @@
 
 	import React from 'react'
     import '../css/Carousel.css' 
-    import BHSLogo from'../assets/client logos/Bronx Health System.png'
-    import MSHLogo from '../assets/client logos/Mount Sinai.jpg'
-    import MFLogo from'../assets/client logos/Montefiore.png'
+    import BHSLogo from'../assets/client logos/Bronx Care.jpg'
+    import MSHLogo from '../assets/client logos/Mount Sinai Logo.jpg'
+    import MFLogo from'../assets/client logos/Montefiore.jpg'
     import NyackLogo from '../assets/client logos/Nyack.jpg'
-    import WPLogo from'../assets/client logos/White Plains.png'
-    import BlytheLogo from '../assets/client logos/Blythedale.png'
-    import STLukeLogo from '../assets/client logos/St Luke.png'
+    import WPLogo from'../assets/client logos/White Plains.jpg'
+    import BlytheLogo from '../assets/client logos/Blythedale.jpg'
+    import STLukeLogo from '../assets/client logos/St Lukes.jpg'
     function Carousel() {
       return (
         <div  class="marquee">

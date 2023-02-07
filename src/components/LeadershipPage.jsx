@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeNavbar from './HomeNavbar'
+import Navbar from './Navbar'
 import Footer from './Footer'
 import img1 from '../assets/leadership_images/leadership-img-1.jfif'
 import img2 from '../assets/leadership_images/leadership-img-2.jfif'
@@ -46,7 +46,7 @@ const people = [
 function LeadershipPage() {
   return (
     <div className='pt-[90px]'>
-        <HomeNavbar/>
+        <Navbar/>
           <div className="bg-white">
       <div className="mx-auto max-w-7xl py-12 px-6 lg:px-8 lg:py-24">
         <div className="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
