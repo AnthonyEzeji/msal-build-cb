@@ -217,15 +217,17 @@ try {
 }, [])
 //When a user is authenticated, an api request is sent for the users saved reports
 useEffect(() => {
-  logInUser()
+  
    async function getSavedReports(){
  
        await axios.get(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`).then(res=>{
 
          setSavedReports(res.data)
+         console.log(res.data)
        })
   }
 getSavedReports()
+
 
 
 
@@ -254,7 +256,7 @@ for(var i = 0; i < savedReports.length; i++){
 instance.setActiveAccount(instance.getAllAccounts()[0])
 let account = instance.getActiveAccount()
     
-  
+  console.log(account)
     const request = {
         ...loginRequest,
         account: account
@@ -623,7 +625,7 @@ useEffect(() => {
           <div className="sticky top-0 z-10 bg-gray-100 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
             <button
               type="button"
-              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
@@ -643,7 +645,7 @@ useEffect(() => {
                     <Combobox.Label className="block text-sm font-medium text-gray-700">Select a report</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
-                        className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                        className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
                         displayValue={(selectedReport) => filteredReports.length>0?selectedReport?.name:'NO REPORTS RETURNED'}
                       />
@@ -660,19 +662,19 @@ useEffect(() => {
                               className={({ active }) =>
                                 classNames(
                                   'relative cursor-default select-none py-2 pl-3 pr-9',
-                                  active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                                  active ? 'bg-slate-400 ' : 'text-gray-900'
                                 )
                               }
                             >
                               {({ active, selected }) => (
                                 <>
-                                  <span className={classNames('block truncate flex items-center', selected && 'font-semibold')}><p>{checkIfSaved(report)?<StarIcon className = 'h-4 mr-2 text-indigo-500'/>:<p className=' mr-6'></p>}</p><p>{report.name}</p></span>
+                                  <span className={classNames('block truncate flex items-center', selected && 'font-semibold')}><p>{checkIfSaved(report)?<StarIcon className = 'h-4 mr-2 text-red-500'/>:<p className=' mr-6'></p>}</p><p>{report.name}</p></span>
 
                                   {selected && (
                                     <span
                                       className={classNames(
                                         'absolute inset-y-0 right-0 flex items-center pr-4',
-                                        active ? 'text-white' : 'text-indigo-600'
+                                        active ? 'text-white' : 'text-red-600'
                                       )}
                                     >
                                       <CheckIcon className="h-5 w-5" aria-hidden="true" />
@@ -716,13 +718,13 @@ useEffect(() => {
               
                 </div>
                
-                {showCreateInsight===false&&<button onClick={()=>{setShowCreateInsight(true)}} className = 'bg-indigo-600 p-3 text-white font-semibold hover:border-[1px] hover:border-indigo-600 hover:bg-transparent hover:text-indigo-600 my-5 w-fit rounded-md'>
+                {showCreateInsight===false&&<button onClick={()=>{setShowCreateInsight(true)}} className = 'bg-slate-600 p-3 text-white font-semibold hover:border-[1px] hover:border-slate-600 hover:bg-transparent hover:text-slate-600 my-5 w-fit rounded-md'>
                   Create
                 </button>}
              <div className={`w-full relative ${showCreateInsight ? 'flex' : 'hidden'}  py-6 flex-col `}>
              <AiOutlineCloseCircle onClick={()=>{setShowCreateInsight(false)}} className='text-black z-40 text-2xl  mb-1 top-0 right-5 hover:text-red-600'/>
               <textarea id='textarea'  value ={commentInputText} type="text" className = 'rounded-t-xl relative' placeholder='  Share a comment with others' onChange={(e)=>onInputChange(e)} ></textarea>
-              <button onClick={()=>handleCreateComment()} className='bg-indigo-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-indigo-600 hover:text-indigo-600'>Submit</button>
+              <button onClick={()=>handleCreateComment()} className='bg-red-600 text-zinc-200 p-2 rounded-b-xl hover:bg-transparent hover:border-[1px] hover:border-red-600 hover:text-red-600'>Submit</button>
              </div>
                  {reportNotes.length>0? <ul className ='w-full p-10 bg-gray-100 overflow-y-scroll rounded-xl h-[50%]'>
                     {!loading?reportNotes.map(note=>{
@@ -737,7 +739,7 @@ useEffect(() => {
                     
                         </div>
                       
-                        <p className ='py-2 my-1 ml-4 pl-2 border-l-[1px] border-gray-400'>
+                        <p className ='py-2 my-1 ml-4 pl-2 px-2 w-fit border-l-[1px] font-light rounded-r-xl bg-gray-300 border-gray-400'>
                       {text}
                         </p>
                         <p  className ='w-full pl-2 font-light h-fit'>{timeSinceComment[0]!=='-'?timeSinceComment:'1 second(s)'}</p>

@@ -361,7 +361,7 @@ await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/u
           <div className="sticky top-0 z-10 bg-gray-100 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
             <button
               type="button"
-              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
@@ -381,7 +381,7 @@ await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/u
                     <Combobox.Label className="block text-sm font-medium text-gray-700">Select a favorite</Combobox.Label>
                     <div className="relative mt-1">
                       <Combobox.Input
-                        className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                        className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
                         onChange={(event) => setQuery(event.target.value)}
                         displayValue={(selectedReport) =>userReports.length>0?selectedReport?.name:'NO REPORTS RETURNED'}
                       />
@@ -398,7 +398,7 @@ await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/u
                               className={({ active }) =>
                                 classNames(
                                   'relative cursor-default select-none py-2 pl-3 pr-9',
-                                  active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                                  active ? 'bg-red-600 text-white' : 'text-gray-900'
                                 )
                               }
                             >
@@ -410,7 +410,7 @@ await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/u
                                     <span
                                       className={classNames(
                                         'absolute inset-y-0 right-0 flex items-center pr-4',
-                                        active ? 'text-white' : 'text-indigo-600'
+                                        active ? 'text-white' : 'text-red-600'
                                       )}
                                     >
                                       <CheckIcon className="h-5 w-5" aria-hidden="true" />

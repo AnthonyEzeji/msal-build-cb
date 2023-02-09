@@ -16,7 +16,7 @@ export default function PPP() {
     return (
       <div className="relative bg-white py-16">
         <div className="absolute inset-x-0 top-0 hidden h-1/2 bg-gray-50 lg:block" aria-hidden="true" />
-        <div className="mx-auto max-w-7xl bg-indigo-600 lg:bg-transparent lg:px-8">
+        <div className="mx-auto max-w-7xl bg-red-600 lg:bg-transparent lg:px-8">
           <div className="lg:grid lg:grid-cols-12">
             <div className="relative z-10 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:bg-transparent lg:py-16">
               <div className="absolute inset-x-0 h-1/2 bg-gray-50 lg:hidden" aria-hidden="true" />
@@ -50,7 +50,7 @@ export default function PPP() {
                       height={20}
                       patternUnits="userSpaceOnUse"
                     >
-                      <rect x={0} y={0} width={4} height={4} className="text-indigo-500" fill="currentColor" />
+                      <rect x={0} y={0} width={4} height={4} className="text-red-500" fill="currentColor" />
                     </pattern>
                   </defs>
                   <rect width={404} height={384} fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
@@ -72,7 +72,7 @@ export default function PPP() {
                       height={20}
                       patternUnits="userSpaceOnUse"
                     >
-                      <rect x={0} y={0} width={4} height={4} className="text-indigo-500" fill="currentColor" />
+                      <rect x={0} y={0} width={4} height={4} className="text-red-500" fill="currentColor" />
                     </pattern>
                   </defs>
                   <rect width={404} height={384} fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
