@@ -374,14 +374,14 @@ const [showLogout, setShowLogout] = useState(false)
                     <Popover.Button
                       className={classNames(
                         open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md  text-base hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
+                        'group inline-flex items-center rounded-md  text-base hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 '
                       )}
                     >
                       <span>About Us</span>
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-slate-800'
+                          'ml-2 h-5 w-5 group-hover:text-white'
                         )}
                         aria-hidden="true"
                       />
