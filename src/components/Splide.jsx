@@ -1,12 +1,12 @@
 import React from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css/skyblue';
+import '@splidejs/react-splide/css/default';
 import ForHospitals from './ForHospitals';
 import ForPhysicians from './ForPhysicians'
 function MySplide() {
   return (
-    <Splide aria-label="My Favorite Images">
-    <SplideSlide>
+    <Splide className=''  aria-label="My Favorite Images">
+    <SplideSlide className='' >
     <ForHospitals/>
     </SplideSlide>
     <SplideSlide>

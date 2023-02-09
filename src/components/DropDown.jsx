@@ -20,7 +20,7 @@ export default function Example() {
         <>
           <Listbox.Label className="block text-sm font-medium text-gray-700">Select Your Report</Listbox.Label>
           <div className="relative mt-1">
-            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm">
               <span className="inline-flex w-full truncate">
                 <span className="truncate">{selected.name}</span>
                 <span className="ml-2 truncate text-gray-500">{selected.username}</span>
@@ -43,7 +43,7 @@ export default function Example() {
                     key={person.username}
                     className={({ active }) =>
                       classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        active ? 'text-white bg-red-600' : 'text-gray-900',
                         'relative cursor-default select-none py-2 pl-3 pr-9'
                       )
                     }
@@ -55,7 +55,7 @@ export default function Example() {
                           <span className={classNames(selected ? 'font-semibold' : 'font-normal', 'truncate')}>
                             {person.name}
                           </span>
-                          <span className={classNames(active ? 'text-indigo-200' : 'text-gray-500', 'ml-2 truncate')}>
+                          <span className={classNames(active ? 'text-red-200' : 'text-gray-500', 'ml-2 truncate')}>
                             {person.username}
                           </span>
                         </div>
@@ -63,7 +63,7 @@ export default function Example() {
                         {selected ? (
                           <span
                             className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
+                              active ? 'text-white' : 'text-red-600',
                               'absolute inset-y-0 right-0 flex items-center pr-4'
                             )}
                           >

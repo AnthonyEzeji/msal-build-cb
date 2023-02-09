@@ -26,7 +26,7 @@ function AnalyticsPage() {
                 height={20}
                 patternUnits="userSpaceOnUse"
               >
-                <rect x={0} y={0} width={4} height={4} className="text-indigo-600" fill="currentColor" />
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
               </pattern>
             </defs>
             <rect width={404} height={384} fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
@@ -47,7 +47,7 @@ function AnalyticsPage() {
                 height={20}
                 patternUnits="userSpaceOnUse"
               >
-                <rect x={0} y={0} width={4} height={4} className="text-indigo-600" fill="currentColor" />
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
               </pattern>
             </defs>
             <rect width={404} height={384} fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
@@ -68,7 +68,7 @@ function AnalyticsPage() {
                 height={20}
                 patternUnits="userSpaceOnUse"
               >
-                <rect x={0} y={0} width={4} height={4} className="text-indigo-600" fill="currentColor" />
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
               </pattern>
             </defs>
             <rect width={404} height={384} fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
@@ -78,7 +78,7 @@ function AnalyticsPage() {
       <div className="relative px-6 lg:px-8">
         <div className="mx-auto max-w-prose text-lg flex flex-col items-center">
           <h1>
-            <span className="block text-center text-lg font-semibold text-indigo-600">Introducing</span>
+            <span className="block text-center text-lg font-semibold text-red-600">Introducing</span>
             <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
               Data Analytics Center of Excellence
             </span>
@@ -88,7 +88,7 @@ function AnalyticsPage() {
           HRA leverages a team of actuaries and healthcare analytics experts to support our clients in making data-driven decisions to improve patient safety and reduce medical malpractice exposures, leading to improved financial performance.
           </p>
         </div>
-        <div className="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500">
+        <div className="prose prose-lg prose-red mx-auto mt-6 text-gray-500">
           <p>
           Data sharing and collaboration is essential to improving patient safety and reducing the rate of medical malpractice claims – and to ensure your policy is priced to appropriately manage your risk. Through the identification of high-risk, high-cost complications, and the implementation of effective operational improvements, together, we can accelerate patient safety and optimize risk management efforts.
            

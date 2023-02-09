@@ -338,7 +338,7 @@ export default function CustomerCalendar() {
           <div className="sticky top-0 z-10 bg-gray-100 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
             <button
               type="button"
-              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
@@ -398,7 +398,7 @@ export default function CustomerCalendar() {
                   day.isSelected && 'text-white',
                   !day.isSelected && day.isCurrentMonth && !day.isToday && 'text-gray-900',
                   !day.isSelected && !day.isCurrentMonth && !day.isToday && 'text-gray-400',
-                  day.isToday && !day.isSelected && 'text-indigo-600',
+                  day.isToday && !day.isSelected && 'text-red-600',
                   dayIdx === 0 && 'rounded-tl-lg',
                   dayIdx === 6 && 'rounded-tr-lg',
                   dayIdx === days.length - 7 && 'rounded-bl-lg',
@@ -409,7 +409,7 @@ export default function CustomerCalendar() {
                   dateTime={day.date}
                   className={classNames(
                     'mx-auto flex h-7 w-7 items-center justify-center rounded-full',
-                    day.isSelected && day.isToday && 'bg-indigo-600',
+                    day.isSelected && day.isToday && 'bg-red-600',
                     day.isSelected && !day.isToday && 'bg-gray-900'
                   )}
                 >
@@ -420,7 +420,7 @@ export default function CustomerCalendar() {
           </div>
           <button
             type="button"
-            className="mt-8 w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mt-8 w-full rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
           >
             Add event
           </button>

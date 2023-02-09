@@ -14,16 +14,19 @@ import Hero from './Hero';
 import Splide from '../components/Splide'
 import CTASection from './CTASection'
 import VideoHero from './VideoHero';
+import HomeNavbar from './HomeNavbar'
+import Carousel from './Carousel';
 const HomePage = () => {
   let isAuthenticated = useIsAuthenticated()
   
   return (
-    <div className=' '>
-    <Navbar/>
-    <VideoHero video='https://vimeo.com/783454719'/>
+    <div className=' w-screen  '>
+    <HomeNavbar/>
+    <VideoHero video="https://player.vimeo.com/video/797037462?h=574d1d5649&autoplay=1&loop=1&background=1"/>
  
      <CTASection/>
-     <ClientList></ClientList>
+     <Carousel/>
+   
 <Splide/>
      <PPP></PPP>
      <BlogList></BlogList>

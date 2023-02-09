@@ -103,9 +103,18 @@ export default function Example() {
   const [bg, setBg] = useState('bg-transparent')
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
-
+  let params = useParams()
   
-
+  const changeNavbarColor = () =>{
+   
+     if(window.scrollY >= 700){
+       setBg('rgb(51 65 85)');
+     }
+     else{
+       setBg('transparent')
+     }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
   
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
@@ -128,8 +137,8 @@ export default function Example() {
 const [showLogout, setShowLogout] = useState(false)
   return (
     <div className="fixed w-full z-40 top-0" id='nav'>
-      <Popover className="relative bg-slate-700 " style={{backgroundColor:bg}}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-700 sticky">
+      <Popover className="relative  " style={{backgroundColor:bg}}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-transparent sticky">
           <div className="flex items-center justify-between py-6 md:justify-between md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">
@@ -297,7 +306,7 @@ const [showLogout, setShowLogout] = useState(false)
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-white'
+                          'ml-2 h-5 w-5 group-hover:text-slate-800'
                         )}
                         aria-hidden="true"
                       />
@@ -325,7 +334,7 @@ const [showLogout, setShowLogout] = useState(false)
                              <BsFileText className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">Blogs</p>
-                                  <p className="mt-1 text-sm text-white">Read blogs and insights.</p>
+                                  <p className="mt-1 text-sm text-slate-800">Read blogs and insights.</p>
                                 </div>
                               </a>
                             
@@ -365,14 +374,14 @@ const [showLogout, setShowLogout] = useState(false)
                     <Popover.Button
                       className={classNames(
                         open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md  text-base  focus:outline-none focus:ring-2 focus:ring-red-500'
+                        'group inline-flex items-center rounded-md  text-base hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2'
                       )}
                     >
                       <span>About Us</span>
                       <ChevronDownIcon
                         className={classNames(
                           open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-white'
+                          'ml-2 h-5 w-5 group-hover:text-slate-800'
                         )}
                         aria-hidden="true"
                       />
@@ -442,7 +451,7 @@ const [showLogout, setShowLogout] = useState(false)
               >
                 Sign up
               </a>
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'drop-shadow-2xl rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50 text-black"  >{<p className='text-slate-600'>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50 text-slate-600"  >{<p className='text-slate-600'>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 

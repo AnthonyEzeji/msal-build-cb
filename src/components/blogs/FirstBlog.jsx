@@ -36,7 +36,7 @@ export default function FirstBlog() {
               <p className="mt-8 text-lg text-gray-500">
               When it comes to understanding risk profiles for medical malpractice insurance, organizations have long been limited to little more than the data which comes only after an adverse event or lawsuit has been filed. However, new technologies are allowing healthcare organizations to be more proactive in their analyses and use data to project risk profiles even before events occur.  
               </p>
-              <div className="prose prose-indigo mt-5 text-gray-500">
+              <div className="prose prose-red mt-5 text-gray-500">
               <p className="mt-8 text-lg text-gray-500">
               New malpractice analytics solutions can analyze data on an ongoing basis, as healthcare delivery services are rendered for patients in facilities like hospitals and ambulatory surgical centers. Leading organizations are already leveraging data as a means to perform well in their value-based care programs – including the use of payer data to build profiles of patients. With this information in hand, analysts are able to leverage the data to provide ongoing evaluation of risk. 
               </p>
@@ -53,16 +53,7 @@ export default function FirstBlog() {
                 <p  className="mt-8 text-lg text-gray-500">
                   This is just one example of how interaction between the care provider and the patient can increase care quality, and thus reduce the chance of medical malpractice lawsuits. When looking at this data, there’s an opportunity to shift away from the traditional, reactive way of doing things toward a more proactive, data-driven approach.  
                 </p>
-                <h1  className="mt-8 text-2xl text-gray-800">The Three V’s:  Volume, Velocity and Variety.  </h1>
-                <p className='mt-8 text-lg text-gray-500'>
-                The volume of healthcare data we currently have at our fingertips is unprecedented, and the velocity at which the data comes in is also something we have never seen before. With these changes come new sets of both challenges and opportunities in terms of how we keep up with the velocity, volume and variety of data.    
-                </p>
-                <p>
-                In terms of assessing medical malpractice risk, the good news is that there’s more data available than ever before, representing an opportunity to use more robust and in-depth sources to better analyze risk.  
-                </p>
-                <p className='mt-8 text-lg text-gray-500'>
-                In the digital era, the use of <a href='https://www.medicaladvantage.com/solutions/healthcare-analytics-solutions/'>data and analytics</a> to assess and improve performance is essential – and perhaps nowhere more so than in healthcare. For more information on how analytics services and data tools can help your organization minimize the risk of malpractice lawsuits, contact one of HRA’s representatives today.
-                </p>
+               
               </div>
             </div>
           </div>
