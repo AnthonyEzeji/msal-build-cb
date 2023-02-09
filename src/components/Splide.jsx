@@ -1,6 +1,6 @@
 import React from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css/skyblue';
+import '@splidejs/react-splide/css/default';
 import ForHospitals from './ForHospitals';
 import ForPhysicians from './ForPhysicians'
 function MySplide() {
