@@ -22,9 +22,11 @@ const HomePage = () => {
   return (
     <div className=' w-screen  '>
     <HomeNavbar/>
-    <VideoHero video="https://player.vimeo.com/video/795597213?h=242b7d9fbe&autoplay=1&loop=1&background=1"/>
+    <VideoHero video="https://player.vimeo.com/video/797037462?h=574d1d5649&autoplay=1&loop=1&background=1"/>
+ 
      <CTASection/>
-    <ClientList></ClientList>
+     <Carousel/>
+   
 <Splide/>
      <PPP></PPP>
      <BlogList></BlogList>
