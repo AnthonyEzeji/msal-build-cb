@@ -3,13 +3,16 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import DashImg1 from '../assets/dashboard-img-1.png'
 import CTASection from '../components/CTASection'
-import CompareImg from '../assets/Compare peers dash.png'
+
 import Step1 from '../components/process/Step1'
+import Step2 from '../components/process/Step2'
 import Step3 from '../components/process/Step3'
 import Step7 from '../components/process/Step7'
 import Step8 from '../components/process/Step8'
 import Step6 from '../components/process/Step6'
 import Footer from './Footer'
+import Step5 from './process/Step5'
+import Step4 from './process/Step4'
 const steps = {
  1: { id: '01', name: 'Risk', href: '#', status: 'current' , reportId:"blah blah"},
  2: { id: '02', name: 'Compare With Peers', href: '#', status: 'upcoming' },
@@ -73,8 +76,9 @@ var stepIdx = parseInt(e.target.id)
   return (
     <div>  
         <Navbar/>
-         <nav className='pt-40' aria-label="Progress">
-    <ol role="list" className="divide-y divide-slate-600 rounded-md border border-slate-600 md:flex md:divide-y-0">
+        <div className='w-screen bg-slate-700 h-[70px] absolute top-[90px]'></div>
+         <nav className='mt-40 bg-gray-300' aria-label="Progress">
+    <ol role="list" className="divide-y divide-slate-600  border-t-[1px] border-b-[1px] border-gray-400 md:flex md:divide-y-0">
       {Object.keys(Object.fromEntries(stepState)).map((step, stepIdx) => {
        
        var stepsToUse = Object.fromEntries(stepState)
@@ -82,10 +86,10 @@ var stepIdx = parseInt(e.target.id)
         return(  <li key={step.name} className="relative md:flex md:flex-1 ">
         { step.status === 'current' ? (
           <a href={step.href} className="flex items-center px-6 py-4 text-sm font-medium " aria-current="step">
-            <span   className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-slate-600">
-              <span className="text-slate-600">{step.id}</span>
+            <span   className="flex h-10 w-10 flex-shrink-0 items-center bg-slate-600 justify-center rounded-full border-2 border-slate-600">
+              <span className="text-white">{step.id}</span>
             </span>
-            <span id = {stepIdx+1} onClick={(e)=>handleStepClick(e)} className="ml-4 text-sm font-medium text-slate-600">{step.name}</span>
+            <span id = {stepIdx+1} onClick={(e)=>handleStepClick(e)} className="ml-4 text-sm font-medium text-slate-900">{step.name}</span>
           </a>
         ) : (
           <a href={step.href} className="group flex items-center">
@@ -128,10 +132,10 @@ var stepIdx = parseInt(e.target.id)
   <main className='flex items-center justify-center '>
     {/*<img className=' h-auto w-auto max-h-[1000px] rounded-xl' src={DashImg1} alt="" />*/}
     {currStep?.id==='01'&&<Step1/>}
-    {currStep?.id==='02'&&<img src={CompareImg} className='pb-20 max-h-[600px]'></img>}
+    {currStep?.id==='02'&&<Step2/>}
     {currStep?.id==='03'&&<Step3 />}
-    {currStep?.id==='04'&&<p>Step 4</p>}
-    {currStep?.id==='05'&&<p>Step 5</p>}
+    {currStep?.id==='04'&&<Step4/>}
+    {currStep?.id==='05'&&<Step5/>}
     {currStep?.id==='06'&&<Step6/>}
     {currStep?.id==='07'&&<Step7/>}
     {currStep?.id==='08'&&<Step8/>}

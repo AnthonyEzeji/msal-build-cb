@@ -8,11 +8,11 @@ export default function Example() {
     return (
       <div className="bg-white">
         <div className="h-screen w-screen ">
-          <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl sm:px-16 h-full">
-            <h2 className="mx-auto max-w-2xl text-4xl font-bold tracking-tight text-white">
+          <div className="relative isolate overflow-hidden bg-slate-700 px-6 pt-32  text-center shadow-2xl sm:px-16 h-full">
+            <h2 className="mx-auto max-w-2xl text-4xl font-bold tracking-tight text-slate-300">
               Contact our Team
             </h2>
-            <h2 className="mx-auto max-w-2xl text-2xl font-bold tracking-tight text-slate-300">
+            <h2 className="mx-auto max-w-2xl text-4xl font-bold tracking-tight text-slate-300">
               Start Leveraging our Services Today
             </h2>
             <div className="flex justify-center">
@@ -30,7 +30,7 @@ export default function Example() {
            
           </div>
         </div>
-      <button>Sign Up</button>
+      <button className='p-3 bg-red-600 min-w-[150px] text-white text-xl drop-shadow-lg mt-5 rounded-md  hover:bg-transparent border-[1px] border-red-600 hover:text-red-600'>Get Started</button>
       </div>
     </div>
            
@@ -40,7 +40,7 @@ export default function Example() {
               className="absolute top-1/2 left-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
               aria-hidden="true"
             >
-              <circle cx={512} cy={512} r={512} fill="url(#827591b1-ce8c-4110-b064-7cb85a0b1217)" fillOpacity="0.7" />
+              <circle cx={512} cy={512} r={512} fill="red" fillOpacity="0.7" />
               <defs>
                 <radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217">
                   <stop stopColor="#7775D6" />
