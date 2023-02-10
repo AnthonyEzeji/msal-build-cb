@@ -102,21 +102,7 @@ const [savedReportSelected, setSavedReportSelected] = useState(false)
 const [commentInputText, setCommentInputText] = useState('')
 const [selectedReport, setSelectedReport] = useState(null)
 
-async function logInUser(){
-   console.log(instance.getActiveAccount())
-   const headers = {
-    'Content-Type': 'text/plain',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin':'http://localhost:3000',
-    'Access-Control-Allow-Credentials': 'true'
-};
-axios.defaults.withCredentials=true
-  await axios.post(`http://localhost:5000/users/login`,{account:instance.getActiveAccount()}).then(res=>{
-    console.log(res.data)
-    console.log(res.headers)
-  })
 
-}
 //Sets auth state to true when user is authenticated
 useEffect(() => {
 
@@ -223,7 +209,7 @@ useEffect(() => {
        await axios.get(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`).then(res=>{
 
          setSavedReports(res.data)
-         console.log(res.data)
+       
        })
   }
 getSavedReports()
@@ -256,7 +242,7 @@ for(var i = 0; i < savedReports.length; i++){
 instance.setActiveAccount(instance.getAllAccounts()[0])
 let account = instance.getActiveAccount()
     
-  console.log(account)
+ 
     const request = {
         ...loginRequest,
         account: account
