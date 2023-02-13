@@ -12,7 +12,8 @@ function VideoHero({video}) {
 
   </iframe>
   <div className="mx-auto w-fit max-w-7xl mt-16 pb-20 text-center lg:ml-20 lg:my-48 lg:text-left z-30 absolute ">
-    <div className="lg:w-1/2 xl:pr-16 2xl:mx-auto 2xl:mt-20">
+    <div className="lg:w-1/2 xl:pr-16 2xl:mx-auto 2xl:mt-20 relative flex flex-col items-center justify-center p-2">
+      <div className='bg-black w-full h-full absolute opacity-20 drop-shadow-xl rounded-2xl'></div>
       <h1 className="text-xl font-bold tracking-tight text-white sm:text-xl md:text-3xl lg:text-3xl xl:text-3xl">
         <span className="block xl:inline">Creating Partnerships to </span>{' '}
         <br></br>
