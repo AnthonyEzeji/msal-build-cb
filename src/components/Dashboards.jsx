@@ -191,7 +191,7 @@ function timeSince(date) {
 var aDay = 24*60*60*1000;
 const axiosInstance = axios.create({
 
-  baseURL: 'https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app',
+  baseURL: 'https://hra-backend-q2gs-frkfu7dfo-anthonyezeji.vercel.app',
   timeout: 1000
 });
 
