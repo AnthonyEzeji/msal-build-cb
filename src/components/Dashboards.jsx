@@ -96,7 +96,7 @@ const [selectedUserGroup, setSelectedUserGroup] = useState({})
 const isAuthenticated = useIsAuthenticated()
 const [showCreateInsight, setShowCreateInsight] = useState(false)
 const [reports, setReports] = useState([])
-const [authenticated, setAuthenticated] = useState()
+const [authenticated, setAuthenticated] = useState(false)
 const [savedReports, setSavedReports] = useState([])
 const [savedReportSelected, setSavedReportSelected] = useState(false)
 const [commentInputText, setCommentInputText] = useState('')
@@ -191,8 +191,8 @@ function timeSince(date) {
 var aDay = 24*60*60*1000;
 const axiosInstance = axios.create({
 
-  baseURL: 'https://hra-backend-q2gs-frkfu7dfo-anthonyezeji.vercel.app',
-  timeout: 1000
+  baseURL:'https://hra-backend-q2gs.vercel.app',
+  timeout: 10000
 });
 
 
@@ -213,15 +213,12 @@ async function getReports(){
      
      })
 }
+async function getUserGroups(){
+  await callMsGraph(accessToken).then(response=>{
 
-
-  
- 
- 
-
-
-
-
+    setUserGroups((response.value))
+   })
+ }
 
 
 //function accepts a report as a parameter and returns whether the current user has it saved
@@ -242,7 +239,7 @@ for(var i = 0; i < savedReports.length; i++){
 
 
 //function to request access token needed for ms graph requests
- function RequestAccessToken() {
+ async function RequestAccessToken() {
   if(isAuthenticated){
 instance.setActiveAccount(instance.getAllAccounts()[0])
 let account = instance.getActiveAccount()
@@ -254,13 +251,13 @@ let account = instance.getActiveAccount()
     };
 
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-    instance.acquireTokenSilent(request).then((response) => {
+    await instance.acquireTokenSilent(request).then((response) => {
     
-        setAccessToken(response.accessToken);
+        setAccessToken(response?.accessToken);
       
     }).catch((e) => {
-        instance.acquireTokenPopup(request).then((response) => {
-            setAccessToken(response.accessToken);
+         instance.acquireTokenPopup(request).then((response) => {
+            setAccessToken(response?.accessToken);
         });
     });
   }
@@ -298,16 +295,7 @@ async function handleSaveReport(){
  }, [isAuthenticated])
 
  useEffect( () => {
- 
-  async function getUserGroups(){
-    await callMsGraph(accessToken).then(response=>{
- 
-      setUserGroups((response.value))
-     })
-   }
- 
   if(accessToken){
-    console.log(accessToken)
     getReports()
     getSavedReports()
     getUserGroups()
@@ -328,7 +316,7 @@ async function handleSaveReport(){
  }
  //When the user's groups are set, we filter the reports
  useEffect(() => {
-  console.log(reports)
+  
   if(userGroups?.length>0&&reports.length>0){
     setFilteredReports(reports?.filter(filterReports))
   }
