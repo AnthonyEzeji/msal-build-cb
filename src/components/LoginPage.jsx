@@ -22,7 +22,7 @@ function LoginPage() {
     <div className='w-screen min-h-screen'>
      <Navbar/>
        <div className='h-screen w-screen flex items-center justify-evenly '>
-        <img className='max-w-[500px] ' src={svg} alt="" />
+        <img className='max-w-[500px] hidden xl:flex ' src={svg} alt="" />
        <div style={{backgroundImage:`url('')`}} className='max-w-[300px] bg-slate-300 h-fit  w-fit flex flex-col items-center p-10  rounded-xl   drop-shadow-lg'>
     <Link to='/'><img src="https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png" alt="" ></img></Link>
     <Link className='flex items-center border-[1px]  w-fit my-5 p-2 bg-black/[.4]' to='/get-started' onClick = {handleLogin}>
@@ -32,7 +32,7 @@ function LoginPage() {
         </Link>
 
     </div>
-    <img className='max-w-[400px] ' src={svg1} alt="" />
+    <img className='max-w-[400px] hidden md:flex ' src={svg1} alt="" />
        </div>
     
        
