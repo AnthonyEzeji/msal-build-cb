@@ -144,7 +144,7 @@ const [showLogout, setShowLogout] = useState(false)
               <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-8 w-auto sm:h-10  text-white"
+                  className=" w-auto h-12  text-white"
                   src={HRALogo}
                   alt=""
                 />

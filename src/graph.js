@@ -19,18 +19,4 @@ export  async function callMsGraph(accessToken) {
         .then(response => response.json())
         .catch(error => console.log(error));
 }
-export  async function callMsGraphPhoto(accessToken) {
-    const headers = new Headers();
-    const bearer = `Bearer ${accessToken}`;
 
-    headers.append("Authorization", bearer);
-    headers.append("Content-Type", "image/jpeg");
-    const options = {
-        method: "GET",
-        headers: headers
-    };
-
-    return fetch(graphConfig.graphMePhotoEndpoint, options)
-        .then(response => response.json())
-        .catch(error => console.log(error));
-}

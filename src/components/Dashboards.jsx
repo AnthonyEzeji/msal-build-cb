@@ -96,12 +96,17 @@ const [selectedUserGroup, setSelectedUserGroup] = useState({})
 const isAuthenticated = useIsAuthenticated()
 const [showCreateInsight, setShowCreateInsight] = useState(false)
 const [reports, setReports] = useState([])
-const [authenticated, setAuthenticated] = useState()
+const [authenticated, setAuthenticated] = useState(false)
 const [savedReports, setSavedReports] = useState([])
 const [savedReportSelected, setSavedReportSelected] = useState(false)
 const [commentInputText, setCommentInputText] = useState('')
 const [selectedReport, setSelectedReport] = useState(null)
-
+const config = {
+  headers:{
+    accesstoken: accessToken,
+  
+  }
+};
 
 //Sets auth state to true when user is authenticated
 useEffect(() => {
@@ -184,40 +189,37 @@ function timeSince(date) {
   return Math.floor(seconds) + " second(s)";
 }
 var aDay = 24*60*60*1000;
-//Sets reports state to api request response for reports
-useEffect(() => {
-async function getReports(){
-  await axios.get('https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/reports').then(res=>{
+const axiosInstance = axios.create({
 
+  baseURL:'https://hra-backend-q2gs.vercel.app',
+  timeout: 10000
+});
+
+
+
+async function getReports(){ 
+  await axiosInstance.get(`/reports?token=${accessToken}`).then(res=>{
+    console.log(res.data)
     setReports(res.data)
     
   })
 }
-try {
 
-  getReports()
-} catch (error) {
-  console.log(error)
+ async function getSavedReports(){
+
+     await axiosInstance.get(`/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports?token=${accessToken}`).then(res=>{
+
+       setSavedReports(res.data)
+     
+     })
 }
+async function getUserGroups(){
+  await callMsGraph(accessToken).then(response=>{
 
-}, [])
-//When a user is authenticated, an api request is sent for the users saved reports
-useEffect(() => {
-  
-   async function getSavedReports(){
- 
-       await axios.get(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`).then(res=>{
+    setUserGroups((response.value))
+   })
+ }
 
-         setSavedReports(res.data)
-       
-       })
-  }
-getSavedReports()
-
-
-
-
-}, [authenticated])
 
 //function accepts a report as a parameter and returns whether the current user has it saved
 function checkIfSaved(report){
@@ -237,7 +239,7 @@ for(var i = 0; i < savedReports.length; i++){
 
 
 //function to request access token needed for ms graph requests
- function RequestAccessToken() {
+ async function RequestAccessToken() {
   if(isAuthenticated){
 instance.setActiveAccount(instance.getAllAccounts()[0])
 let account = instance.getActiveAccount()
@@ -249,13 +251,13 @@ let account = instance.getActiveAccount()
     };
 
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
-    instance.acquireTokenSilent(request).then((response) => {
+    await instance.acquireTokenSilent(request).then((response) => {
     
-        setAccessToken(response.accessToken);
+        setAccessToken(response?.accessToken);
       
     }).catch((e) => {
-        instance.acquireTokenPopup(request).then((response) => {
-            setAccessToken(response.accessToken);
+         instance.acquireTokenPopup(request).then((response) => {
+            setAccessToken(response?.accessToken);
         });
     });
   }
@@ -263,7 +265,7 @@ let account = instance.getActiveAccount()
  }
  //function handles a user saving a report
 async function handleSaveReport(){
-  await axios.post(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount().idTokenClaims?.oid}/reports`,{...selectedReport,user:instance.getActiveAccount()}).then(res=>{
+  await axiosInstance.post(`/users/${instance.getActiveAccount().idTokenClaims?.oid}/reports?token=${accessToken}`,{...selectedReport,user:instance.getActiveAccount()}).then(res=>{
     
     setSavedReportSelected(!savedReportSelected)
     
@@ -274,7 +276,7 @@ async function handleSaveReport(){
  //function handles user removing report from their saved reports
  async function removeSavedReport(){
   
-  await axios.delete(`https://hra-backend-q2gs-atz7s8hi9-anthonyezeji.vercel.app/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports`, {data:selectedReport}).then((res)=>{
+  await axiosInstance.delete(`/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports?token=${accessToken}`, {data:selectedReport}).then((res)=>{
 
   
   setSavedReportSelected(!savedReportSelected)
@@ -288,22 +290,14 @@ async function handleSaveReport(){
 }
 //When an access token is set, we make a request to ms graph for the user's groups
  useEffect(() => {
-
    RequestAccessToken()
+
  }, [isAuthenticated])
- const [userPhoto, setUserPhoto] = useState('');
- useEffect(() => {
-  if(isAuthenticated){
 
-  
-
-    async function getUserGroups(){
-     await callMsGraph(accessToken).then(response=>{
-  
-       setUserGroups((response.value))
-      })
-    }
-    
+ useEffect( () => {
+  if(accessToken){
+    getReports()
+    getSavedReports()
     getUserGroups()
   }
  }, [accessToken])
@@ -327,7 +321,7 @@ async function handleSaveReport(){
     setFilteredReports(reports?.filter(filterReports))
   }
    
- }, [userGroups])
+ }, [userGroups,reports])
 
 
 
@@ -338,7 +332,7 @@ async function handleSaveReport(){
     
     return
   }else{
-    
+
     if(window.sessionStorage.hasOwnProperty('selectedReport')){
      var sessionReport = JSON.parse(window.sessionStorage.getItem('selectedReport'))
       if(sessionReport!==null){
