@@ -2,10 +2,12 @@ import React from 'react'
 
 import mp4 from '../assets/3270945556.mp4'
 import Vimeo from '@u-wave/react-vimeo'
+import { useIsAuthenticated } from '@azure/msal-react'
 function VideoHero({video}) {
     function callback(){
         return
     }
+    const isAuthenticated = useIsAuthenticated()
   return (
 
 <div className = 'pb-[56.25%] relative '>  <iframe src={video} webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen="true" msallowfullscreen="true" allowFullScreen={true} frameborder="0" className='w-[100%] h-[100%] absolute top-0 left-0 z-30' allow="autoplay; fullscreen">
@@ -25,12 +27,18 @@ function VideoHero({video}) {
       </p>
       <div className="mt-6 sm:flex sm:justify-center lg:justify-start w-full">
         <div className="rounded-md shadow w-full">
-          <a
+        {isAuthenticated?  <a
             href="/get-started"
             className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg"
           >
           Learn More
-          </a>
+          </a>: <a
+            href="/login"
+            className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg"
+          >
+          Learn More
+          </a>}
+         
         </div>
        
       </div>
