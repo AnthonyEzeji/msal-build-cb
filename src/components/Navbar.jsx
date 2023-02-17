@@ -124,6 +124,19 @@ export default function Example() {
     postLogoutRedirectUri: "/",
   });
 }
+const [authenticated, setAuthenticated] = useState(false)
+useEffect(() => {
+  if(isAuthenticated){
+    setAuthenticated(true)
+   
+  }
+
+}, [])
+useEffect(() => {
+  console.log(instance.getAllAccounts()[0]?.name)
+  instance.setActiveAccount(instance.getAllAccounts()[0])
+}, [authenticated])
+
  let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
 const [showLogout, setShowLogout] = useState(false)
   return (

@@ -19,6 +19,7 @@ import LeadershipPage from "./components/LeadershipPage";
 import AboutPage from "./components/AboutPage";
 import SavedReports from "./components/SavedReport";
 import StepsPage from './components/StepsPage'
+import LoginPage from "./components/LoginPage";
 const About = () => {
   return <h1>About</h1>
 };
@@ -30,6 +31,7 @@ function App() {
     
       <Routes>
         <Route path='/' element = {<HomePage/>}/>
+        <Route path='/login' element = {<LoginPage/>}/>
         <Route path='/get-started' element = {<StepsPage/>}/>
         <Route path='/solutions/hospitals/data-analytics' element = {<AnalyticsPage/>}/>
         <Route path='/dashboard' element = {<Dashboards/>}/>
