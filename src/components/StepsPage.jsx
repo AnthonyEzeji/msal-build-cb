@@ -13,6 +13,7 @@ import Step6 from '../components/process/Step6'
 import Footer from './Footer'
 import Step5 from './process/Step5'
 import Step4 from './process/Step4'
+import { AuthenticatedTemplate } from '@azure/msal-react'
 const steps = {
  1: { id: '01', name: 'Risk', href: '#', status: 'current' , reportId:"blah blah"},
  2: { id: '02', name: 'Compare With Peers', href: '#', status: 'upcoming' },
@@ -74,7 +75,7 @@ var stepIdx = parseInt(e.target.id)
   setStepState(Object.entries(currStepState))
     }
   return (
-    <div>  
+    <AuthenticatedTemplate>  
         <Navbar/>
         <div className='w-screen bg-slate-700 h-[70px] absolute top-[90px]'></div>
          <nav className='mt-40 bg-gray-300' aria-label="Progress">
@@ -142,7 +143,7 @@ var stepIdx = parseInt(e.target.id)
     
   </main>
   <Footer/>
-  </div>
+  </AuthenticatedTemplate>
  
   )
 }
