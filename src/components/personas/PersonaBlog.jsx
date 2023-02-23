@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Navbar from '../Navbar'
 import { models } from 'powerbi-client';
+//map for persona-blog content
 const dashboards = {'/risk-manager/med-mal':{reportId:'12345',content:' content for med mal', caption:'Hospital Med Mal Overview'},'/risk-manager/freq-sev-trends':{reportId:'12346',content:'content for freq/sev trends', caption:'Frequency/Severity Trends'},'/risk-manager/national-benchmark':{reportId:'123467',content:'conent for national benchmarking', caption:'National Benchmarking'}}
 function PersonaBlog() {
     const [location, setLocation] = useState('')
@@ -36,18 +37,15 @@ function PersonaBlog() {
         }]
       ]);
       const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
-      const mockSignIn = async () => {
 
+      //configures reportConfig with dahsboard[location].reportId and requests access
+      const mockSignIn = async () => {
         const reportConfigResponse = await fetch(sampleReportUrl+{/*dashboard[location]?.reportId*/} );
-    
-    
         if (!reportConfigResponse.ok) {
           console.error(`Failed to fetch config for report. Status: ${reportConfigResponse.status} ${reportConfigResponse.statusText}`);
           return;
         }
-    
         const reportConfig = await reportConfigResponse.json();
-        
         setReportConfig({
           ...pbiReportConfig,
           //embedUrl: reportConfig.EmbedUrl,
@@ -55,12 +53,14 @@ function PersonaBlog() {
           accessToken: reportConfig.accessToken
           //accessToken: reportConfig.EmbedToken.Token
         });
-    
       };
+
+      //gets current route (/risk-manger/med-mal)
       useEffect(() => {
         setLocation(window.location.href.split(window.location.origin)[1])
         }, [])
-    
+
+    //sets location state to current route and calls mockSignIn function
         useEffect(() => {
           console.log(dashboards[location.toString()])
           mockSignIn()
