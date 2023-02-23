@@ -21,7 +21,7 @@ const catalogOptions = [{
 ]
 function Catalog() {
   return (
-    <div className='py-10  w-screen '>
+    <div className='py-10  w-screen bg-slate-100 '>
       <h1 className='py-5 text-2xl px-20 w-full text-center'>Browse Our Catalog of Data Forward Risk Reduction Strategies</h1>
   <Splide
     className=' px-20 xl:px-40 py-20'

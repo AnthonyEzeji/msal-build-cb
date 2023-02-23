@@ -19,7 +19,7 @@ import HomeNavbar from './HomeNavbar'
 import Carousel from './Carousel';
 import { useEffect } from 'react';
 import VideoHeroTabs from './VideoHeroTabs';
-import PreviewButtons from './PreviewButtons';
+import PreviewButtons from './personas/RMPreviewButtons';
 const HomePage = () => {
   let isAuthenticated = useIsAuthenticated()
   const [video, setVideo] = useState("https://player.vimeo.com/video/797037462?h=574d1d5649&autoplay=1&loop=1&background=1")
@@ -64,8 +64,9 @@ const HomePage = () => {
     <VideoHeroTabs video={video}/>
 
      <CTASection/>
-     <PreviewButtons/>
-     <Catalog/>
+    
+     
+   
      <Carousel/>
     <Splide/>
      <PPP></PPP>

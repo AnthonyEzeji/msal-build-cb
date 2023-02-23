@@ -2,25 +2,36 @@ import React from 'react'
 
 import mp4 from '../assets/3270945556.mp4'
 import Vimeo from '@u-wave/react-vimeo'
-import { useIsAuthenticated } from '@azure/msal-react'
+import { useIsAuthenticated, useMsal } from '@azure/msal-react'
 import { useState } from 'react'
+import { loginRequest } from '../authConfig'
+import { Link } from 'react-router-dom'
 function VideoHeroTabs({video}) {
     function callback(){
         return
     }
-    const isAuthenticated = useIsAuthenticated()
-    const [heroTab,setHeroTab ] = useState('Risk Manager')
+    const { instance } = useMsal();
+    let isAuthenticated = useIsAuthenticated()
+    const handleLogin = () => {
+      /* instance.loginPopup(loginRequest).catch(e => {
+           console.log(e);
+       }); */
+       instance.loginRedirect(loginRequest).catch(e => {
+         console.log(e);
+     });
+   }
+    const [heroTab,setHeroTab ] = useState({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
     function handleTabClick(e){
         console.log(e.target.id)
         switch (e.target.id) {
             case 'cro':
-                setHeroTab('Risk Manager')
+                setHeroTab({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
                 break;
                 case 'cmo':
-                    setHeroTab('Department Chair')
+                    setHeroTab({caption:'Department Chair', url:'/department-chair'})
                     break;
                     case 'csuite':
-                        setHeroTab('Finance')
+                        setHeroTab({caption:'CXO', url:'/cxo'})
                         break;
         
             default:
@@ -46,32 +57,36 @@ function VideoHeroTabs({video}) {
         Healthcare Risk Advisors partners with healthcare organizations to identify and solve their unique challenges in services for self-insurance programs, risk transfer, risk management, and claims and litigation.
       </p>
         </div>
-    <div className = 'h-full flex flex-col justify-start ml-3'>
+    <div className = 'h-full flex flex-col justify-start ml-3 border-l-[.5px] border-red-500 pl-6'>
     <div className='flex w-fit '>
     
-    <button id='cro' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-[75px] mx-5 text-white ${heroTab==='Risk Manager'&&'border-b border-red-400'}`}>CRO</button>
-    <button id='cmo' onClick={(e)=>handleTabClick(e)}  className = {` h-[70px] w-[75px] mx-5 text-white ${heroTab==='Department Chair'&&'border-b border-red-400'}`}>CMO</button>
-    <button id='csuite' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-[75px] mx-5 text-white ${heroTab==='Finance'&&'border-b border-red-400'}`}>C-Suite</button>
+    <button id='cro' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Risk Manager'&&'border-b border-red-400'}`}>Risk Manager</button>
+    <button id='cmo' onClick={(e)=>handleTabClick(e)}  className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Department Chair'&&'border-b border-red-400'}`}>Department Chair</button>
+    <button id='csuite' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='CXO'&&'border-b border-red-400'}`}>CXO</button>
 </div>
 <div className=' py-2 w-full'>
-  <h1 className='text-white text-2xl w-full  mx-4 my-8 min-h-[100px]'>
-{heroTab}
-  </h1>
+ 
+  <ul className='text-white px-8 font-light mx-4 my-4'>
+    {heroTab?.previews?.map((preview)=>( <li style={{listStyleType:'circle', textAlign:'left'}}>{preview}</li>))}
+   
+
+  </ul>
 </div>
   
     <div className=" sm:flex sm:justify-center lg:justify-start w-full">
       <div className="rounded-md shadow w-full">
-      {isAuthenticated?  <a
-          href="/get-started"
+      {isAuthenticated?<Link
+          to={heroTab.url}
           className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg "
         >
         Learn More
-        </a>: <a
-          href="/login"
-          className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg"
+        </Link>:<Link
+          to={heroTab.url}
+          onClick={handleLogin}
+          className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg "
         >
         Learn More
-        </a>}
+        </Link>}
        
       </div>
      

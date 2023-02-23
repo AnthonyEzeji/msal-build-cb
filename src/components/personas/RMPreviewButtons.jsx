@@ -11,7 +11,7 @@ function PreviewButtons() {
                 <div className='flex flex-1 items-start mb-2 '>
                     <div>
                         <h1 className='text-2xl font-bold  min-w-[500px]'>
-                        Total Enterprise Reinvention
+                        Hospital Med Mal Overview
                         </h1>
                         <p className='text-gray-500 w-[400px]'>The strategy that leads to a new perforance frontier</p>
                     </div>
@@ -21,7 +21,7 @@ function PreviewButtons() {
                 <div className='flex flex-1 items-start mb-2'>
                     <div>
                         <h1 className='text-2xl font-bold  min-w-[500px]'>
-                        The CHRO as a growth executive
+                        Frequency / Severity Trends
                         </h1>
                         <p className='text-gray-500 w-[400px]'>Focusing the power of data, tech and people to accelerate reinvention—and a new vision for growth</p>
                     </div>
@@ -31,7 +31,7 @@ function PreviewButtons() {
                 <div className='flex flex-1 items-start mb-2'>
                     <div>
                         <h1 className='text-2xl font-bold min-w-[500px]'>
-                        Metaverse: evolution, then revolution
+                        National benchmarking
                         </h1>
                         <p className='text-gray-500 w-[400px]'>Gradually, then suddenly: The metaverse is changing the way we experience the internet</p>
                     </div>
