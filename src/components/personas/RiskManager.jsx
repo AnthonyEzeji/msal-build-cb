@@ -32,7 +32,7 @@ useEffect(() => {
     &&
     <div>
     <Navbar/>
-    <div class='risk-manager-page' className = 'w-screen h-fit min-h-screen sm:pt-20 md:pt-40'>
+    <div class='risk-manager-page' className = 'w-screen h-fit min-h-screen  '>
      
         <PreviewButtons/>
     </div>

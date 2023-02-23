@@ -22,6 +22,7 @@ import StepsPage from './components/StepsPage'
 import LoginPage from "./components/LoginPage";
 import RiskManager from "./components/personas/RiskManager";
 import DepartmentChair from "./components/personas/DepartmentChair";
+import PersonaBlog from "./components/personas/PersonaBlog";
 const About = () => {
   return <h1>About</h1>
 };
@@ -34,6 +35,9 @@ function App() {
       <Routes>
         <Route path='/' element = {<HomePage/>}/>
         <Route path='/login' element = {<LoginPage/>}/>
+        <Route path='/risk-manager/med-mal' element = {<PersonaBlog/>}/>
+        <Route path='/risk-manager/freq-sev-trends' element = {<PersonaBlog/>}/>
+        <Route path='/risk-manager/national-benchmark' element = {<PersonaBlog/>}/>
         <Route path='/get-started' element = {<StepsPage/>}/>
         <Route path='/risk-manager' element = {<RiskManager/>}/>
         <Route path='/department-chair' element = {<DepartmentChair/>}/>
