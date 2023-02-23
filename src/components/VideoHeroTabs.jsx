@@ -28,10 +28,10 @@ function VideoHeroTabs({video}) {
                 setHeroTab({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
                 break;
                 case 'cmo':
-                    setHeroTab({caption:'Department Chair', url:'/department-chair'})
+                    setHeroTab({caption:'Department Chair', url:'/department-chair',previews:['Frequent Flyers','ICD-level malpractice insights', 'Med Mal Contributing Factors']})
                     break;
                     case 'csuite':
-                        setHeroTab({caption:'CXO', url:'/cxo'})
+                        setHeroTab({caption:'CXO', url:'/cxo',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
                         break;
         
             default:
@@ -67,7 +67,7 @@ function VideoHeroTabs({video}) {
 <div className=' py-2 w-full'>
  
   <ul className='text-white px-8 font-light mx-4 my-4'>
-    {heroTab?.previews?.map((preview)=>( <li style={{listStyleType:'circle', textAlign:'left'}}>{preview}</li>))}
+    {heroTab?.previews?.map((preview)=>( <li className='text-md my-2' style={{listStyleType:'circle' ,color:'rgb(230,68,68)',textAlign:'left'}}><p className='text-white'>{preview}</p></li>))}
    
 
   </ul>
