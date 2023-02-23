@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 function PreviewButtons() {
   return (
     <div className='w-screen flex justify-center flex-col items-center justify-center  min-h-screen mb-10 md:mb-0'>
-         <div className='w-[90vw] 2xl:w-[70vw]  flex flex-col  '>
+        <div className='w-[90vw] flex justify-center 2xl:justify-end'>
+        <div className=' 2xl:w-[70vw]  flex flex-col  '>
         <h1 className=' text-2xl md:text-3xl 2xl:text-4xl  font-bold text-center lg:text-left py-10 w-full'>Get the Insights to stay ahead of change</h1>
         <div className='flex flex-col lg:flex-row items-center lg:items-start h-full w-full'>
             <img className='w-full md:w-[450px] 2xl:w-[450px] xl:max-w-[450px] md:rounded-md' src="https://as1.ftcdn.net/v2/jpg/03/38/49/28/1000_F_338492830_gOno5hqTomxyaP4RZd9ugMzlt1cZ8Qte.jpg" alt="" />
@@ -43,6 +44,8 @@ function PreviewButtons() {
             </div>
         </div>
     </div>
+        </div>
+ 
     </div>
    
   )
