@@ -140,16 +140,16 @@ useEffect(() => {
  let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
 const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="fixed w-full z-40 top-0" id='nav'>
-      <Popover className="relative bg-slate-700 " style={{backgroundColor:bg}}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-slate-700 sticky">
-          <div className="flex items-center justify-between py-6 md:justify-between md:space-x-10">
-            <div className="flex justify-start lg:w-0 lg:flex-1  ">
+    <div className="fixed w-full z-40 top-0 drop-shadow-xl border-b border-gray-300" id='nav'>
+      <Popover className="relative bg-zinc-200 " style={{backgroundColor:bg}}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-zinc-200 sticky">
+          <div className="flex items-center justify-between  md:justify-between md:space-x-10">
+            <div className="flex justify-start  lg:w-0 lg:flex-1  ">
               <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-8 w-auto sm:h-10  text-white"
-                  src={HRALogo}
+                  className="h-8 w-auto sm:h-10  text-black"
+                  src={'https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png'}
                   alt=""
                 />
               </Link>
@@ -166,15 +166,15 @@ const [showLogout, setShowLogout] = useState(false)
                   <>
                     <Popover.Button
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md  border-none text-base  focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
+                        open ? 'text-black' : 'text-black',
+                        'group inline-flex items-center rounded-md  border-none text-base  focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-black '
                       )}
                     >
                       <span>Solutions</span>
                       <ChevronDownIcon
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-white'
+                          open ? 'text-black' : 'text-black',
+                          'ml-2 h-5 w-5 group-hover:text-black'
                         )}
                         aria-hidden="true"
                       />
@@ -230,15 +230,15 @@ const [showLogout, setShowLogout] = useState(false)
                   <>
                     <Popover.Button
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
+                        open ? 'text-black' : 'text-black',
+                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-black '
                       )}
                     >
-                      <span>Who We Serve</span>
+                      <span>Clients</span>
                       <ChevronDownIcon
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-white'
+                          open ? 'text-black' : 'text-black',
+                          'ml-2 h-5 w-5 group-hover:text-black'
                         )}
                         aria-hidden="true"
                       />
@@ -302,15 +302,15 @@ const [showLogout, setShowLogout] = useState(false)
                   <>
                     <Popover.Button
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
-                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
+                        open ? 'text-black' : 'text-black',
+                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-black '
                       )}
                     >
                       <span>Insights</span>
                       <ChevronDownIcon
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-white'
+                          open ? 'text-black' : 'text-black',
+                          'ml-2 h-5 w-5 group-hover:text-black'
                         )}
                         aria-hidden="true"
                       />
@@ -338,7 +338,7 @@ const [showLogout, setShowLogout] = useState(false)
                              <BsFileText className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-slate-900">Blogs</p>
-                                  <p className="mt-1 text-sm text-white">Read blogs and insights.</p>
+                                  <p className="mt-1 text-sm text-black">Read blogs and insights.</p>
                                 </div>
                               </a>
                             
@@ -377,15 +377,15 @@ const [showLogout, setShowLogout] = useState(false)
                   <>
                     <Popover.Button
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
+                        open ? 'text-black' : 'text-black',
                         'group inline-flex items-center rounded-md  text-base  focus:outline-none focus:ring-2 focus:ring-red-500'
                       )}
                     >
                       <span>About Us</span>
                       <ChevronDownIcon
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
-                          'ml-2 h-5 w-5 group-hover:text-white'
+                          open ? 'text-black' : 'text-black',
+                          'ml-2 h-5 w-5 group-hover:text-black'
                         )}
                         aria-hidden="true"
                       />
@@ -446,16 +446,16 @@ const [showLogout, setShowLogout] = useState(false)
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
-             text-white hover:text-slate-900" onClick={handleLogin}>
+             text-black hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
               <a
                 href="#"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700"
+                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-red-700"
               >
                 Sign up
               </a>
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'drop-shadow-2xl rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50 text-black"  >{<p className='text-slate-600'>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'drop-shadow-2xl rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  >{<p className=''>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 
@@ -526,7 +526,7 @@ const [showLogout, setShowLogout] = useState(false)
                 <div>
                   <a
                     href="#"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-red-700"
                   >
                     Sign up
                   </a>

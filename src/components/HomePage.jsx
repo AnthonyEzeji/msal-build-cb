@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import PPP from "../components/PPP";
 import BlogList from './BlogList';
 import Tabs from  '../components/Tabs'
+import Catalog from  '../components/Catalog'
 import { useIsAuthenticated } from '@azure/msal-react';
 import ForHospitals from './ForHospitals';
 import Hero from './Hero';
@@ -17,6 +18,8 @@ import VideoHero from './VideoHero';
 import HomeNavbar from './HomeNavbar'
 import Carousel from './Carousel';
 import { useEffect } from 'react';
+import VideoHeroTabs from './VideoHeroTabs';
+import PreviewButtons from './personas/RMPreviewButtons';
 const HomePage = () => {
   let isAuthenticated = useIsAuthenticated()
   const [video, setVideo] = useState("https://player.vimeo.com/video/797037462?h=574d1d5649&autoplay=1&loop=1&background=1")
@@ -27,7 +30,7 @@ const HomePage = () => {
   }, [])
   
   return (
-    <div className=' w-screen  '>
+    <div className=' w-screen   '>
     <HomeNavbar/>
     {/*<div>
     <img className='h-screen' src="https://www.mastersindatascience.org/wp-content/uploads/sites/54/2022/05/What-Is-Data-Visualization-and-Why-Is-It-Important.png" alt="" ></img>
@@ -58,12 +61,14 @@ const HomePage = () => {
   </div>
   </div>*/}
     
-    <VideoHero video={video}/>
- 
+    <VideoHeroTabs video={video}/>
+
      <CTASection/>
-     <Carousel/>
+    
+     
    
-<Splide/>
+     <Carousel/>
+    <Splide/>
      <PPP></PPP>
      <BlogList></BlogList>
      <ContactUs></ContactUs>

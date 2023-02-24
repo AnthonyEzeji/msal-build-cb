@@ -139,7 +139,7 @@ const [showLogout, setShowLogout] = useState(false)
     <div className="fixed w-full z-40 top-0" id='nav'>
       <Popover className="relative  " style={{backgroundColor:bg}}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-transparent sticky">
-          <div className="flex items-center justify-between py-6 md:justify-between md:space-x-10">
+          <div className="flex items-center justify-between py-3 md:justify-between md:space-x-10 ">
             <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">
                 <span className="sr-only">Your Company</span>
