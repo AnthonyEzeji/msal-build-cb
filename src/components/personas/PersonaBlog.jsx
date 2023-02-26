@@ -6,7 +6,8 @@ import Navbar from '../Navbar'
 import { models } from 'powerbi-client';
 import Footer from '../Footer'
 //map for persona-blog content with routes as keys
-const dashboards = {'/risk-manager/med-mal':{reportId:'12345',content:' content for med mal', caption:'Hospital Med Mal Overview'},'/risk-manager/freq-sev-trends':{reportId:'12346',content:'content for freq/sev trends', caption:'Frequency/Severity Trends'},'/risk-manager/national-benchmark':{reportId:'123467',content:'conent for national benchmarking', caption:'National Benchmarking'}}
+const dashboards = {'/risk-manager/med-mal':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'Hospital Med Mal Overview'},'/risk-manager/freq-sev-trends':{reportId:'0c816635-432c-44eb-aaf9-44b6ef9af906',content:'Frequency & Severity Trends', caption:'Frequency/Severity Trends'},'/risk-manager/national-benchmark':{reportId:'1eb7957f-9a88-4fa9-9457-1a219ef75ee6',content:'National Benchmarks', caption:'National Benchmarking'}}
+
 function PersonaBlog() {
     const [location, setLocation] = useState('')
     
@@ -41,7 +42,7 @@ function PersonaBlog() {
 
       //configures reportConfig with dahsboard[location].reportId and requests access
       const mockSignIn = async () => {
-        const reportConfigResponse = await fetch(sampleReportUrl+{/*dashboard[location]?.reportId*/} );
+        const reportConfigResponse = await fetch( sampleReportUrl +  dashboards[location]?.reportId   );
         if (!reportConfigResponse.ok) {
           console.error(`Failed to fetch config for report. Status: ${reportConfigResponse.status} ${reportConfigResponse.statusText}`);
           return;
@@ -59,6 +60,7 @@ function PersonaBlog() {
       //gets current route (/risk-manger/med-mal)
       useEffect(() => {
         setLocation(window.location.href.split(window.location.origin)[1])
+        console.log(window.location.origin);
         }, [])
 
     //sets location state to current route and calls mockSignIn function
