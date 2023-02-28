@@ -140,15 +140,15 @@ useEffect(() => {
  let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
 const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="fixed w-full z-40 top-0 drop-shadow-xl border-b border-gray-300" id='nav'>
-      <Popover className="relative bg-zinc-200 " style={{backgroundColor:bg}}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-zinc-200 sticky">
+    <div className="fixed w-full z-40 top-0 drop-shadow-md border-b border-gray-300" id='nav'>
+      <Popover className="relative bg-slate-50 " style={{backgroundColor:bg}}>
+        <div className="mx-auto max-w-7xl px-4 py-1 sm:px-6 bg-slate-50 sticky">
           <div className="flex items-center justify-between  md:justify-between md:space-x-10">
             <div className="flex justify-start  lg:w-0 lg:flex-1  ">
               <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-8 w-auto sm:h-10  text-black"
+                  className="h-12 w-auto  text-black"
                   src={'https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png'}
                   alt=""
                 />
@@ -445,16 +445,12 @@ const [showLogout, setShowLogout] = useState(false)
               </Popover>
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
+            <Link to="/dashboard" className="whitespace-nowrap text-base 
              text-black hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
-              <a
-                href="#"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-red-700"
-              >
-                Sign up
-              </a>
+             
+            
             </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'drop-shadow-2xl rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  >{<p className=''>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>

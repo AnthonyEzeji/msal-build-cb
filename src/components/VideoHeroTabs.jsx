@@ -28,7 +28,7 @@ function VideoHeroTabs({video}) {
                 setHeroTab({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
                 break;
                 case 'cmo':
-                    setHeroTab({caption:'Department Chair', url:'/department-chair',previews:['Frequent Flyers','ICD-level Malpractice Insights', 'Med Mal Contributing Factors']})
+                    setHeroTab({caption:'Department Chair', url:'/department-chair',previews:['Frequent Flyers','Malpractice Insights', 'Contributing Factors']})
                     break;
                     case 'csuite':
                         setHeroTab({caption:'CXO', url:'/cxo',previews:['KPI Boardroom','Financial Benchmarking', 'Department Insights']})
@@ -57,7 +57,7 @@ function VideoHeroTabs({video}) {
         Healthcare Risk Advisors partners with healthcare organizations to identify and solve their unique challenges in services for self-insurance programs, risk transfer, risk management, and claims and litigation.
       </p>
         </div>
-    <div className = 'h-full flex flex-col justify-start ml-3 border-l-[.5px] border-red-500 pl-6'>
+    <div className = 'h-full flex flex-col justify-start ml-3 border-l-[.5px] border-red-500 pl-6 min-h-[300px]'>
     <div className='flex w-fit '>
     
     <button id='cro' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Risk Manager'&&'border-b border-red-400'}`}>Risk Manager</button>
