@@ -28,10 +28,10 @@ function VideoHeroTabs({video}) {
                 setHeroTab({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
                 break;
                 case 'cmo':
-                    setHeroTab({caption:'Department Chair', url:'/department-chair',previews:['Frequent Flyers','ICD-level malpractice insights', 'Med Mal Contributing Factors']})
+                    setHeroTab({caption:'Department Chair', url:'/department-chair',previews:['Frequent Flyers','ICD-level Malpractice Insights', 'Med Mal Contributing Factors']})
                     break;
                     case 'csuite':
-                        setHeroTab({caption:'CXO', url:'/cxo',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
+                        setHeroTab({caption:'CXO', url:'/cxo',previews:['KPI Boardroom','Financial Benchmarking', 'Department Insights']})
                         break;
         
             default:

@@ -4,13 +4,13 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../Navbar'
-import PreviewButtons from './DCPreviewButtons'
+import PreviewButtons from './CXOPreviewButtons'
 import Footer from '../Footer'
 
 
     
 
-function DepartmentChair() {
+function CXO() {
     var isAuthenticated = useIsAuthenticated()
     const [authenticated, setAuthenticated] = useState(false)
 const {instance} = useMsal()
@@ -32,7 +32,7 @@ useEffect(() => {
     &&
     <div>
     <Navbar/>
-    <div class='department-chair-page' className = 'w-screen h-fit min-h-screen  '>
+    <div class='cxo-page' className = 'w-screen h-fit min-h-screen  '>
      
         <PreviewButtons/>
     </div>
@@ -42,4 +42,4 @@ useEffect(() => {
     </AuthenticatedTemplate>
   )
   }
-export default DepartmentChair
+export default CXO
