@@ -101,6 +101,7 @@ function classNames(...classes) {
 export default function Example() {
 
   const [bg, setBg] = useState('bg-transparent')
+  const [textColor, setTextColor] = useState('white')
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
   let params = useParams()
@@ -108,9 +109,11 @@ export default function Example() {
   const changeNavbarColor = () =>{
    
      if(window.scrollY >= 700){
-       setBg('rgb(51 65 85)');
+       setBg('rgb(248 250 252)');
+       setTextColor('black')
      }
      else{
+      setTextColor('white')
        setBg('transparent')
      }
   };
@@ -133,19 +136,19 @@ export default function Example() {
     postLogoutRedirectUri: "/",
   });
 }
- let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
+ let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80",HRALogo]
 const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="fixed w-full z-40 top-0" id='nav'>
+    <div className="fixed w-full z-40 top-0 drop-shadow-md" id='nav'>
       <Popover className="relative  " style={{backgroundColor:bg}}>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 bg-transparent sticky">
-          <div className="flex items-center justify-between py-3 md:justify-between md:space-x-10 ">
+        <div className="mx-auto max-w-7xl py-1 px-4 sm:px-6 bg-transparent sticky">
+          <div className="flex items-center justify-between  md:justify-between md:space-x-10 ">
             <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
                   className=" w-auto h-12  text-white"
-                  src={HRALogo}
+                  src={bg==='rgb(248 250 252)'?imgs[0]:HRALogo}
                   alt=""
                 />
               </Link>
@@ -161,15 +164,17 @@ const [showLogout, setShowLogout] = useState(false)
                 {({ open }) => (
                   <>
                     <Popover.Button
+                    style={{color:textColor}}
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
+                        
                         'group inline-flex items-center rounded-md  border-none text-base  focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
                       )}
                     >
                       <span>Solutions</span>
                       <ChevronDownIcon
+                      style={{color:textColor}}
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
+                          
                           'ml-2 h-5 w-5 group-hover:text-white'
                         )}
                         aria-hidden="true"
@@ -225,15 +230,17 @@ const [showLogout, setShowLogout] = useState(false)
                 {({ open }) => (
                   <>
                     <Popover.Button
+                    style={{color:textColor}}
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
+                       
                         'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
                       )}
                     >
                       <span>Who We Serve</span>
                       <ChevronDownIcon
+                      style={{color:textColor}}
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
+                          
                           'ml-2 h-5 w-5 group-hover:text-white'
                         )}
                         aria-hidden="true"
@@ -297,15 +304,17 @@ const [showLogout, setShowLogout] = useState(false)
                 {({ open }) => (
                   <>
                     <Popover.Button
+                    style={{color:textColor}}
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
+                       
                         'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-white '
                       )}
                     >
                       <span>Insights</span>
                       <ChevronDownIcon
+                      style={{color:textColor}}
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
+                         
                           'ml-2 h-5 w-5 group-hover:text-slate-800'
                         )}
                         aria-hidden="true"
@@ -372,15 +381,17 @@ const [showLogout, setShowLogout] = useState(false)
                 {({ open }) => (
                   <>
                     <Popover.Button
+                    style={{color:textColor}}
                       className={classNames(
-                        open ? 'text-white' : 'text-white',
+                      
                         'group inline-flex items-center rounded-md  text-base hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 '
                       )}
                     >
                       <span>About Us</span>
                       <ChevronDownIcon
+                      style={{color:textColor}}
                         className={classNames(
-                          open ? 'text-white' : 'text-white',
+                         
                           'ml-2 h-5 w-5 group-hover:text-white'
                         )}
                         aria-hidden="true"
@@ -441,17 +452,12 @@ const [showLogout, setShowLogout] = useState(false)
               </Popover>
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
-             text-white hover:text-slate-900" onClick={handleLogin}>
+            <Link style={{color:textColor}} to="/dashboard" className="whitespace-nowrap text-base 
+              hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
-              <a
-                href="#"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700"
-              >
-                Sign up
-              </a>
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar onClick={()=>setShowLogout(!showLogout)} className="hover:opacity-50 text-slate-600"  >{<p className='text-slate-600'>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
+            
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  >{<p className=''>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
           </div>
         </div>
 

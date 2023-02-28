@@ -44,7 +44,7 @@ export default function Example() {
                       <feature.icon className="absolute top-1 left-1 h-5 w-5 text-red-600" aria-hidden="true" />
                       {feature.name}
                     </dt>{' '}
-                    <dd className="inline">{feature.description}<a href = {feature.href} className='text-red-500 mx-2 font-semibold border-b border-red-500'>Learn more.</a></dd>
+                    <dd className="inline">{feature.description}<a href = {feature.href} className='text-red-500 mx-2 font-semibold border-b border-red-500'>View Insights.</a></dd>
                     
                   </div>
                 ))}
@@ -54,7 +54,7 @@ export default function Example() {
           <img
             src={img}
             alt="Product screenshot"
-            className="w-[48rem] max-w-[600px] rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+            className="w-[48rem] max-w-[600px] rounded-xl  sm:w-[57rem] md:-ml-4 lg:-ml-0"
             width={2432}
             height={1442}
           />
