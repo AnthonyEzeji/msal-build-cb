@@ -58,11 +58,12 @@ function VideoHeroTabs({video}) {
       </p>
         </div>
     <div className = 'h-full flex flex-col justify-start ml-3 border-l-[.5px] border-red-500 pl-6 min-h-[300px]'>
-    <div className='flex w-fit '>
+    <div className='flex w-fit justify-evenly '>
+    <button id='csuite' onClick={(e)=>handleTabClick(e)} className = {` flex font-medium   h-[70px] w-flex mx-5 text-white ${heroTab.caption==='CXO'&&'border-b-2 border-red-400'}`}>CXO</button>
+    <button id='cmo' onClick={(e)=>handleTabClick(e)}  className = {` flex  font-medium    h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Department Chair'&&'border-b-2 border-red-400'}`}>Department Chair</button>
+    <button id='cro' onClick={(e)=>handleTabClick(e)} className = {`flex  font-medium    h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Risk Manager'&&'border-b-2 border-red-400'}`}>Risk Manager</button>
     
-    <button id='cro' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Risk Manager'&&'border-b border-red-400'}`}>Risk Manager</button>
-    <button id='cmo' onClick={(e)=>handleTabClick(e)}  className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Department Chair'&&'border-b border-red-400'}`}>Department Chair</button>
-    <button id='csuite' onClick={(e)=>handleTabClick(e)} className = {` h-[70px] w-fit mx-5 text-white ${heroTab.caption==='CXO'&&'border-b border-red-400'}`}>CXO</button>
+
 </div>
 <div className=' py-2 w-full'>
  

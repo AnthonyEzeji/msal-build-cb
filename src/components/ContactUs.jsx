@@ -16,9 +16,9 @@ import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import { BsPinMap } from 'react-icons/bs'
 export default function ContactUs() {
   return (
-    <div className="relative bg-white">
+    <div className="relative bg-white mx-32">
       <div className="absolute inset-0">
-        <div className="absolute inset-y-0 left-0 w-1/2 bg-gray-50" />
+        <div className="absolute inset-y-0 left-0 w-1/2 " />
       </div>
       <div className="relative mx-auto max-w-7xl lg:grid lg:grid-cols-5">
         <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
