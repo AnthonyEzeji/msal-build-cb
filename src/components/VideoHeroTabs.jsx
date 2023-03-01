@@ -20,7 +20,7 @@ function VideoHeroTabs({video}) {
          console.log(e);
      });
    }
-    const [heroTab,setHeroTab ] = useState({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
+    const [heroTab,setHeroTab ] = useState({caption:'CXO', url:'/cxo',previews:['KPI Boardroom','Financial Benchmarking', 'Department Insights']})
     function handleTabClick(e){
         console.log(e.target.id)
         switch (e.target.id) {
