@@ -84,7 +84,7 @@ function PersonaBlog() {
   return (
     <div>
         <Navbar/>
-        <div className="bg-white py-32 px-6 lg:px-8">
+        <div className="bg-white py-[100px] px-6 lg:px-8">
       <div className="mx-auto lg:max-w-5xl md:max-w-4xl sm:max-w-4xl text-base leading-7 text-gray-700">
         <p className="text-base font-semibold leading-7 text-red-600 ">Our Tailored Insights for a {dashboards[location]?.persona}</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{dashboards[location]?.caption}</h1>

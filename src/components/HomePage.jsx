@@ -64,7 +64,7 @@ const HomePage = () => {
     <VideoHeroTabs video={video}/>
 
      <CTASection/>
-    
+  
      
    
      <Carousel/>
