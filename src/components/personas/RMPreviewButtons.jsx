@@ -4,21 +4,21 @@ import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/2
 import img from '../../assets/Risk management-rafiki.svg'
 const features = [
   {
-    name: 'Hospital Med Mal Overview',
+    name: 'Hospital Med Mal Overview :',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Review your Med Mal Exposure.',
     icon: CloudArrowUpIcon,
     href:'/risk-manager/med-mal'
   },
   {
-    name: 'Frequency/Severity Trends',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    name: 'Frequency/Severity Trends :',
+    description: 'Find out how you are trending.',
     icon: LockClosedIcon,
     href:'/risk-manager/frequency-severity-trends'
   },
   {
-    name: 'National Benchmarking',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'National Benchmarking :',
+    description: 'Find out how you compare against similar organizations.',
     icon: ServerIcon,
     href:'/risk-manager/national-benchmarking'
   },
@@ -34,8 +34,7 @@ export default function Example() {
               <h2 className="text-base font-semibold leading-7 text-red-600">Mitigate Risk</h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Risk Manager</p>
               <p className="mt-6 text-lg leading-8 text-gray-600">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque,
-                iste dolor cupiditate blanditiis ratione.
+              It is time for businesses to shift from risk management to a risk enabled performance management system to identify emerging risk trends.
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                 {features.map((feature) => (

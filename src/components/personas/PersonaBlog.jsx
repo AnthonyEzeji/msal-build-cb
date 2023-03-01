@@ -8,9 +8,9 @@ import Footer from '../Footer'
 import { CheckCircleIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 //map for persona-blog content with routes as keys
 const dashboards = {
-  '/cxo/department-insights':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'Department Insights'},
-  '/cxo/financial-benchmarking':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'Financial Benchmarking'},
-  '/cxo/kpi-boardroom':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'KPI Boardroom'},
+  '/cxo/department-insights':{reportId:'8e8633bb-9499-4ab5-b550-52340ddd11a6',content:'New Content', caption:'Department Insights'},
+  '/cxo/financial-benchmarking':{reportId:'41ab916e-2e92-41fd-a4a5-a9b91be84d35',content:'New Content', caption:'Financial Benchmarking'},
+  '/cxo/kpi-boardroom':{reportId:'75081349-83b5-41ab-91be-3dbc51508f39',content:'New Content', caption:'KPI Boardroom'},
   '/department-chair/med-mal-contributing-factors':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'Med Mal Contributing Factors'},
   '/department-chair/icd-level-malpractice-insights':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'ICD Level Malpractice Insights'},
   '/department-chair/freq-flyers':{reportId:'09694b4f-41a4-41c2-a1b1-5b8bf24e0873',content:'New Content', caption:'Frequent Flyers'},
