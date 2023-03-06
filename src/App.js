@@ -53,8 +53,8 @@ function App() {
         <Route path='/department-chair/icd-level-malpractice-insights-live' element = {<PersonaBlogLive/>}/>
         <Route path='/department-chair/med-mal-contributing-factors-live' element = {<PersonaBlogLive/>}/>
         <Route path='/cxo/kpi-boardroom-live' element = {<PersonaBlogLive/>}/>
-        <Route path='/cxo/financial-benchmarking-live' element = {<PersonaBlog/>}/>
-        <Route path='/cxo/department-insights-live' element = {<PersonaBlog/>}/>
+        <Route path='/cxo/financial-benchmarking-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/cxo/department-insights-live' element = {<PersonaBlogLive/>}/>
         <Route path='/get-started' element = {<StepsPage/>}/>
         <Route path='/risk-manager' element = {<RiskManager/>}/>
         <Route path='/department-chair' element = {<DepartmentChair/>}/>
