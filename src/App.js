@@ -45,7 +45,7 @@ function App() {
         <Route path='/department-chair/med-mal-contributing-factors' element = {<PersonaBlog/>}/>
         <Route path='/cxo/kpi-boardroom' element = {<PersonaBlog/>}/>
         <Route path='/cxo/financial-benchmarking' element = {<PersonaBlog/>}/>
-        <Route path='/cxo/department-insights' element = {<PersonaBlogLive/>}/>
+        <Route path='/cxo/department-insights' element = {<PersonaBlog/>}/>
         <Route path='/risk-manager/med-mal-live' element = {<PersonaBlogLive/>}/>
         <Route path='/risk-manager/frequency-severity-trends-live' element = {<PersonaBlogLive/>}/>
         <Route path='/risk-manager/national-benchmarking-live' element = {<PersonaBlogLive/>}/>
