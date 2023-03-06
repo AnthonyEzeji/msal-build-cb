@@ -10,17 +10,27 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated, use
 import { BiLeftArrow } from 'react-icons/bi'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
+
+import img1 from '../../assets/persona images/department-insights.png'
+import img2 from '../../assets/persona images/financial-benchmark.png'
+import img3 from '../../assets/persona images/freq-flyers.png'
+import img4 from '../../assets/persona images/freq-sev-trends.png'
+import img5 from '../../assets/persona images/icd-level-med-mal.png'
+import img6 from '../../assets/persona images/kpi-boardroom.png'
+import img7 from '../../assets/persona images/med-mal-contributing-factors.png'
+import img8 from '../../assets/persona images/med-mal-overview.png'
+import img9 from '../../assets/persona images/national-benchmark.png'
 //map for persona-blog content with routes as keys
 const dashboards = {
-  '/cxo/department-insights':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'Department Insights' , persona : 'CXO'},
-  '/cxo/financial-benchmarking':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'Financial Benchmarking', persona : 'CXO'},
-  '/cxo/kpi-boardroom':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'KPI Boardroom', persona : 'CXO'},
-  '/department-chair/med-mal-contributing-factors':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'Med Mal Contributing Factors', persona : 'Department Chair'},
-  '/department-chair/icd-level-malpractice-insights':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'ICD Level Malpractice Insights', persona : 'Department Chair'},
-  '/department-chair/freq-flyers':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'Frequent Flyers' , persona : 'Department Chair'},
-  '/risk-manager/med-mal':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'New Content', caption:'Hospital Med Mal Overview' , persona : 'Risk Manager'},
-  '/risk-manager/frequency-severity-trends':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'Frequency & Severity Trends', caption:'Frequency/Severity Trends', persona : 'Risk Manager'},
-  '/risk-manager/national-benchmarking':{img:'https://community.powerbi.com/t5/image/serverpage/image-id/496583iD7DB796B4B0B174B?v=v2',content:'National Benchmarks', caption:'National Benchmarking', persona : 'Risk Manager'}
+  '/cxo/department-insights':{img:img1,content:'New Content', caption:'Department Insights' , persona : 'CXO'},
+  '/cxo/financial-benchmarking':{img:img2,content:'New Content', caption:'Financial Benchmarking', persona : 'CXO'},
+  '/cxo/kpi-boardroom':{img:img6,content:'New Content', caption:'KPI Boardroom', persona : 'CXO'},
+  '/department-chair/med-mal-contributing-factors':{img:img7,content:'New Content', caption:'Med Mal Contributing Factors', persona : 'Department Chair'},
+  '/department-chair/icd-level-malpractice-insights':{img:img5,content:'New Content', caption:'ICD Level Malpractice Insights', persona : 'Department Chair'},
+  '/department-chair/freq-flyers':{img:img3,content:'New Content', caption:'Frequent Flyers' , persona : 'Department Chair'},
+  '/risk-manager/med-mal':{img:img8,content:'New Content', caption:'Hospital Med Mal Overview' , persona : 'Risk Manager'},
+  '/risk-manager/frequency-severity-trends':{img:img4,content:'Frequency & Severity Trends', caption:'Frequency/Severity Trends', persona : 'Risk Manager'},
+  '/risk-manager/national-benchmarking':{img:img9,content:'National Benchmarks', caption:'National Benchmarking', persona : 'Risk Manager'}
 }
 
 function PersonaBlog() {
