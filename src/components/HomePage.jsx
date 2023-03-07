@@ -68,7 +68,7 @@ const HomePage = () => {
      
 
      <Carousel/>
-     <Catalog/>
+     
     <Splide/>
      <PPP></PPP>
      <BlogList></BlogList>
