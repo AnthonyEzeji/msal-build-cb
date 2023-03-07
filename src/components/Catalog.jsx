@@ -3,8 +3,8 @@ import React from 'react'
 import { useState } from 'react';
 import test from '../assets/test image.jpg'
 import img2 from '../assets/7-things-to-do (1).jpg'
-import img3 from '../assets/team-training.webp'
-import img1 from '../assets/review.webp'
+import img3 from '../assets/YoungPeopleBusinessMeeting_1200x627 (1).jpg'
+import img1 from '../assets/types-of-business-meetings-scaled (1).jpg'
 import img4 from '../assets/advantages-and-disadvantages-of-online-learning (1).jpg'
 import img5 from '../assets/istockphoto-541114144-612x612 (1).jpg'
 import img6 from '../assets/1669-blog-header-webinar-marketing (1).png'
@@ -66,11 +66,15 @@ const catalogOptions = [{
 function Catalog() {
 const [size, setSize] = useState(4)
 function setPerPage(){
-  var width =window.screen.availWidth
-  if(width<1500){
-    setSize(3)
-  }else {
+  var width =window.screen.width
+
+  
+  if(width>1500){
     setSize(4)
+  }else if(width>1000&&width<1500) {
+    setSize(3)
+  }else if(width>800&&width<1000) {
+    setSize(1)
   }
 }
 useEffect(() => {
