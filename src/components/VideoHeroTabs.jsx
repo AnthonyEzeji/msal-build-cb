@@ -76,14 +76,8 @@ function VideoHeroTabs({video}) {
   
     <div className=" sm:flex sm:justify-center lg:justify-start w-full">
       <div className="rounded-md shadow w-full">
-      {isAuthenticated?<Link
+      {<Link
           to={heroTab.url}
-          className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg "
-        >
-        Learn More
-        </Link>:<Link
-          to={heroTab.url}
-          onClick={handleLogin}
           className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg "
         >
         Learn More

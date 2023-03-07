@@ -27,9 +27,7 @@ useEffect(() => {
 }, [authenticated])
 
   return (
-    <AuthenticatedTemplate>{
-    isAuthenticated
-    &&
+
     <div>
     <Navbar/>
     <div class='risk-manager-page' className = 'w-screen h-fit min-h-screen  '>
@@ -38,8 +36,7 @@ useEffect(() => {
     </div>
     <Footer/>
     </div>
-    }
-    </AuthenticatedTemplate>
+ 
   )
   }
 export default RiskManager
