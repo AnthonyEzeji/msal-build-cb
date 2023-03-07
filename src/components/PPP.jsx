@@ -14,7 +14,7 @@
 */
 export default function PPP() {
     return (
-      <div className="relative bg-white py-16 mx-32">
+      <div className="relative px-10 bg-slate-100 py-16 xl:px-32 min-h-screen flex items-center">
         <div className="absolute inset-x-0 top-0 hidden h-1/2  lg:block" aria-hidden="true" />
         <div className="mx-auto max-w-7xl bg-red-600 lg:bg-transparent lg:px-8">
           <div className="lg:grid lg:grid-cols-12">
