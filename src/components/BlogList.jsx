@@ -74,7 +74,7 @@ const posts = [
     }, [])
     
     return (
-      <div className="relative  mx-32 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28 flex flex-col items center">
+      <div className="relative  px-10  xl:px-32 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28 flex flex-col items center">
         <div className="absolute inset-0 relative">
           <div className="h-1/3 bg-white sm:h-2/3" />
         </div>
