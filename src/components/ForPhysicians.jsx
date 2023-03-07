@@ -44,7 +44,7 @@ const features = [
 
 export default function Example() {
   return (
-    <div className="bg-white">
+    <div className="bg-slate-100">
       <div className="mx-auto max-w-7xl py-24 px-6 sm:py-32 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">New York Physicians</h2>
