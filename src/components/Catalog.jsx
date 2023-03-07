@@ -85,8 +85,8 @@ useEffect(() => {
     <div className='py-20 2xl:py-20 mt-20  w-screen min-h-screen flex flex-col items-center justify-center bg-slate-100 '>
       <h1 className='py-5  px-20 w-full text-center text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl'>Browse Our Catalog of <span className='text-red-600'>Data Forward</span> Risk Reduction Strategies</h1>
   <Splide
-    className='  xl:px-40 py-20 mx-32 flex items-center justify-center'
-    options={{perPage:size,gap:'1rem'}}>
+    className='  xl:px-40   py-20 mx-32 flex items-center justify-center  w-[95vw] '
+    options={{perPage:size,gap:'2rem'}}>
     
       {catalogOptions.map((option, i)=>{   return <SplideSlide key={i} className="p-2 ">
         <div id={option.id} onMouseOver={(e)=>setHovering({hovering:true,id:i})} onMouseOut={(e)=>setHovering({hovering:false,id:i})} className={` ${hovering.hovering===true&&hovering.id===i ?"shadow-xl ":'shadow-md'} flex-1 h-fit rounded-md `}>
