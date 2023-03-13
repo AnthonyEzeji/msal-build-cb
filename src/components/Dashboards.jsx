@@ -51,7 +51,7 @@ export default function Dashboards() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { instance } = useMsal();
   const [loggedInAcc, setLoggedInAcc] = useState(instance.getActiveAccount())
-  const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
+  const sampleReportUrl = 'https://ngapnodepbitdchra.azurewebsites.net/api/getPBIToken';
   // --------- Set State -------------------
 
   const [filteredReports, setFilteredReports] = useState([])
@@ -191,28 +191,29 @@ function timeSince(date) {
 var aDay = 24*60*60*1000;
 const axiosInstance = axios.create({
 
-  baseURL:'https://hra-backend-q2gs.vercel.app',
+  //baseURL:'https://hra-backend-q2gs.vercel.app'
+  baseURL:'https://ngapnodepbitdchra.azurewebsites.net',
   timeout: 10000
 });
 
 
 
 async function getReports(){ 
-  await axiosInstance.get(`/reports?token=${accessToken}`).then(res=>{
+  await axiosInstance.get(`/api/getADReportList?code=YuzwjzL_E6zLJ9EPwP8XOLhsc5z-PyEwbi6ATKqrKuXAAzFuMeQbrw==`).then(res=>{
     console.log(res.data)
     setReports(res.data)
     
   })
 }
 
- async function getSavedReports(){
+ /*async function getSavedReports(){
 
      await axiosInstance.get(`/users/${instance.getActiveAccount()?.idTokenClaims?.oid}/reports?token=${accessToken}`).then(res=>{
 
        setSavedReports(res.data)
      
      })
-}
+}*/
 async function getUserGroups(){
   await callMsGraph(accessToken).then(response=>{
 
@@ -264,7 +265,7 @@ let account = instance.getActiveAccount()
   
  }
  //function handles a user saving a report
-async function handleSaveReport(){
+/*async function handleSaveReport(){
   await axiosInstance.post(`/users/${instance.getActiveAccount().idTokenClaims?.oid}/reports?token=${accessToken}`,{...selectedReport,user:instance.getActiveAccount()}).then(res=>{
     
     setSavedReportSelected(!savedReportSelected)
@@ -288,6 +289,7 @@ async function handleSaveReport(){
     return report.reportId!==selectedReport.reportId
 }))
 }
+*/
 //When an access token is set, we make a request to ms graph for the user's groups
  useEffect(() => {
    RequestAccessToken()
@@ -297,7 +299,7 @@ async function handleSaveReport(){
  useEffect( () => {
   if(accessToken){
     getReports()
-    getSavedReports()
+    //getSavedReports()
     getUserGroups()
   }
  }, [accessToken])
@@ -354,7 +356,7 @@ async function handleSaveReport(){
   //Config for power-bi based on selected report
   const mockSignIn = async () => {
 
-    const reportConfigResponse = await fetch(sampleReportUrl+selectedReport?.reportId);
+    const reportConfigResponse = await fetch(sampleReportUrl+`?code=${'ckZ5LS1oWKtIuPtbI6BtJjQnM7SBfn1evDzoFgjhGz05AzFuqQU_Nw=='}&reportId=${selectedReport.reportId}&mstoken=${accessToken}`);
 
 
     if (!reportConfigResponse.ok) {
@@ -416,7 +418,7 @@ useEffect(() => {
     getReportNotes()
     mockSignIn()
 
-      setSavedReportSelected(checkIfSaved(selectedReport))
+      //setSavedReportSelected(checkIfSaved(selectedReport))
     
     window.sessionStorage.setItem('selectedReport', JSON.stringify(selectedReport))
   }
@@ -425,7 +427,7 @@ useEffect(() => {
 
 //When a report is selected, function checkIfSaved() checks to see if the report is included in the users saved reports
 useEffect(() => {
-  setSavedReportSelected(checkIfSaved(selectedReport))
+ // setSavedReportSelected(checkIfSaved(selectedReport))
 }, [savedReports])
 
 
@@ -675,7 +677,7 @@ useEffect(() => {
                   {/*<div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
                   */}
                 </div>
-               {!savedReportSelected? <button className='bg-slate-700 border-[1px] text-white hover:bg-transparent hover:text-slate-700 p-3 rounded-md border-slate-700 my-4 min-w-[120px] felx justify-center' onClick={handleSaveReport}><p className="flex justify-center h-fit text-lg items-center min-h-[26px]">Save<StarIcon className='h-6'/></p></button>:<button className='bg-green-600 border-[1px] text-white hover:bg-transparent hover:text-green-600 p-3 rounded-md border-green-600 my-4 min-w-[120px] felx justify-center' onClick={removeSavedReport}><p className="flex justify-center h-fit text-lg items-center min-h-[26px]">Saved<CheckIcon className='h-6'/></p></button>}
+               {/*!savedReportSelected? <button className='bg-slate-700 border-[1px] text-white hover:bg-transparent hover:text-slate-700 p-3 rounded-md border-slate-700 my-4 min-w-[120px] felx justify-center' onClick={handleSaveReport}><p className="flex justify-center h-fit text-lg items-center min-h-[26px]">Save<StarIcon className='h-6'/></p></button>:<button className='bg-green-600 border-[1px] text-white hover:bg-transparent hover:text-green-600 p-3 rounded-md border-green-600 my-4 min-w-[120px] felx justify-center' onClick={removeSavedReport}><p className="flex justify-center h-fit text-lg items-center min-h-[26px]">Saved<CheckIcon className='h-6'/></p></button>*/}
                 {selectedReport&&<PowerBIEmbed
               
                 embedConfig={pbiReportConfig}
