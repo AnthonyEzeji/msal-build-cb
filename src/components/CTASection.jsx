@@ -3,7 +3,7 @@ import Vector from '../assets/Risk management-bro.svg'
 import Vector2 from '../assets/Orthopedic-bro.svg'
 export default function Example() {
     return (
-      <div className=" flex flex-col-reverse md:flex-row w-full justify-center items-center py-20 ">
+      <div className=" flex flex-col-reverse md:flex-row w-full justify-center items-center py-20 min-h-[75vh] ">
                 <img className='max-w-[350px] w-auto h-auto hidden 2xl:flex  ' src = {Vector2}></img>
         <div className=" max-w-2xl py-16 px-6 text-center sm:py-20 lg:px-8 ">
           <h2 className="text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl">

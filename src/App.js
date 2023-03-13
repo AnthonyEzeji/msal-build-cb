@@ -24,6 +24,7 @@ import RiskManager from "./components/personas/RiskManager";
 import DepartmentChair from "./components/personas/DepartmentChair";
 import PersonaBlog from "./components/personas/PersonaBlog";
 import CXO from "./components/personas/CXO";
+import PersonaBlogLive from "./components/personas/PersonaBlogLive";
 const About = () => {
   return <h1>About</h1>
 };
@@ -45,6 +46,15 @@ function App() {
         <Route path='/cxo/kpi-boardroom' element = {<PersonaBlog/>}/>
         <Route path='/cxo/financial-benchmarking' element = {<PersonaBlog/>}/>
         <Route path='/cxo/department-insights' element = {<PersonaBlog/>}/>
+        <Route path='/risk-manager/med-mal-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/risk-manager/frequency-severity-trends-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/risk-manager/national-benchmarking-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/department-chair/freq-flyers-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/department-chair/icd-level-malpractice-insights-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/department-chair/med-mal-contributing-factors-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/cxo/kpi-boardroom-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/cxo/financial-benchmarking-live' element = {<PersonaBlogLive/>}/>
+        <Route path='/cxo/department-insights-live' element = {<PersonaBlogLive/>}/>
         <Route path='/get-started' element = {<StepsPage/>}/>
         <Route path='/risk-manager' element = {<RiskManager/>}/>
         <Route path='/department-chair' element = {<DepartmentChair/>}/>

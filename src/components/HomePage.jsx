@@ -66,8 +66,9 @@ const HomePage = () => {
      <CTASection/>
   
      
-   
+
      <Carousel/>
+     
     <Splide/>
      <PPP></PPP>
      <BlogList></BlogList>

@@ -14,6 +14,7 @@ function CXO() {
     var isAuthenticated = useIsAuthenticated()
     const [authenticated, setAuthenticated] = useState(false)
 const {instance} = useMsal()
+
     useEffect(() => {
         if(isAuthenticated){
           setAuthenticated(true)
@@ -27,9 +28,7 @@ useEffect(() => {
 }, [authenticated])
 
   return (
-    <AuthenticatedTemplate>{
-    isAuthenticated
-    &&
+ 
     <div>
     <Navbar/>
     <div class='cxo-page' className = 'w-screen h-fit min-h-screen  '>
@@ -38,8 +37,7 @@ useEffect(() => {
     </div>
     <Footer/>
     </div>
-    }
-    </AuthenticatedTemplate>
+  
   )
   }
 export default CXO

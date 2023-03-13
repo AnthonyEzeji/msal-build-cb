@@ -20,18 +20,18 @@ function VideoHeroTabs({video}) {
          console.log(e);
      });
    }
-    const [heroTab,setHeroTab ] = useState({caption:'CXO', url:'/cxo',previews:['KPI Boardroom','Financial Benchmarking', 'Department Insights']})
+    const [heroTab,setHeroTab ] = useState({caption:'CXO', url:'/cxo',previewMessage:'Monitor your hospital\'s risk, finance and KPIs. Benchmark your department\'s performance to your peers.'})
     function handleTabClick(e){
         console.log(e.target.id)
         switch (e.target.id) {
             case 'cro':
-                setHeroTab({caption:'Risk Manager', url:'/risk-manager',previews:['Hospital Med Mal Overview','Frequency/Severity Trends', 'National Benchmarking']})
+                setHeroTab({caption:'Risk Manager', url:'/risk-manager',previewMessage:' Shift to pro-active risk management and deliver actionable insights to your providers.'})
                 break;
                 case 'cmo':
-                    setHeroTab({caption:'Department Chair', url:'/department-chair',previews:['Frequent Flyers','Malpractice Insights', 'Contributing Factors']})
+                    setHeroTab({caption:'Department Chair', url:'/department-chair',previewMessage:' Obtain clarity on procedures and diagnosis associated with malpractice.'})
                     break;
                     case 'csuite':
-                        setHeroTab({caption:'CXO', url:'/cxo',previews:['KPI Boardroom','Financial Benchmarking', 'Department Insights']})
+                        setHeroTab({caption:'CXO', url:'/cxo',previewMessage:'Monitor your hospital\'s risk, finance and KPIs. Benchmark your department\'s performance to your peers.'})
                         break;
         
             default:
@@ -59,31 +59,22 @@ function VideoHeroTabs({video}) {
         </div>
     <div className = 'h-full flex flex-col justify-start ml-3 border-l-[.5px] border-red-500 pl-6 min-h-[300px]'>
     <div className='flex w-fit justify-evenly '>
-    <button id='csuite' onClick={(e)=>handleTabClick(e)} className = {` flex font-medium   h-[70px] w-flex mx-5 text-white ${heroTab.caption==='CXO'&&'border-b-2 border-red-400'}`}>CXO</button>
-    <button id='cmo' onClick={(e)=>handleTabClick(e)}  className = {` flex  font-medium    h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Department Chair'&&'border-b-2 border-red-400'}`}>Department Chair</button>
-    <button id='cro' onClick={(e)=>handleTabClick(e)} className = {`flex  font-medium    h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Risk Manager'&&'border-b-2 border-red-400'}`}>Risk Manager</button>
+    <button id='csuite' onClick={(e)=>handleTabClick(e)} className = {`hover:border-slate-300 hover:border-b-2 flex font-medium   h-[70px] w-flex mx-5 text-white ${heroTab.caption==='CXO'&&'border-b-2 border-red-400'}`}>CXO</button>
+    <button id='cmo' onClick={(e)=>handleTabClick(e)}  className = {`hover:border-slate-300 hover:border-b-2 flex  font-medium    h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Department Chair'&&'border-b-2 border-red-400'}`}>Department Chair</button>
+    <button id='cro' onClick={(e)=>handleTabClick(e)} className = {`hover:border-slate-300 hover:border-b-2 flex  font-medium    h-[70px] w-fit mx-5 text-white ${heroTab.caption==='Risk Manager'&&'border-b-2 border-red-400'}`}>Risk Manager</button>
     
 
 </div>
-<div className=' py-2 w-full'>
- 
-  <ul className='text-white px-8 font-light mx-4 my-4'>
-    {heroTab?.previews?.map((preview)=>( <li className='text-md my-2' style={{listStyleType:'circle' ,color:'rgb(230,68,68)',textAlign:'left'}}><p className='text-white'>{preview}</p></li>))}
-   
+<div className=' my-10 w-full h-full flex flex-col items-center '>
 
-  </ul>
+
+ <p className='text-white text-lg h-[100px] w-[350px]'>{heroTab?.previewMessage}</p>
 </div>
   
     <div className=" sm:flex sm:justify-center lg:justify-start w-full">
       <div className="rounded-md shadow w-full">
-      {isAuthenticated?<Link
+      {<Link
           to={heroTab.url}
-          className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg "
-        >
-        Learn More
-        </Link>:<Link
-          to={heroTab.url}
-          onClick={handleLogin}
           className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-8 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg "
         >
         Learn More

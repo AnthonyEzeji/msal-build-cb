@@ -5,8 +5,9 @@ import ForHospitals from './ForHospitals';
 import ForPhysicians from './ForPhysicians'
 function MySplide() {
   return (
-    <div className='mx-32'>
-       <Splide className=''  aria-label="My Favorite Images">
+    <div className='xl:px-32 mt-20 bg-slate-100  '>
+      <div className=''>
+      <Splide className=''  aria-label="My Favorite Images">
     <SplideSlide className='' >
     <ForHospitals/>
     </SplideSlide>
@@ -14,6 +15,8 @@ function MySplide() {
     <ForPhysicians/>
     </SplideSlide>
   </Splide>
+      </div>
+      
     </div>
    
   )

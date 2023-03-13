@@ -27,9 +27,8 @@ useEffect(() => {
 }, [authenticated])
 
   return (
-    <AuthenticatedTemplate>{
-    isAuthenticated
-    &&
+ 
+   
     <div>
     <Navbar/>
     <div class='department-chair-page' className = 'w-screen h-fit min-h-screen  '>
@@ -38,8 +37,7 @@ useEffect(() => {
     </div>
     <Footer/>
     </div>
-    }
-    </AuthenticatedTemplate>
+
   )
   }
 export default DepartmentChair
