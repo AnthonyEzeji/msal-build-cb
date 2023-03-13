@@ -51,7 +51,24 @@ export default function Dashboards() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { instance } = useMsal();
   const [loggedInAcc, setLoggedInAcc] = useState(instance.getActiveAccount())
-  const sampleReportUrl = 'https://ngapnodepbitdchra.azurewebsites.net/api/getPBIToken';
+  const [accessToken, setAccessToken] = useState(null);
+  const [userGroups, setUserGroups] = useState([])
+  const [selectedUserGroup, setSelectedUserGroup] = useState({})
+  const isAuthenticated = useIsAuthenticated()
+  const [showCreateInsight, setShowCreateInsight] = useState(false)
+  const [reports, setReports] = useState([])
+  const [authenticated, setAuthenticated] = useState(false)
+  const [savedReports, setSavedReports] = useState([])
+  const [savedReportSelected, setSavedReportSelected] = useState(false)
+  const [commentInputText, setCommentInputText] = useState('')
+  const [selectedReport, setSelectedReport] = useState(null)
+  const config = {
+    headers:{
+      accesstoken: accessToken,
+    
+    }
+  };
+  const sampleReportUrl = `https://ngapnodepbitdchra.azurewebsites.net/api/getPBIToken?code=${process.env.REACT_APP_EMBED_KEY}&reportId=${selectedReport?.reportId}&mstoken=${accessToken}`;
   // --------- Set State -------------------
 
   const [filteredReports, setFilteredReports] = useState([])
@@ -90,23 +107,7 @@ export default function Dashboards() {
       //setMessage('The report is rendered')
     }]
   ]);
-  const [accessToken, setAccessToken] = useState(null);
-const [userGroups, setUserGroups] = useState([])
-const [selectedUserGroup, setSelectedUserGroup] = useState({})
-const isAuthenticated = useIsAuthenticated()
-const [showCreateInsight, setShowCreateInsight] = useState(false)
-const [reports, setReports] = useState([])
-const [authenticated, setAuthenticated] = useState(false)
-const [savedReports, setSavedReports] = useState([])
-const [savedReportSelected, setSavedReportSelected] = useState(false)
-const [commentInputText, setCommentInputText] = useState('')
-const [selectedReport, setSelectedReport] = useState(null)
-const config = {
-  headers:{
-    accesstoken: accessToken,
-  
-  }
-};
+
 
 //Sets auth state to true when user is authenticated
 useEffect(() => {
@@ -199,7 +200,7 @@ const axiosInstance = axios.create({
 
 
 async function getReports(){ 
-  await axiosInstance.get(`/api/getADReportList?code=YuzwjzL_E6zLJ9EPwP8XOLhsc5z-PyEwbi6ATKqrKuXAAzFuMeQbrw==`).then(res=>{
+  await axiosInstance.get(`/api/getADReportList?code=${process.env.REACT_APP_REPORT_KEY}`).then(res=>{
     console.log(res.data)
     setReports(res.data)
     
@@ -356,7 +357,7 @@ let account = instance.getActiveAccount()
   //Config for power-bi based on selected report
   const mockSignIn = async () => {
 
-    const reportConfigResponse = await fetch(sampleReportUrl+`?code=${'ckZ5LS1oWKtIuPtbI6BtJjQnM7SBfn1evDzoFgjhGz05AzFuqQU_Nw=='}&reportId=${selectedReport.reportId}&mstoken=${accessToken}`);
+    const reportConfigResponse = await fetch(sampleReportUrl);
 
 
     if (!reportConfigResponse.ok) {
