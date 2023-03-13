@@ -8,6 +8,7 @@ import Footer from '../Footer'
 import { ArrowLeftIcon, CheckCircleIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated, useMsal } from '@azure/msal-react'
 import { useNavigate } from 'react-router-dom'
+import { loginRequest } from '../../authConfig'
 //map for persona-blog content with routes as keys
 const dashboards = {
   '/cxo/department-insights-live':{reportId:'8e8633bb-9499-4ab5-b550-52340ddd11a6',content:'New Content', caption:'Department Insights' , persona : 'CXO'},
@@ -26,17 +27,40 @@ function PersonaBlogLive() {
     const isAuthenticated = useIsAuthenticated()
     
 const [authenticated, setAuthenticated] = useState(false)
+const [accessToken, setAccessToken] = useState(null)
 const {instance} = useMsal()
 var navigate = useNavigate()
 
+
+async function RequestAccessToken() {
+instance.setActiveAccount(instance.getAllAccounts()[0])
+let account = instance.getActiveAccount()
+    const request = {
+        ...loginRequest,
+        account: account
+    };
+    // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+    await instance.acquireTokenSilent(request).then((response) => {
+        setAccessToken(response?.accessToken);
+    }).catch((e) => {
+         instance.acquireTokenPopup(request).then((response) => {
+            setAccessToken(response?.accessToken);
+        });
+    });
+  
+ }
 useEffect(() => {
   if(isAuthenticated === true){
-    setAuthenticated(true)
+    RequestAccessToken()
    }
 }, [isAuthenticated])
+
 useEffect(() => {
- console.log(authenticated)
-}, [authenticated])
+  if(accessToken!==null){
+    mockSignIn()
+  }
+ 
+}, [accessToken,location])
 
 
 
@@ -66,11 +90,11 @@ useEffect(() => {
           //setMessage('The report is rendered')
         }]
       ]);
-      const sampleReportUrl = 'https://ngapnodepbiembed.azurewebsites.net/api/getPBIEmbedTokenNode?reportId=';
+      const sampleReportUrl = `https://ngapnodepbitdchra.azurewebsites.net/api/getPBIToken?code=${process.env.REACT_APP_EMBED_KEY}&reportId=${dashboards[location]?.reportId}&mstoken=${accessToken}`;
 
       //configures reportConfig with dahsboard[location].reportId and requests access
       const mockSignIn = async () => {
-        const reportConfigResponse = await fetch( sampleReportUrl +  dashboards[location]?.reportId   );
+        const reportConfigResponse = await fetch( sampleReportUrl    );
         if (!reportConfigResponse.ok) {
           console.error(`Failed to fetch config for report. Status: ${reportConfigResponse.status} ${reportConfigResponse.statusText}`);
           return;
@@ -87,15 +111,12 @@ useEffect(() => {
 
       //gets current route (/risk-manger/med-mal)
       useEffect(() => {
+      
         setLocation(window.location.href.split(window.location.origin)[1])
         console.log(window.location.origin);
         }, [])
 
-    //sets location state to current route and calls mockSignIn function
-        useEffect(() => {
-          console.log(dashboards[location.toString()])
-          mockSignIn()
-        }, [location])
+    
     
       
   return (
