@@ -113,10 +113,10 @@ callModelEndpoint()
         
         {!showLossRun&&<label for = 'file-picker' className="mt-8 inline-flex w-full items-center justify-center rounded-md border-transparent bg-red-600 px-5 py-3 text-base font-medium text-white hover:bg-transparent hover:text-red-600 border-[1px] hover:border-red-600  absolute sm:left-[35%] 2xl:left-[33%] sm:w-auto left-0 ">Upload Loss Run<AiOutlineUpload className='mx-2'/></label>}
         {!showLossRun&&<input type="file"  onInput={importExcel} className='opacity-0 absolute  mt-10 sm:left-[35%] 2xl:left-[33%] left-20  '/>}
-        <main className = {`w-full  flex flex-col ${showLossRun&&`2xl:h-[70vh]`}`}>
-        {showLossRun&&<button className='flex w-fit h-fit my-4 ' onClick={()=>setShowLossRun(false)}><ArrowLeftOnRectangleIcon className='w-8 text-slate-500 hover:text-red-500'/> </button>}
-        {showLossRun&&<h1 className='flex items-center text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl justify-center mb-2 '>Loss Run</h1>}
-        {showLossRun&&<h1 className='flex items-center text-lg  tracking-tight text-red-600 sm:text-xl justify-center mb-10   '>Score: 80%</h1>}
+        <main className = {`w-full  flex flex-col ${showLossRun&&`2xl:min-h-[70vh]`}`}>
+
+        {showLossRun&&<h1 className='flex items-center text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl justify-center mb-2 relative '>        <button className='flex w-fit h-fit my-4 absolute left-0 ' onClick={()=>setShowLossRun(false)}><ArrowLeftOnRectangleIcon className='w-8 text-slate-500 hover:text-red-500'/> </button>Loss Run</h1>}
+        {showLossRun&&<h1 className='flex items-center text-lg  tracking-tight text-red-600 sm:text-xl justify-center mb-10   '>Score: 60%</h1>}
 
         {showLossRun&&<Tabs>
     <TabList>
@@ -129,7 +129,12 @@ callModelEndpoint()
             <div className = 'w-full'>
         
             {showLossRun&&<ul className='rounded-b-md w-full border-b-[1px] drop-shadow-lg  border-stone-400'>{prediction&&Object.entries(prediction?.predictions?.data_quality).map((entry)=>{
-      return (<li className='flex w-full flex-row border-b-2 px-2 border-x-[1px]  border-stone-400 '><p className='w-fit font-light flex-1 text-left '>{entry[0]}:</p><p className='w-fit ml-2 text-red-600  text-2xl'>{entry[1]}</p></li>)
+                var str= entry[0].split(' ')[0]
+                if(str.toLocaleLowerCase()==='type'){
+                    console.log(str)
+                }
+                
+      return (<li className='flex w-full flex-row py-2 px-2 border-x-[1px]  border-stone-400 '><p className='w-fit font-light flex-1 justify-center flex items-center'>{entry[0]}:</p><p className={`w-fit ml-2 ${str.toLocaleLowerCase()==='type'?`text-black`:entry[1]!==0?`text-red-600`:'text-green-600'}  text-2xl`}>{entry[1]}</p></li>)
       console.log(entry[1])
     })}</ul>}
                 
@@ -139,7 +144,7 @@ callModelEndpoint()
     <TabPanel>
     {showLossRun&&<ul className='rounded-b-md w-full border-b-[1px] border-x-[1px] border-stone-400'>{prediction&&Object.entries(prediction?.predictions?.model_output).map((entry)=>{
       return (<div>
-        <h1 className = 'bg-red-600 text-white'>{entry[0]}</h1>
+        <h1 className = 'text-red-600 border-[1px] border-red-600'>{entry[0]}</h1>
         <ul className='max-h-[180px] overflow-scroll md:min-w-[485px] '>{Object.values(entry[1]).sort(function (a, b) {
   return b-a;
 }).map(obj=>{
