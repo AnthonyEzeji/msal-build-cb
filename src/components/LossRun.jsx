@@ -119,7 +119,7 @@ callModelEndpoint()
         {!showLossRun&&<input type="file"  onInput={importExcel} className='opacity-0 absolute  mt-10 sm:left-[35%] 2xl:left-[33%] left-20  '/>}
         <main className = {`w-full  flex flex-col ${showLossRun&&`2xl:min-h-[70vh]`}`}>
 
-        {showLossRun&&<h1 className='flex items-center text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl justify-center mb-2 relative '>        <button className='flex w-fit h-fit my-4 absolute left-0 ' onClick={()=>setShowLossRun(false)}><ArrowLeftOnRectangleIcon className='w-8 text-slate-500 hover:text-red-500'/> </button>Loss Run</h1>}
+        {showLossRun&&<h1 className='flex items-center text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl justify-center mb-2 relative '>        <button className='flex w-fit h-fit my-4 absolute left-0 ' onClick={()=>setShowLossRun(false)}><ArrowLeftOnRectangleIcon className='w-8 text-slate-600 hover:text-red-500'/> </button>Loss Run</h1>}
         {showLossRun&&<h1 className='flex items-center text-lg  tracking-tight text-red-600 sm:text-xl justify-center mb-10   '>Score: 60%</h1>}
 
         {showLossRun&&<Tabs>
@@ -138,7 +138,7 @@ callModelEndpoint()
                     console.log(str)
                 }
                 
-      return (<li className='flex w-full flex-row py-2 px-2 border-x-[1px]  border-stone-400 '><p className='w-fit font-light flex-1 justify-center flex items-center'>{entry[0]}:</p><p className={`w-fit ml-2 ${str.toLocaleLowerCase()==='type'?`text-black`:entry[1]!==0?`text-red-600`:'text-green-600'}  text-2xl`}>{entry[1]}</p></li>)
+      return (<li className='flex w-full flex-row py-2 px-2 border-x-[1px]  border-stone-400 '><p className='w-fit font-light flex-1 justify-start flex items-left'>{entry[0]}:</p><p className={`w-fit ml-2 ${str.toLocaleLowerCase()==='type'?`text-black`:entry[1]!==0?`text-red-600`:'text-green-600'}  text-2xl`}>{entry[1]}</p></li>)
       console.log(entry[1])
     })}</ul>}
                 
@@ -152,8 +152,11 @@ callModelEndpoint()
         <ul className='max-h-[180px] overflow-scroll md:min-w-[485px] '>{Object.values(entry[1]).sort(function (a, b) {
   return b-a;
 }).map(obj=>{
-
-        return(<li className='text-left  font-light hover:bg-gray-300'><p className = 'px-2 py-1 flex'><p className='text-green-600 '>&#36;</p>{(obj).toLocaleString('en-us')}</p></li>)
+  var obj =obj.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+        return(<li className='text-left  font-light hover:bg-gray-300'><p className = 'px-2 py-1 flex'><p className='text-green-600 '>&#36;</p>{obj}</p></li>)
       })}</ul></div>)
       console.log(entry[1])
     })}</ul>}
