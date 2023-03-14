@@ -78,7 +78,7 @@ const [lossRunJson, setLossRunJson] = useState(null)
     e.target.value=null
   }
   const instance = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://hra-backend-q2gs.vercel.app',
     timeout: 25000,
    
   });
@@ -92,6 +92,10 @@ const [lossRunJson, setLossRunJson] = useState(null)
 
 
       instance.post('/data-model/data-quality',lossRunJson).then(res=>{
+        if(res.data.hasOwnProperty('message')){
+          alert("Invalid dataset")
+          return
+        }
   setPrediction(res.data)
 
         
@@ -128,7 +132,7 @@ callModelEndpoint()
     
             <div className = 'w-full'>
         
-            {showLossRun&&<ul className='rounded-b-md w-full border-b-[1px] drop-shadow-lg  border-stone-400'>{prediction&&Object.entries(prediction?.predictions?.data_quality).map((entry)=>{
+            {showLossRun&&<ul className='rounded-b-md w-full border-b-[1px] drop-shadow-lg  border-stone-400'>{prediction!==null&&Object.entries(prediction?.predictions?.data_quality)?.map((entry)=>{
                 var str= entry[0].split(' ')[0]
                 if(str.toLocaleLowerCase()==='type'){
                     console.log(str)
