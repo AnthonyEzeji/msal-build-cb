@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Vector from '../assets/Risk management-bro.svg'
 import Vector2 from '../assets/Orthopedic-bro.svg'
-import LossRun from './LossRun'
+import LossRun2 from './LossRun2'
 import { useState } from 'react';
 export default function Example() {
   const [showLossRun, setShowLossRun] = useState(false);
@@ -11,9 +11,9 @@ export default function Example() {
   
   
     return (
-      <div className={` flex flex-col-reverse md:flex-row w-full justify-center items-center ${!showLossRun&&`py-20`}  `}>
-                {!showLossRun&&<img className='max-w-[350px] w-auto h-auto hidden 2xl:flex  ' src = {Vector2}></img>}
-        <div className=" max-w-2xl py-16 px-6 text-center relative sm:py-20 lg:px-8 ">
+      <div className={` flex flex-col-reverse md:flex-row w-full justify-center items-center md:py-20   `}>
+                <img className='max-w-[450px] w-auto h-auto hidden 2xl:flex  ' src = {Vector2}></img>
+        <div className=" max-w-2xl py-16 px-6 text-center relative sm:py-20 lg:px-8   h-[600px] max-w-[600px]">
          
          {!showLossRun&& <div>
           <h2 className="text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl">
@@ -24,10 +24,10 @@ export default function Example() {
           Our clinical initiatives are designed to encourage positive changes in culture and practice, support new technologies, and enhance operational efficiencies – all with the goal of achieving the best possible outcomes and increasing patient satisfaction.
           </p>
           </div>} 
-         <LossRun showLossRun={showLossRun} setShowLossRun={setShowLossRun} />
+         <LossRun2 showLossRun={showLossRun} setShowLossRun={setShowLossRun} />
          
         </div>
-        {!showLossRun&&<img className='max-w-[350px] w-auto h-auto' src = {Vector}></img>}
+        <img className='max-w-[450px] w-auto h-auto' src = {Vector}></img>
       </div>
     )
   }
