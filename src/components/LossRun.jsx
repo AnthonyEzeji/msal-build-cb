@@ -7,6 +7,12 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { ArrowLeftCircleIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/20/solid';
 import { AiOutlineUpload } from 'react-icons/ai';
+import { CheckIcon } from '@heroicons/react/20/solid';
+import { Avatar } from '@mui/material';
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 function LossRun({showLossRun,setShowLossRun}) {
     const EXTENSIONS = ['xlsx', 'xls', 'csv']
@@ -15,6 +21,7 @@ function LossRun({showLossRun,setShowLossRun}) {
     const [data, setData] = useState()
   const [prediction, setPrediction] = useState(null)
 const [lossRunJson, setLossRunJson] = useState(null)
+const [clusterArray, setClusterArray] = useState([])
   const getExention = (file) => {
     const parts = file.name.split('.')
     const extension = parts[parts.length - 1]
@@ -39,11 +46,11 @@ const [lossRunJson, setLossRunJson] = useState(null)
     const file = e.target.files[0]
 
     const reader = new FileReader()
-    reader.onload = (event) => {
+    reader.onload = (rule) => {
       //parse data
 
-      const bstr = event.target.result
-      const workBook = read(bstr, { type: "binary" })
+      const bstr = rule.target.result
+      const workBook = read(bstr, { type: "binary", cellDates:true  })
 
       //get first sheet
       const workSheetName = workBook.SheetNames[0]
@@ -83,7 +90,7 @@ const [lossRunJson, setLossRunJson] = useState(null)
    
   });
   useEffect(() => {
-    console.log(lossRunJson)
+  
     async function callModelEndpoint(){
       // callback
 
@@ -92,26 +99,39 @@ const [lossRunJson, setLossRunJson] = useState(null)
 
 
       instance.post('/data-model/data-quality',lossRunJson).then(res=>{
-        if(res.data.hasOwnProperty('message')){
-          alert("Invalid dataset")
+        if(res.data.hasOwnProperty('error')){
           return
         }
-  setPrediction(res.data)
+      
+  setPrediction(res.data.predictions)
 
         
       }).catch(err=>{
    
       })
     }
+    
+    
 callModelEndpoint()
 
   }, [lossRunJson])
+
   useEffect(() => {
-  console.log(prediction)
+  
+  var tempArr = []
   if(prediction){
     setShowLossRun(true)
+   var lossLocInsightsClusterArray =  Object.values(Object.values(prediction?.model_output)[0])
+lossLocInsightsClusterArray.forEach(cluster=>{
+
+ tempArr.push(cluster)
+})
+setClusterArray(tempArr)
   }
+  
+
   }, [prediction])
+
   return (
     <div className='relative '>
         
@@ -119,47 +139,98 @@ callModelEndpoint()
         {!showLossRun&&<input type="file"  onInput={importExcel} className='opacity-0 absolute  mt-10 sm:left-[35%] 2xl:left-[33%] left-20  '/>}
         <main className = {`w-full  flex flex-col ${showLossRun&&`2xl:min-h-[70vh]`}`}>
 
-        {showLossRun&&<h1 className='flex items-center text-3xl font-bold tracking-tight text-slate-700 sm:text-4xl justify-center mb-2 relative '>        <button className='flex w-fit h-fit my-4 absolute left-0 ' onClick={()=>setShowLossRun(false)}><ArrowLeftOnRectangleIcon className='w-8 text-slate-600 hover:text-red-500'/> </button>Loss Run</h1>}
-        {showLossRun&&<h1 className='flex items-center text-lg  tracking-tight text-red-600 sm:text-xl justify-center mb-10   '>Score: 60%</h1>}
+        {showLossRun&&<h1 className='flex items-center text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl justify-center  relative rounded-t-md mb-5 '>        <button className='flex w-fit h-fit my-1 absolute left-0 ' onClick={()=>setShowLossRun(false)}><ArrowLeftOnRectangleIcon className='w-8 text-slate-900 hover:text-red-500'/> </button>Loss Run</h1>}
+      
 
         {showLossRun&&<Tabs>
-    <TabList>
+    <TabList >
       <Tab>Data Quality</Tab>
-      <Tab>Model Output</Tab>
+      <Tab>Data Science Insights</Tab>
     </TabList>
 
     <TabPanel>
-    
-            <div className = 'w-full'>
-        
-            {showLossRun&&<ul className='rounded-b-md w-full border-b-[1px] drop-shadow-lg  border-stone-400'>{prediction!==null&&Object.entries(prediction?.predictions?.data_quality)?.map((entry)=>{
-                var str= entry[0].split(' ')[0]
-                if(str.toLocaleLowerCase()==='type'){
-                    console.log(str)
-                }
-                
-      return (<li className='flex w-full flex-row py-2 px-2 border-x-[1px]  border-stone-400 '><p className='w-fit font-light flex-1 justify-start flex items-left'>{entry[0]}:</p><p className={`w-fit ml-2 ${str.toLocaleLowerCase()==='type'?`text-black`:entry[1]!==0?`text-red-600`:'text-green-600'}  text-2xl`}>{entry[1]}</p></li>)
-      console.log(entry[1])
-    })}</ul>}
-                
-
+    <div className="flow-root">
+    {showLossRun&&<h1 className='flex items-center  justify-evenly mb-2  border-slate-600 rounded-b-md relative  '><p className='z-20 text-md font-light  tracking-tight text-slate-900 sm:text-xl'>Records: {prediction?.simple_statistics?.number_of_records}</p><p className='z-20 text-md font-light  tracking-tight text-slate-900 sm:text-xl'>Score: {prediction?.data_quality?.overall_score.toFixed(2)}%</p></h1>}
+      <ul role="list" className="-mb-8 max-h-[350px] overflow-scroll p-2 border-[1px] border-gray-300">
+      {Object.entries(prediction?.data_quality?.details).map((rule, ruleIdx) => {
+          var typeRule = false
+          if(rule[0].split(" ")[0]==="Type"){
+            typeRule=true
+          }
+            
+          return(  <li className='' key={rule[0]}>
+            <div className="relative pb-8">
+             {ruleIdx !== prediction?.data_quality?.length - 1 ? (
+                <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+             ) : null}
+              <div className="relative flex space-x-3">
+                <div>
+                  <span
+                   
+                  >
+                    <Avatar className="h-8 w-8 text-white  rounded-full " style={{backgroundColor:'green'}} aria-hidden="true" >{ruleIdx+1}</Avatar>
+                  </span>
+                </div>
+                <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                  <div>
+                    <p className="text-sm text-left  text-gray-600 ">
+                      {rule[0]}{' '}
+                      
+                    </p>
+                  </div>
+                  <div className={`whitespace-nowrap text-slate-600 text-right text-md ${!typeRule&&rule[1]!==0?`text-red-600` :`text-gray-500`} `}>
+                   <p>{rule[1]}</p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </li>)
+        
+        
+})}
+
+      </ul>
+    </div>
     </TabPanel>
     <TabPanel>
-    {showLossRun&&<ul className='rounded-b-md w-full border-b-[1px] border-x-[1px] border-stone-400'>{prediction&&Object.entries(prediction?.predictions?.model_output).map((entry)=>{
-      return (<div>
-        <h1 className = 'text-red-600 border-[1px] border-red-600'>{entry[0]}</h1>
-        <ul className='max-h-[180px] overflow-scroll md:min-w-[485px] '>{Object.values(entry[1]).sort(function (a, b) {
-  return b-a;
-}).map(obj=>{
-  var obj =obj.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
-        return(<li className='text-left  font-light hover:bg-gray-300'><p className = 'px-2 py-1 flex'><p className='text-green-600 '>&#36;</p>{obj}</p></li>)
-      })}</ul></div>)
-      console.log(entry[1])
-    })}</ul>}
+    <div className="flow-root ">
+    {showLossRun&&<p className='  max-w-[485px]  mb-5  border-slate-600 rounded-b-md relative z-20 text-sm font-light  tracking-tight text-slate-900 sm:text-sm xl:text-xl'>After reviewing analysis produced by a machine learning model, which clusters the data into partitions of 5 based on similarities, the top contributors for each cluster are as follows: </p>}
+      <ul role="list" className="-mb-8 max-h-[285px] overflow-scroll p-2 border-[1px] border-gray-300">
+      {(clusterArray).map((clusterObj, clusterObjIdx) => {
+         var topContrib = Object.keys(clusterObj)
+            var percent = Object.values(clusterObj)
+          return(  <li className='' key={clusterObjIdx}>
+            <div className="relative pb-8">
+             {clusterObjIdx !== prediction?.data_quality?.length - 1 ? (
+                <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+             ) : null}
+              <div className="relative flex space-x-3">
+                <div>
+                  <span
+                   
+                  >
+                    <Avatar className="h-8 w-8 text-white  rounded-full " style={{backgroundColor:'green'}} aria-hidden="true" >{clusterObjIdx+1}</Avatar>
+                  </span>
+                </div>
+                <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                  <div>
+                    <p className="text-sm xl:text-md  text-gray-600 ">
+                     Top contributor for Cluster {clusterObjIdx+1}:
+                      
+                    </p>
+                  </div>
+                  <div className={`whitespace-nowrap text-right text-slate-600 text-md  `}>
+                   <p className='flex'>{topContrib}<p className='font-bold mx-1'>-</p>{parseFloat(percent).toFixed()}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>)
+        
+        
+})}
+             </ul>
+    </div>
     </TabPanel>
   </Tabs>}
        

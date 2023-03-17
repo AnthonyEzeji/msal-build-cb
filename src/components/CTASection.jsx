@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Vector from '../assets/Risk management-bro.svg'
 import Vector2 from '../assets/Orthopedic-bro.svg'
-import LossRun2 from './LossRun2'
+import LossRun from './LossRun'
 import { useState } from 'react';
 export default function Example() {
   const [showLossRun, setShowLossRun] = useState(false);
@@ -24,7 +24,7 @@ export default function Example() {
           Our clinical initiatives are designed to encourage positive changes in culture and practice, support new technologies, and enhance operational efficiencies – all with the goal of achieving the best possible outcomes and increasing patient satisfaction.
           </p>
           </div>} 
-         <LossRun2 showLossRun={showLossRun} setShowLossRun={setShowLossRun} />
+         <LossRun showLossRun={showLossRun} setShowLossRun={setShowLossRun} />
          
         </div>
         <img className='max-w-[450px] w-auto h-auto' src = {Vector}></img>
