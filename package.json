@@ -27,9 +27,11 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-tabs": "^6.0.0",
     "react-vimeo": "^2.0.0",
     "react-vimeo-provider": "^0.0.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
