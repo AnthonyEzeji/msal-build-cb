@@ -139,7 +139,7 @@ export default function Example() {
  let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80",HRALogo]
 const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="fixed w-full z-40 top-0 drop-shadow-md" id='nav'>
+    <div className="fixed w-[93%] sm:w-full z-40 top-0 drop-shadow-md" id='nav'>
       <Popover className="relative  " style={{backgroundColor:bg}}>
         <div className="mx-auto max-w-7xl py-1 px-4 sm:px-6 bg-transparent sticky">
           <div className="flex items-center justify-between  md:justify-between md:space-x-10 ">
