@@ -70,7 +70,7 @@ function setPerPage(){
 
   
   if(width>1500){
-    setSize(5)
+    setSize(6)
   }else if(width>1200&&width<1500) {
     setSize(4)
   }else if(width>900&&width<1200) {
@@ -97,7 +97,7 @@ useEffect(() => {
       {catalogOptions.map((option, i)=>{   return <SplideSlide key={i} className=" flex justify-center  ">
         <div id={option.id} onMouseOver={(e)=>setHovering({hovering:true,id:i})} onMouseOut={(e)=>setHovering({hovering:false,id:i})} className={` ${hovering.hovering===true&&hovering.id===i ?"shadow-xl ":'shadow-md'} flex-1 h-fit rounded-md w-[150px] min-w-[150px] `}>
         <div className="flex-shrink-0">
-      <img className={`h-[400px]  w-full rounded-t-md   `} src={option.img} alt="" />
+      <img className={`h-[300px]  w-full rounded-t-md   `} src={option.img} alt="" />
     </div>
     <div className="flex flex-1 flex-col justify-between bg-white py-6 2xl:px-5 px-2 rounded-b-md  ">
       <div className="flex-1 min-h-[80px]">
