@@ -25,6 +25,7 @@ import DepartmentChair from "./components/personas/DepartmentChair";
 import PersonaBlog from "./components/personas/PersonaBlog";
 import CXO from "./components/personas/CXO";
 import PersonaBlogLive from "./components/personas/PersonaBlogLive";
+import TOTM from "./components/TOTM";
 const About = () => {
   return <h1>About</h1>
 };
@@ -37,6 +38,7 @@ function App() {
       <Routes>
         <Route path='/' element = {<HomePage/>}/>
         <Route path='/login' element = {<LoginPage/>}/>
+        <Route path='/totm' element = {<TOTM/>}/>
         <Route path='/risk-manager/med-mal' element = {<PersonaBlog/>}/>
         <Route path='/risk-manager/frequency-severity-trends' element = {<PersonaBlog/>}/>
         <Route path='/risk-manager/national-benchmarking' element = {<PersonaBlog/>}/>
