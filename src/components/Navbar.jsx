@@ -49,7 +49,7 @@ const features = [
     description: 'Patient Safety And Risk Management.',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Risk Transfer', href: '#', description: "Risk Transfer.", icon: ShieldCheckIcon },
+  { name: 'Risk Transfer', href: '/solutions/risk-transfer', description: "Risk Transfer.", icon: ShieldCheckIcon },
   {
     name: 'Claims And Litigation Services',
     href: 'http://test.com',
