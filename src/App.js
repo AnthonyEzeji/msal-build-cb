@@ -28,6 +28,9 @@ import PersonaBlogLive from "./components/personas/PersonaBlogLive";
 import TOTM from "./components/TOTM";
 import Careers from "./components/Careers";
 import RiskTransfer from "./components/RiskTransfer";
+import PatientSafety from "./components/PatientSafety";
+import ClaimsAndLitigtion from "./components/ClaimsAndLitigation";
+import SelfInsurance from "./components/SelfInsurance";
 const About = () => {
   return <h1>About</h1>
 };
@@ -42,6 +45,9 @@ function App() {
       
         <Route path='/login' element = {<LoginPage/>}/>
         <Route path='/solutions/risk-transfer' element = {<RiskTransfer/>}/>
+        <Route path='/solutions/patient-safety-and-risk-management' element = {<PatientSafety/>}/>
+        <Route path='/solutions/claims-and-litigation' element = {<ClaimsAndLitigtion/>}/>
+        <Route path='/solutions/self-insurance' element = {<SelfInsurance/>}/>
         <Route path='/totm' element = {<TOTM/>}/>
         <Route path='/risk-manager/med-mal' element = {<PersonaBlog/>}/>
         <Route path='/risk-manager/frequency-severity-trends' element = {<PersonaBlog/>}/>

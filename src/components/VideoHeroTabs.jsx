@@ -6,7 +6,7 @@ import { useIsAuthenticated, useMsal } from '@azure/msal-react'
 import { useState } from 'react'
 import { loginRequest } from '../authConfig'
 import { Link } from 'react-router-dom'
-import { LightBulbIcon } from '@heroicons/react/24/outline'
+import { LightBulbIcon } from '@heroicons/react/24/solid'
 function VideoHeroTabs({video}) {
     function callback(){
         return
@@ -57,9 +57,9 @@ function VideoHeroTabs({video}) {
       <p className="hidden md:flex mx-auto mt-3 max-w-md text-sm text-white font-light leading-1 sm:text-md md:mt-5 md:max-w-3xl">
         Healthcare Risk Advisors partners with healthcare organizations to identify and solve their unique challenges in services for self-insurance programs, risk transfer, risk management, and claims and litigation.
       </p>
-      <a href='/totm' className='flex items-center border-[1px] border-red-600 my-2 rounded-r-full justify-center text-white group hover:text-red-600'>
-        <LightBulbIcon className='w-5 text-red-600'/>
-        <p className='font-light m-1  '>
+      <a href='/totm' className='flex items-center border-[1px]   my-2 rounded-r-full justify-center text-white group hover:bg-yellow-400 hover:text-black'>
+        <LightBulbIcon className='w-5 group-hover:text-black text-yellow-400'/>
+        <p className='font-semibold m-1  '>
         Tip of the Month
         </p>
         
