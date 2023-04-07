@@ -3,8 +3,8 @@ import ContactUs from './ContactUs'
 import FAQ from './FAQ'
 import Footer from './Footer'
 import Navbar from './Navbar'
-import img from '../assets/risk-transfer.jpg'
-function RiskTransfer() {
+import img from '../assets/self-insurance.jpg'
+function SelfInsurance() {
   return (
     <div className='pt-[103px]'>
          <div className="relative overflow-hidden bg-white py-16">
@@ -60,27 +60,22 @@ function RiskTransfer() {
           <h1>
             <span className="block text-center text-lg font-semibold text-red-600">Introducing</span>
             <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-              Risk Transfer - Insurance Solutions
+Self-Insured Programs
             </span>
           </h1>
           <img className = 'mt-10' src={img}/>
           <p className="mt-8 text-xl leading-8 text-gray-500">
-          As part of The Doctors Company, Healthcare Risk Advisors offers a broad portfolio of insurance solutions for hospitals and healthcare organizations. We provide professional and general liability insurance coverage for hospitals and their employed healthcare professionals.
+          Over the past 30 years, Healthcare Risk Advisors has created and managed numerous hospital self-insurance programs for our clients. Whether you need advisory services for self-insurance formation or require enhanced capabilities to operate and administer your current self-insurance program, Healthcare Risk Advisors provides expert advice based on decades of experience in this area.
           </p>
         </div>
         <div className="prose prose-lg prose-red mx-auto mt-6 text-gray-500">
           <p>
-          Keep your hospital or healthcare system on the leading edge with risk sharing, streamlined administration, consolidated coverage, and enhanced reporting—all provided by seasoned insurance and risk financing professionals.
+          Clients of our self-insurance services also benefit from patient safety and claims services designed to reduce MPL risk, minimize claims and lower premiums.
            
           </p>
-          <p>
-          Our hospital clients also benefit from patient safety and claims services designed to reduce MPL risk, minimize claims and lower premiums.
-           
-          </p>
+        
           
       
-        
-         
         
        
          
@@ -98,4 +93,4 @@ function RiskTransfer() {
   )
 }
 
-export default RiskTransfer
+export default SelfInsurance

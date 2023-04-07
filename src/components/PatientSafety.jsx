@@ -3,8 +3,8 @@ import ContactUs from './ContactUs'
 import FAQ from './FAQ'
 import Footer from './Footer'
 import Navbar from './Navbar'
-import img from '../assets/risk-transfer.jpg'
-function RiskTransfer() {
+import img from '../assets/patient-safety-img.jpg'
+function PatientSafety() {
   return (
     <div className='pt-[103px]'>
          <div className="relative overflow-hidden bg-white py-16">
@@ -60,27 +60,33 @@ function RiskTransfer() {
           <h1>
             <span className="block text-center text-lg font-semibold text-red-600">Introducing</span>
             <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-              Risk Transfer - Insurance Solutions
+            Patient Safety & Risk Management
             </span>
           </h1>
           <img className = 'mt-10' src={img}/>
           <p className="mt-8 text-xl leading-8 text-gray-500">
-          As part of The Doctors Company, Healthcare Risk Advisors offers a broad portfolio of insurance solutions for hospitals and healthcare organizations. We provide professional and general liability insurance coverage for hospitals and their employed healthcare professionals.
+          The Healthcare Risk Advisors Risk Management team is responsible for minimizing malpractice risk through the development and support of risk reduction strategies.  Our team works collaboratively with our insured hospitals, physicians and long-term care facilities to improve healthcare quality and safety and reduce malpractice risk.
           </p>
         </div>
         <div className="prose prose-lg prose-red mx-auto mt-6 text-gray-500">
           <p>
-          Keep your hospital or healthcare system on the leading edge with risk sharing, streamlined administration, consolidated coverage, and enhanced reporting—all provided by seasoned insurance and risk financing professionals.
+          Under the direction of our chief medical officer, the program supports our clients’ efforts to improve patient safety across all areas of medicine. Our clinical initiatives are designed to encourage positive changes in culture and practice, support new technologies, and enhance operational efficiencies – all with the goal of achieving the best possible outcomes and increasing patient satisfaction.  Our initiatives are developed with input from clinical committees, analysis of internal and external data, evaluation of medical literature and opinions from experts, interactions with clinical leaders from our insured institutions, and funding from the program.
            
           </p>
           <p>
-          Our hospital clients also benefit from patient safety and claims services designed to reduce MPL risk, minimize claims and lower premiums.
+          We engage clinical and administrative leadership to develop interventions and teaching opportunities in high-risk areas. Our team accesses data from a variety of sources, including clinical records, state and national research databases, surveys, and claims information.  Our findings help define and inform the department’s focus, objectives and communication with clients.
            
           </p>
           
       
+          <p>
         
-         
+          Our interventions include team and simulation training, development of best practice guidelines, documentation standards, and reducing risks associated with electronic medical record systems. Our team also conducts office assessments and provides ongoing education for insured physicians in the form of online courses, regular webinars, and bi-annual risk management conferences
+          </p>
+          <p>
+          Our goal is to minimize claims and lower premiums by preventing patient harm, enhancing teamwork, and improving documentation.
+           
+          </p>
         
        
          
@@ -98,4 +104,4 @@ function RiskTransfer() {
   )
 }
 
-export default RiskTransfer
+export default PatientSafety

@@ -62,11 +62,11 @@ function TOTM() {
         <ol role="list" className="">
           {Object.values(steps).map((step) => {
             console.log(step)
-            return(<li key={step.name} className='p-3' >
+            return(<li key={step.name} className={`p-2 ${currentStep?.name.toLowerCase()===step?.name.toLowerCase()?`border-r-[2px]  border-red-600`:`border-r-[2px] border-gray-300`}`} >
             {step.status === 'complete' ? (
               <a className="group hover:text-gray-300" >
-                <span className="flex items-start">
-                  <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
+                <span className="flex items-start ">
+                  <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center ">
                     <CheckCircleIcon
                       className="h-full w-full text-red-600 group-hover:text-red-800"
                       aria-hidden="true"
@@ -101,6 +101,8 @@ function TOTM() {
         </ol>
       </nav>
     </div>
+
+    
 <div class= 'content' className='flex-1 min-h-screen'>
     <div className = 'py-12 mx-4 md:mx-32 2xl:mx-64 h-full'>
         <div className='flex items-center'>
@@ -108,26 +110,29 @@ function TOTM() {
         <h1>Tip of the Month</h1>
         </div>
        
-    <h1 className='text-3xl py-2 font-bold border-b-[1px] mb-12 border-black'>
+    <h1 className='text-3xl py-2 font-bold border-b-[1px] mb-0 border-black'>
   {currentStep?.tip}
 </h1>
-<div className = 'my-5'>
-<h1 className = 'font-semibold'>
+<div className = 'my-6      '>
+<h1 className = 'font-semibold my-2 text-red-600 '>
     Background
 </h1>
-<p>
+<p className=''>
     {currentStep?.background}
 </p>
 </div>
-<div className = 'my-5'>
-<h1 className = 'font-semibold'>
+<div className = 'my-6 '>
+<h1 className = 'font-semibold my-2 text-red-600 '>
     Conclusion
 </h1>
-<p>
+<p className='' >
     {currentStep?.conclusion}
 </p>
-<div className='my-24 w-fit  text-sm font-light'>
-    <img className='w-full' src="https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png" alt="" />
+
+</div>
+
+<div className='my-16 w-fit  text-sm font-light'>
+    <img className='w-40' src="https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png" alt="" />
     <p className=''> 
     Peter A. Kolbert
     </p>
@@ -154,8 +159,6 @@ function TOTM() {
     </p>
     <p>pkolbert@tdchra.com</p>
 </div>
-</div>
-
     </div>
 
 </div>

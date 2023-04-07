@@ -3,8 +3,8 @@ import ContactUs from './ContactUs'
 import FAQ from './FAQ'
 import Footer from './Footer'
 import Navbar from './Navbar'
-import img from '../assets/risk-transfer.jpg'
-function RiskTransfer() {
+import img from '../assets/claims-and-litigation.jpg'
+function ClaimsAndLitigtion () {
   return (
     <div className='pt-[103px]'>
          <div className="relative overflow-hidden bg-white py-16">
@@ -60,28 +60,29 @@ function RiskTransfer() {
           <h1>
             <span className="block text-center text-lg font-semibold text-red-600">Introducing</span>
             <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-              Risk Transfer - Insurance Solutions
+    Claims and Litigation Services
             </span>
           </h1>
           <img className = 'mt-10' src={img}/>
           <p className="mt-8 text-xl leading-8 text-gray-500">
-          As part of The Doctors Company, Healthcare Risk Advisors offers a broad portfolio of insurance solutions for hospitals and healthcare organizations. We provide professional and general liability insurance coverage for hospitals and their employed healthcare professionals.
+          Healthcare Risk Advisors has decades of experience handling hospital claims. We have the people, expertise, and experience to defend you and your providers.
           </p>
         </div>
         <div className="prose prose-lg prose-red mx-auto mt-6 text-gray-500">
           <p>
-          Keep your hospital or healthcare system on the leading edge with risk sharing, streamlined administration, consolidated coverage, and enhanced reporting—all provided by seasoned insurance and risk financing professionals.
+          HIC’s claim philosophy is to aggressively defend claims without merit and fairly and efficiently resolve those that do. 
            
           </p>
           <p>
-          Our hospital clients also benefit from patient safety and claims services designed to reduce MPL risk, minimize claims and lower premiums.
+          Our attorneys have years of experience defending medical malpractice, long term care, and general liability cases. By working closely with our risk management team and leveraging our own investigators and registered nurses, we bring a thorough understanding of hospital medicine and common procedures across specialties.  For cases with merit, efforts are made to negotiate a fair settlement, as early resolution helps control both indemnity and expense costs for our insureds. Claims that do not appear to have merit are vigorously defended
            
           </p>
           
       
-        
-         
-        
+          <p>
+          We establish close working relationships with our hospital clients and maintain a high level of communication throughout the claims process. You can count on our team to protect your interests and work to achieve best possible outcomes.
+          </p>
+          
        
          
         
@@ -98,4 +99,4 @@ function RiskTransfer() {
   )
 }
 
-export default RiskTransfer
+export default ClaimsAndLitigtion 
