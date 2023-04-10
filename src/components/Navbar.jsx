@@ -45,20 +45,20 @@ const features = [
   },
   {
     name: 'Patient Safety And Risk Management',
-    href: 'http://test.com',
+    href: '/solutions/patient-safety-and-risk-management',
     description: 'Patient Safety And Risk Management.',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Risk Transfer', href: '#', description: "Risk Transfer.", icon: ShieldCheckIcon },
+  { name: 'Risk Transfer', href: '/solutions/risk-transfer', description: "Risk Transfer.", icon: ShieldCheckIcon },
   {
     name: 'Claims And Litigation Services',
-    href: 'http://test.com',
+    href: '/solutions/claims-and-litigation',
     description: "Claims And Litigation Services.",
     icon: VscLaw,
   },
   {
-    name: 'Self-Insurance',
-    href: 'http://test.com',
+    name: 'Self-Insured Programs',
+    href: '/solutions/self-insurance',
     description: 'Design, setup and self-insurance administration services.',
     icon: VscPerson,
   },
@@ -140,7 +140,7 @@ useEffect(() => {
  let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
 const [showLogout, setShowLogout] = useState(false)
   return (
-    <div className="fixed w-full z-40 top-0 drop-shadow-md border-b border-gray-300" id='nav'>
+    <div className="fixed w-screen z-40 top-0 drop-shadow-md border-b border-gray-300" id='nav'>
       <Popover className="relative bg-slate-50 " style={{backgroundColor:bg}}>
         <div className="mx-auto max-w-7xl px-4 py-1 sm:px-6 bg-slate-50 sticky">
           <div className="flex items-center justify-between  md:justify-between md:space-x-10">
