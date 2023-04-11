@@ -16,7 +16,54 @@ export default function NYPhysiciansPage() {
     <>
     <Navbar/>  
     <div className="bg-slate-50">
-     
+
+    <div className="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
+      <div className="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+          <svg
+            className="absolute top-12 left-full translate-x-32 transform"
+            width={404}
+            height={384}
+            fill="none"
+            viewBox="0 0 404 384"
+          >
+            <defs>
+              <pattern
+                id="74b3fd99-0a6f-4271-bef2-e80eeafdf357"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={384} fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+          </svg>
+          <svg
+            className="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+            width={404}
+            height={384}
+            fill="none"
+            viewBox="0 0 404 384"
+          >
+            
+            <defs>
+              <pattern
+                id="d3eb07ae-5182-43e6-857d-35c643af9034"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={384} fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
+          </svg>
+        </div></div>
+
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-3xl py-18 sm:py-30 lg:py-36">
           <div className="text-center">
@@ -44,7 +91,7 @@ export default function NYPhysiciansPage() {
       </div>
     </div>
 
-    <div className="">
+    <div className="bg-slate-50">
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-3xl py-4 sm:py-6 lg:py-8">
           <div className="text-center">
@@ -64,8 +111,8 @@ export default function NYPhysiciansPage() {
       </div>
     </div>
 
-<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<section class="bg-slate-50 mx-auto px-4 py-2 pb-10 sm:px-6 lg:px-4">
+    <div class="grid grid-cols-1 max-w-6xl mx-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="h-full w-full m-auto shadow bg-gradient-to-r from-slate-100 via-slate-50 to-white p-6 gap-8 rounded-lg border-2 border-slate-100">
                 <div class="my-auto">
                 <h3 className="text-6xl text-center text-zinc-800 font-bold">5%</h3>
@@ -138,7 +185,7 @@ export default function NYPhysiciansPage() {
 
 
 
-<section class="mt-10 pt-20 pb-12 lg:pt-[120px] lg:pb-[90px] bg-white">
+<section class="pb-12 lg:pt-[120px] lg:pb-[90px] bg-white">
   <div class="container mx-auto">
     <div class="-mx-4">
       <div class="w-full px-4">
@@ -152,48 +199,37 @@ export default function NYPhysiciansPage() {
       </div>
     </div>
 
-    <div class="mx-20 h-full flex items-center">
-      <div class="w-full h-full  md:w-1/2 lg:w-1/4">
-        <div className="h-full contents-center rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
-          
-          <img src={records_icon} class="w-20 items-center" width="512" height="512" alt="burger illustration"/>
-          <p class="text-xl mt-8 font-semibold text-body-color">
-          New York claims expertise.
-          </p>
-        </div>
-      </div>
+    <div class="grid grid-cols-1 md:lg:xl:grid-cols-4 group shadow-xl shadow-neutral-100 border ">
+            <div
+                class="p-10 flex flex-col items-center text-center group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
+                        <img src={records_icon} class="w-20 items-center" width="512" height="512" alt="burger illustration"/>
+            
+                      <p class="text-xl font-medium text-slate-700 mt-3">New York claims expertise.</p>
+            </div>
 
-      <div class="w-full h-full  md:w-1/2 lg:w-1/4">
-        <div className="h-full contents-center rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
-          
-          <img src={computer_icon} class="w-20 items-center" width="512" height="512" alt="burger illustration"/>
-          <p class="text-xl mt-8 font-semibold text-body-color">
-          Competitive rates for affiliated physicians.
-          </p>
-        </div>
-      </div>
+            <div
+                class="p-10 flex flex-col items-center text-center group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
+                        <img src={computer_icon} class="w-24 items-center" width="512" height="512" alt="burger illustration"/>
+                         <p class="text-xl font-medium text-slate-700 mt-7">Competitive rates for affiliated physicians.</p>
+                
+            </div>
 
-      <div class="w-full h-full  md:w-1/2 lg:w-1/4">
-        <div className="h-full contents-center rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
-          
-          <img src={communication_icon} class="w-20 items-center" width="512" height="512" alt="burger illustration"/>
-          <p class="text-xl mt-8 font-semibold text-body-color">
-          Owned by The Doctors Company, the largest physician-owned medical malpractice insurer.
-          </p>
-        </div>
-      </div>
+            <div class="p-10 flex flex-col items-center text-center group   md:lg:xl:border-b md:lg:xl:border-r hover:bg-slate-50 cursor-pointer">
+                        <img src={communication_icon} class="w-20 items-center" width="512" height="512" alt="burger illustration"/>
+                      
+                <p class="text-xl font-medium text-slate-700 mt-3">Owned by The Doctors Company, the largest physician-owned medical malpractice insurer.</p>
+                
+            </div>
 
-      <div className="w-full h-full md:w-1/2 lg:w-1/4">
-        <div className="h-full contents-center rounded-[20px] bg-white p-10 shadow-md hover:shadow-lg md:px-7 xl:px-10">
-          
-            <div className="items-center contents-center"><img src={sheild_icon} class="w-20" width="512" height="512" alt="burger illustration"/></div>
-          
-          <p class="text-xl mt-8 font-semibold text-body-color">
-          Financial strength – over $6.5B in assets.
-          </p>
+
+            <div class="p-10 flex flex-col items-center text-center group md:lg:xl:border-r hover:bg-slate-50 cursor-pointer">
+                        <img src={sheild_icon} class="w-20" width="512" height="512" alt="burger illustration"/>
+                <p class="text-xl font-medium text-slate-700 mt-3">Financial strength – over $6.5B in assets.</p>
+            </div>
+
+
         </div>
-      </div>
-    </div>
+
   </div>
 </section>
 
@@ -211,6 +247,10 @@ export default function NYPhysiciansPage() {
 </div>
 
 
+
+        
+
+    
 
 
 
