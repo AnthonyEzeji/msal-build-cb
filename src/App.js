@@ -34,6 +34,7 @@ import SelfInsurance from "./components/SelfInsurance";
 
 import HospitalsPage from "./components/HospitalsPage";
 import NYPhysiciansPage from "./components/NYPhysiciansPage";
+import Indication from "./components/Indication";
 
 const About = () => {
   return <h1>About</h1>
@@ -48,6 +49,7 @@ function App() {
         <Route path='/' element = {<HomePage/>}/>
       
         <Route path='/login' element = {<LoginPage/>}/>
+        <Route path ='/solutions/ny-physicians/indication/' element={<Indication/>}/>
         <Route path='/solutions/risk-transfer' element = {<RiskTransfer/>}/>
         <Route path='/solutions/patient-safety-and-risk-management' element = {<PatientSafety/>}/>
         <Route path='/solutions/claims-and-litigation' element = {<ClaimsAndLitigtion/>}/>
