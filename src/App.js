@@ -1,6 +1,18 @@
 
 import Dashboards from "./components/Dashboards";
-import FirstBlog from "./components/blogs/FirstBlog";
+import HowDataCanReduceTheChanceForMedicalMalpracticeLawsuits from "./components/blogs/HowDataCanReduceTheChanceForMedicalMalpracticeLawsuits";
+import HealthcaresDigitalRevolutionFinallyATimeForOptimismWebinarPresentedByHra from "./components/blogs/HealthcaresDigitalRevolutionFinallyATimeForOptimismWebinarPresentedByHra";
+import CommunicationIsTheKeyToPrevailInAMedicalLawsuit from "./components/blogs/CommunicationIsTheKeyToPrevailInAMedicalLawsuit";
+import DukeUniversityThreeGoodThings from "./components/blogs/DukeUniversityThreeGoodThings";
+
+import UsingMedicalMalpracticeData from "./components/blogs/UsingMedicalMalpracticeData";
+import ReasonForOptimismRegardingCOVID from "./components/blogs/ReasonForOptimismRegardingCOVID";
+import BeforeCOVID19Outlier from "./components/blogs/BeforeCOVID19Outlier";
+
+import FearOfCovid19 from "./components/blogs/FearOfCovid19";
+import OpenNotesAPracticeComplianceRequirement from "./components/blogs/OpenNotesAPracticeComplianceRequirement";
+import HowRemotePatientMonitoring from "./components/blogs/HowRemotePatientMonitoring";
+
 import CustomerCalendar from "./components/customer/CustomerCalendar";
 import {
   BrowserRouter as Router,
@@ -82,7 +94,18 @@ function App() {
         <Route path='/solutions/hospitals/data-analytics' element = {<AnalyticsPage/>}/>
         <Route path='/dashboard' element = {<Dashboards/>}/>
         <Route path='/saved-reports' element = {<SavedReports/>}/>
-        <Route path='/firstblog' element = {<FirstBlog/>}/>
+
+        <Route path='/blog/how-data-can-reduce-the-chance-for-medical-malpractice-lawsuits' element = {<HowDataCanReduceTheChanceForMedicalMalpracticeLawsuits/>}/>
+        <Route path='/blog/healthcares-digital-revolution-finally-a-time-for-optimism-webinar-presented-by-hra' element = {<HealthcaresDigitalRevolutionFinallyATimeForOptimismWebinarPresentedByHra/>}/>
+        <Route path='blog/communication-is-the-key-to-prevail-in-a-medical-lawsuit' element = {<CommunicationIsTheKeyToPrevailInAMedicalLawsuit/>}/>
+        <Route path='/blog/duke-university-three-good-things-program-on-addressing-physician--staff-burnout-presented-by-hra' element = {<DukeUniversityThreeGoodThings/>}/>
+        <Route path='/blog/using-medical-malpractice-data-to-improve-patient-safety' element = {<UsingMedicalMalpracticeData/>}/>
+        <Route path='/blog/reason-for-optimism-regarding-covid-related-lawsuits-against-practitioners-in-new-york' element = {<ReasonForOptimismRegardingCOVID/>}/>
+        <Route path='/blog/before-covid-19-outlier-medical-malpractice-verdicts-were-risingwhats-nextbefore-covid-19-outlier-medical-malpractice-verdicts-were-risingwhats-next' element = {<BeforeCOVID19Outlier/>}/>
+        <Route path='/blog/fear-of-covid-19-creates-its-own-risks-for-cardiologists' element = {<FearOfCovid19/>}/>
+        <Route path='/blog/opennotes-a-practice-compliance-requirement-affecting-group-practices-vaps-and-hospitals-in-spring-2021' element = {<OpenNotesAPracticeComplianceRequirement/>}/>
+        <Route path='/blog/how-remote-patient-monitoring-will-affect-medical-liability' element = {<HowRemotePatientMonitoring/>}/>
+        
         <Route path='/blog' element = {<BlogsPage/>}/>
         <Route path='/about' element = {<AboutPage/>}/> 
         <Route path='/about/leadership' element = {<LeadershipPage/>}/>
