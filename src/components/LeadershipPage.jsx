@@ -1,114 +1,241 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import img1 from '../assets/leadership_images/leadership-img-1.jfif'
-import img2 from '../assets/leadership_images/leadership-img-2.jfif'
-import img3 from '../assets/leadership_images/leadership-img-3.jfif'
-import img4 from '../assets/leadership_images/leadership-img-4.jfif'
-const people = [
-    {
-      name: 'Leslie Alexander',
-      role: 'Co-Founder / CEO',
-      imageUrl: img1,
-      bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-      twitterUrl: '#',
-      linkedinUrl: '#',
-    },
-    {
-        name: 'Bob Johnson',
-        role: 'Co-Founder / CFO',
-        imageUrl:
-          img2,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-      },
-      {
-        name: 'Trinh Nguyen',
-        role: 'Co-Founder / COO',
-        imageUrl:
-         img3,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-      },
-      {
-        name: 'Samson Oliver',
-        role: 'Co-Founder / CIO',
-        imageUrl:
-         img4,
-        bio: 'Ultricies massa malesuada viverra cras lobortis. Tempor orci hac ligula dapibus mauris sit ut eu. Eget turpis urna maecenas cras. Nisl dictum.',
-        twitterUrl: '#',
-        linkedinUrl: '#',
-      },
-    // More people...
-  ]
+import rkauffman_img from '../assets/leadership_images/rkauffman.jpg'
+import ndoelger_img from '../assets/leadership_images/ndoelger.jpg';
+import dfeldman_img from '../assets/leadership_images/dfeldman.jpg';
+import freddanback_img from '../assets/leadership_images/fred-danback.jpg';
+import pkolbert_img from '../assets/leadership_images/pkolbert.jpg';
+import richcaldwell_img from '../assets/leadership_images/richcaldwell.jpg';
+import bdalton_img from '../assets/leadership_images/bdalton.jpg';
+import vgrenon_img from '../assets/leadership_images/vgrenon.jpg';
+import rosshess_img from '../assets/leadership_images/rosshess.jpg';
+import melissajohnson_img from '../assets/leadership_images/melissajohnson.jpg';
+import marclanzkowsky_img from '../assets/leadership_images/marclanzkowsky.jpg';
+import michaelletang_img from '../assets/leadership_images/michaelletangv6.jpg';
+import stevemac_img from '../assets/leadership_images/stevemacv2.jpg';
+import duaneperricelli_img from '../assets/leadership_images/duaneperricelli.jpg';
+import richstorey_img from '../assets/leadership_images/richstoreyv3.jpg';
+
 function LeadershipPage() {
   return (
     <div className='pt-[90px]'>
         <Navbar/>
-          <div className="bg-white">
-      <div className="mx-auto max-w-7xl py-12 px-6 lg:px-8 lg:py-24">
-        <div className="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
-          <div className="space-y-5 sm:space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Leadership</h2>
-            <p className="text-xl text-gray-500">
-              Nulla quam felis, enim faucibus proin velit, ornare id pretium. Augue ultrices sed arcu condimentum
-              vestibulum suspendisse. Volutpat eu faucibus vivamus eget bibendum cras.
-            </p>
-          </div>
-          <div className="lg:col-span-2">
-            <ul
-              role="list"
-              className="space-y-12 sm:-mt-8 sm:space-y-0 sm:divide-y sm:divide-gray-200 lg:gap-x-8 lg:space-y-0"
-            >
-              {people.map((person) => (
-                <li key={person.name} className="sm:py-8">
-                  <div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
-                    <div className="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
-                      <img className="rounded-lg object-cover shadow-lg" src={person.imageUrl} alt="" />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <div className="space-y-4">
-                        <div className="space-y-1 text-lg font-medium leading-6">
-                          <h3>{person.name}</h3>
-                          <p className="text-red-600">{person.role}</p>
-                        </div>
-                        <div className="text-lg">
-                          <p className="text-gray-500">{person.bio}</p>
-                        </div>
-                        <ul role="list" className="flex space-x-5">
-                          <li>
-                            <a href={person.twitterUrl} className="text-gray-400 hover:text-gray-500">
-                              <span className="sr-only">Twitter</span>
-                              <svg className="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-                              </svg>
-                            </a>
-                          </li>
-                          <li>
-                            <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-500">
-                              <span className="sr-only">LinkedIn</span>
-                              <svg className="h-5 w-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                  fillRule="evenodd"
-                                  d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div class="w-full bg-white">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+        <div class="text-center pb-12">
+            
+            <h1 class="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-gray-700">
+                Leadership           
+            </h1>
         </div>
-      </div>
-    </div>
+        <div class="px-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href='/about/leadership/robert-kauffman/'>
+            <div class="w-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={rkauffman_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">Robert A. Kauffman</p>
+                    <p class="text-base text-gray-400 font-normal">President</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/noeleen-doelger/'>
+            <div class="w-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={ndoelger_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">Noeleen Doelger</p>
+                    <p class="text-base text-gray-400 font-normal">COO and CFO</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/david-lfeldman/'>
+            <div class="w-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class=" px-4 py-4 object-cover object-center h-full w-full" src={dfeldman_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">David L. Feldman</p>
+                    <p class="text-base text-gray-400 font-normal">SVP and CMO</p>
+                </div>
+                
+            </div>
+            </a>
+
+        </div>
+        
+
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-6">
+        <a href='/about/leadership/fred-danback/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={freddanback_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">Fred Danback</p>
+                    <p class="text-base text-gray-400 font-normal">SVP and CIO</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/peter-akolbert/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={pkolbert_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold">Peter A. Kolbert</p>
+                    <p class="text-base text-gray-400 font-normal">SVP, Claims and Litigation Management</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/rich-caldwell/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={richcaldwell_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold ">Rich Caldwell</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Finance & Underwriting</p>
+                </div>
+                
+            </div>
+            </a>
+
+
+            <a href='/about/leadership/brian-dalton/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={bdalton_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold ">Brian Dalton</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Business Development</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/veronique-grenon/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={vgrenon_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">Veronique Grenon</p>
+                    <p class="text-base text-gray-400 font-normal">VP Data Analytics</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/ross-hess/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={rosshess_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold">Ross Hess</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Underwriting and Physician Service</p>
+                </div>
+                
+            </div>
+            </a>
+
+
+            <a href='/about/leadership/melissa-johnson/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={melissajohnson_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold ">Melissa Johnson</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Finance and Controller</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/marc-lanzkowsky/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={marclanzkowsky_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">Marc Lanzkowsky</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Claims Operations</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/michael-letang/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={michaelletang_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold ">Michael LeTang</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Chief Nursing Informatics Officer</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/steve-macaluso/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={stevemac_img} alt="photo"/>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-lg text-gray-600 font-bold mb-2">Steve Macaluso</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Client Management</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/duane-perricelli/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={duaneperricelli_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold ">Duane Perricelli</p>
+                    <p class="text-base text-gray-400 font-normal">Vice President, Insurance Services</p>
+                </div>
+                
+            </div>
+            </a>
+
+            <a href='/about/leadership/rich-storey/'>
+            <div class="w-full h-full overflow-hidden shadow-md duration-200 hover:scale-105 hover:shadow-xl rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+              
+              <img class="px-4 py-4 object-cover object-center h-full w-full" src={richstorey_img} alt="photo"/>
+                
+                <div class="mt-2 text-center">
+                    <p class="text-lg text-gray-600 font-bold ">Rich Storey</p>
+                    <p class="text-base text-gray-400 font-normal">VP, Claim and Administration</p>
+                </div>
+                
+            </div>
+            </a>
+
+           
+
+        </div>
+    </section>
+</div>
     <Footer/>
     </div>
   )
