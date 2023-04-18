@@ -12,7 +12,7 @@ export default function HealthcaresDigitalRevolutionFinallyATimeForOptimismWebin
    </div>
    <div className="relative px-6 lg:px-8">
      <div className="mx-auto w-1/2 text-lg flex flex-col items-center">
-     <h3 className="mt-2 text-3xl font-bold  text-center leading-8 tracking-tight text-gray-900 sm:text-4xl">How Data Can Reduce the Chance for Medical Malpractice Lawsuits</h3>
+     <h3 className="mt-2 text-3xl font-bold  text-center leading-8 tracking-tight text-gray-900 sm:text-4xl">“Healthcare’s Digital Revolution: (Finally) a Time for Optimism” Webinar Presented by HRA</h3>
      
        <img className = 'mt-10 rounded-xl' src={BlogImg}/>
        <p className="mt-8 text-lg leading-8 text-gray-500 italic">by David L. Feldman, MD, MBA, CPE, FAAPL, FACS, Chief Medical Officer for The Doctors Company</p>

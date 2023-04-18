@@ -1,4 +1,4 @@
-import BlogImg from '../../assets/blog images/HowRemotePatientMonitoringWillAffect.jpg';
+import BlogImg from '../../assets/blog images/OpenNotesApracticeComplianceRequirement.jpg';
 import Navbar from '../Navbar'
 import Footer from '../Footer'
 /*
@@ -23,51 +23,124 @@ export default function OpenNotesAPracticeComplianceRequirement() {
    </div>
    <div className="relative px-6 lg:px-8">
      <div className="mx-auto w-1/2 text-lg flex flex-col items-center">
-     <h3 className="mt-2 text-3xl font-bold  text-center leading-8 tracking-tight text-gray-900 sm:text-4xl">How Remote Patient Monitoring Will Affect Medical Liability</h3>
+     <h3 className="mt-2 text-3xl font-bold  text-center leading-8 tracking-tight text-gray-900 sm:text-4xl">OpenNotes: A Practice Compliance Requirement Affecting Group Practices, VAPs and Hospitals in Spring 2021</h3>
      
        <img className = 'mt-10 rounded-xl' src={BlogImg}/>
-       <p className="mt-8 text-lg leading-8 text-gray-500 italic">by Richard E. Anderson, MD, FACP, Chairman and Chief Executive Officer, The Doctors Company, and Leader of the TDC Group of Companies, including Healthcare Risk Advisors (HRA)</p>
-
+       
        <p className="mt-8 text-xl leading-8 text-gray-500">
-       Remote patient monitoring (RPM) is one of the most talked-about areas of innovation in healthcare today, and for good reason: many consider RPM an exciting extension of the way telehealth has already allowed practices to offer more comprehensive care, improve patient outcomes, boost profitability, and reduce liability.  
-       </p>
-
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       RPM refers to a general set of policy and technology solutions aimed at chronic care management (CCM) and the care of certain risk populations. 
+       Group practices, Voluntary Attending Physicians, and hospitals of all sizes should take note of a fast-approaching federal regulatory compliance requirement: <a href='https://www.opennotes.org/reading-your-notes-faqs-for-patients/' className='text-red-600 underline'>OpenNotes</a>, a program from the HHS that will require practices to “unblock” various categories of patient notes and make them available to patients <a href='https://www.opennotes.org/news/open-notes-compliance-date-extended-to-april-5-2021/' className='text-red-600 underline'>by Monday, April 5, 2021</a>. 
        </p>
 
        <p className="mt-8 text-xl leading-8 text-gray-500">
-       A broad range of exciting new RPM devices like scales, step counters and blood pressure cuffs are just some of the new options allowing practices to collect data on vital signs, weight, blood pressure, blood sugar, blood oxygen levels, heart rate, electrocardiograms and more, often from the comfort of their home. This data is then transmitted in a variety of ways to the care provider. 
+       Philosophically, OpenNotes is a simple concept – making a patient’s practitioner notes (including SOAP Notes) available to the patient at any time, with no charge. 
        </p>
 
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       In addition to the devices themselves, increased vendor support for monitoring and patient care, and enhanced technological integration with EHR systems and office workflow are making remote patient monitoring solutions more and more viable.   
-       </p>
+     
 
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       Studies show that RPM technologies can go a long way toward improving clinical and financial outcomes. According to <a className='text-red-600 underline' href='https://wellbox.care/'>Wellbox</a>, a provider of RPM technologies and CCM solutions, RPM technologies can decrease emergency room visits and hospitalizations by up to 70 percent, improve patient outcomes by up to 44 percent, and potentially save the U.S. $6 billion in annual healthcare costs.
-       </p>
-
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       RPM technologies represent new and cutting-edge possibilities for hospitals, medical practice groups and physicians of all kinds to offer better care and patient outcomes and reduce liability in the process. 
-       </p>
-
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       “I think there are some really exciting innovations occurring in remote patient monitoring right now, and I can’t wait to see what practices are able to do with them,” Bailey Sutherland, an In-Practice Technology Services Consultant with HRA-affiliate Medical Advantage, said. 
-       </p>
-
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       “It’s really an extension of patient care, to see inside your patient’s home, and see what they’re doing to maintain their health,” Sutherland continued. “Getting reported deliveries on things like blood pressure, step count, and other metrics you’d want to monitor– there’s billable components to it too, which is great. I think it’s a great thing for practices to be able to tap into.”  
-       </p>
-
-       <p className="mt-8 text-xl leading-8 text-gray-500">
-       If your organization is interested in exploring RPM solutions, HRA’s affiliate business unit, Medical Advantage, can offer advisory and consultancy services around how to integrate CCM and RPM technology and policy solutions into your current patient experience. For further assistance, <a className='text-red-600 underline' href='https://www.medicaladvantage.com/contact/'>contact one of Medical Advantage’s experts</a> today. 
-       </p>
-
-       <p className="mt-8 text-xl leading-8 text-gray-500 italic">
-       This post was adapted from an article which originally appeared on <a className='text-red-600 underline' href='https://www.medicaladvantage.com/blog/why-rpm-will-become-more-important/'>medicaladvantage.com</a>. 
-       </p>
      </div>
+
+     <div className="w-1/2 prose-lg prose-red mx-auto mt-6 text-gray-500">
+     <h1  className="mt-8 text-2xl text-gray-800 font-bold">
+     History of OpenNotes
+      </h1>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       The OpenNotes concept began in the early 1970s, when articles on the idea began being circulated. The OpenNotes concept truly became a healthcare industry initiative in 2010, with the founding of the OpenNotes non-profit advocacy organization. The 2016 US congressional “21st Century Cures Act” wrote OpenNotes into law, with an implementation date that is now set for April 5, 2021. 
+       </p>
+
+     </div>
+
+
+     <div className="w-1/2 prose-lg prose-red mx-auto mt-6 text-gray-500">
+     <h1  className="mt-8 text-2xl text-gray-800 font-bold">
+     Purpose and Proof of Concept of OpenNotes
+      </h1>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       In numerous academic studies, the increased transparency delivered by OpenNotes has shown improvement in care, patient outcomes, and a reduction in costs to the healthcare system. The main goal of OpenNotes is an improvement of outcomes and care quality – and it also brings a bonus of reducing liability for hospitals and physician groups by involving patients more in their medical records, thereby decreasing the chance for mistakes and errors. 
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       Studies have found that more involved patients are more motivated to follow their care plan, have higher rates of health literacy, and are more engaged.One study found that after one year, 99% of patients wished to continue.
+       </p>
+
+     </div>
+
+     <div className="w-1/2 prose-lg prose-red mx-auto mt-6 text-gray-500">
+     <h1  className="mt-8 text-2xl text-gray-800 font-bold">
+     Coming into Compliance with OpenNotes
+      </h1>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       So, what must hospitals, VAPs, and medical practices do to be compliant with The Cures Act and OpenNotes when it goes into effect on April 5, 2021? 
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       The key term and intent of the 21st Century Cures Act is “unblocking.” To comply with the 21st Century Cures Act, medical practices must make available new categories of their patients’ healthcare information to them. These categories include consultation notes, discharge and summary notes, history and physical information, imaging narratives, lab report narratives, pathology report narratives, procedure notes, and progress notes. 
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       Psychotherapy notes and information compiled in anticipation of a lawsuit are exempt from the rule. 
+       </p>
+
+     </div>
+
+
+     <div className="w-1/2 prose-lg prose-red mx-auto mt-6 text-gray-500">
+     <h1  className="mt-8 text-2xl text-gray-800 font-bold">
+     What is the risk for non-compliance with the OpenNotes? Or the 21st Century Cures Act?
+      </h1>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       While the details are still being determined in Washington – as well as any incentives for compliance with OpenNotes, it should be noted that the 2016 legislation authorizes a penalty “which may not exceed $1,000,000 per violation.”
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       Although there is still much to be determined as to what the enforcement of these penalties will look like, getting ahead of the curve and coming into compliance as soon as possible is a best practice to avoid being noncompliant down the road. 
+       </p>
+
+     </div>
+
+     <div className="w-1/2 prose-lg prose-red mx-auto mt-6 text-gray-500">
+     <h1  className="mt-8 text-2xl text-gray-800 font-bold">
+     What is the risk for non-compliance with the OpenNotes? Or the 21st Century Cures Act?
+      </h1>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       While the details are still being determined in Washington – as well as any incentives for compliance with OpenNotes, it should be noted that the 2016 legislation authorizes a penalty “which may not exceed $1,000,000 per violation.”
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       Although there is still much to be determined as to what the enforcement of these penalties will look like, getting ahead of the curve and coming into compliance as soon as possible is a best practice to avoid being noncompliant down the road. 
+       </p>
+
+     </div>
+
+
+     <div className="w-1/2 prose-lg prose-red mx-auto mt-6 text-gray-500">
+     <h1  className="mt-8 text-2xl text-gray-800 font-bold">
+     How Can I Develop and Launch an OpenNotes Program?
+      </h1>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       First, make sure to communicate the benefits of OpenNotes to your relative stakeholders. Then, during the planning process, think about questions like: how will you manage your patients’ requests? How will patients (and proxies) access the notes? How will patient requests to change notes be managed? Who on the team will be responsible for educating and enrolling patients – and introducing them to OpenNotes? 
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       Generally, raising awareness among stakeholders and promoting understanding of the benefits of OpenNotes will ease its rollout. 
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       As you would imagine, there are many best practices in implementing and maintaining compliance with OpenNotes. It will impact everything from how practices record notes, to IT network security, and beyond. HRA, in partnership with Medical Advantage, offers consultancy on OpenNotes best practices and assistance with implementation. For further assistance, <a href='https://www.medicaladvantage.com/contact/' className='text-red-600 underline'>contact one of Medical Advantage’s experts</a> today. 
+       </p>
+
+       <p className="mt-8 text-xl leading-8 text-gray-500">
+       This post was adapted from an article which originally appeared on <a href='https://www.medicaladvantage.com/blog/opennotes-compliance-requirement-april-5th/' className='text-red-600 underline'>medicaladvantage.com</a>. 
+       </p>
+
+     </div>
+
+
    </div>
  </div>
      <Navbar/>  
