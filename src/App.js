@@ -1,6 +1,15 @@
-
 import Dashboards from "./components/Dashboards";
-import FirstBlog from "./components/blogs/FirstBlog";
+import HowDataCanReduceTheChanceForMedicalMalpracticeLawsuits from "./components/blogs/HowDataCanReduceTheChanceForMedicalMalpracticeLawsuits";
+import HealthcaresDigitalRevolutionFinallyATimeForOptimismWebinarPresentedByHra from "./components/blogs/HealthcaresDigitalRevolutionFinallyATimeForOptimismWebinarPresentedByHra";
+import CommunicationIsTheKeyToPrevailInAMedicalLawsuit from "./components/blogs/CommunicationIsTheKeyToPrevailInAMedicalLawsuit";
+import DukeUniversityThreeGoodThings from "./components/blogs/DukeUniversityThreeGoodThings";
+import UsingMedicalMalpracticeData from "./components/blogs/UsingMedicalMalpracticeData";
+import ReasonForOptimismRegardingCOVID from "./components/blogs/ReasonForOptimismRegardingCOVID";
+import BeforeCOVID19Outlier from "./components/blogs/BeforeCOVID19Outlier";
+import FearOfCovid19 from "./components/blogs/FearOfCovid19";
+import OpenNotesAPracticeComplianceRequirement from "./components/blogs/OpenNotesAPracticeComplianceRequirement";
+import HowRemotePatientMonitoring from "./components/blogs/HowRemotePatientMonitoring";
+
 import CustomerCalendar from "./components/customer/CustomerCalendar";
 import {
   BrowserRouter as Router,
@@ -35,6 +44,27 @@ import SelfInsurance from "./components/SelfInsurance";
 import HospitalsPage from "./components/HospitalsPage";
 import NYPhysiciansPage from "./components/NYPhysiciansPage";
 import Indication from "./components/Indication";
+
+import NewsAndEvents from "./components/NewsAndEvents";
+import HICAminus from "./components/news/HICAminus";
+import HRAParentCompany from "./components/news/HRAParentCompany";
+
+import RobertAKauffman from "./components/leaderships/RobertAKauffman";
+import NoeleenDoelger from "./components/leaderships/NoeleenDoelger";
+import DavidLFeldman from "./components/leaderships/DavidLFeldman";
+import FredDanback from "./components/leaderships/FredDanback";
+import PeterAKolbert from "./components/leaderships/PeterAKolbert";
+import RichCaldwell from "./components/leaderships/RichCaldwell";
+import BrianDalton from "./components/leaderships/BrianDalton";
+import VeroniqueGrenon from "./components/leaderships/VeroniqueGrenon";
+import RossHess from "./components/leaderships/RossHess";
+import MelissaJohnson from "./components/leaderships/MelissaJohnson";
+import MarcLanzkowsky from "./components/leaderships/MarcLanzkowsky";
+import MichaelLeTang from "./components/leaderships/MichaelLeTang";
+import SteveMacaluso from "./components/leaderships/SteveMacaluso";
+import DuanePerricelli from "./components/leaderships/DuanePerricelli";
+import RichStorey from "./components/leaderships/RichStorey";
+
 
 const About = () => {
   return <h1>About</h1>
@@ -82,12 +112,43 @@ function App() {
         <Route path='/solutions/hospitals/data-analytics' element = {<AnalyticsPage/>}/>
         <Route path='/dashboard' element = {<Dashboards/>}/>
         <Route path='/saved-reports' element = {<SavedReports/>}/>
-        <Route path='/firstblog' element = {<FirstBlog/>}/>
+
+        <Route path='/blog/how-data-can-reduce-the-chance-for-medical-malpractice-lawsuits' element = {<HowDataCanReduceTheChanceForMedicalMalpracticeLawsuits/>}/>
+        <Route path='/blog/healthcares-digital-revolution-finally-a-time-for-optimism-webinar-presented-by-hra' element = {<HealthcaresDigitalRevolutionFinallyATimeForOptimismWebinarPresentedByHra/>}/>
+        <Route path='blog/communication-is-the-key-to-prevail-in-a-medical-lawsuit' element = {<CommunicationIsTheKeyToPrevailInAMedicalLawsuit/>}/>
+        <Route path='/blog/duke-university-three-good-things-program-on-addressing-physician--staff-burnout-presented-by-hra' element = {<DukeUniversityThreeGoodThings/>}/>
+        <Route path='/blog/using-medical-malpractice-data-to-improve-patient-safety' element = {<UsingMedicalMalpracticeData/>}/>
+        <Route path='/blog/reason-for-optimism-regarding-covid-related-lawsuits-against-practitioners-in-new-york' element = {<ReasonForOptimismRegardingCOVID/>}/>
+        <Route path='/blog/before-covid-19-outlier-medical-malpractice-verdicts-were-risingwhats-nextbefore-covid-19-outlier-medical-malpractice-verdicts-were-risingwhats-next' element = {<BeforeCOVID19Outlier/>}/>
+        <Route path='/blog/fear-of-covid-19-creates-its-own-risks-for-cardiologists' element = {<FearOfCovid19/>}/>
+        <Route path='/blog/opennotes-a-practice-compliance-requirement-affecting-group-practices-vaps-and-hospitals-in-spring-2021' element = {<OpenNotesAPracticeComplianceRequirement/>}/>
+        <Route path='/blog/how-remote-patient-monitoring-will-affect-medical-liability' element = {<HowRemotePatientMonitoring/>}/>
+        
         <Route path='/blog' element = {<BlogsPage/>}/>
         <Route path='/about' element = {<AboutPage/>}/> 
         <Route path='/about/leadership' element = {<LeadershipPage/>}/>
+        <Route path='/about/leadership/robert-kauffman/' element = {<RobertAKauffman/>}/>
+        <Route path='/about/leadership/noeleen-doelger/' element = {<NoeleenDoelger/>}/>
+        <Route path='/about/leadership/david-lfeldman/' element = {<DavidLFeldman/>}/>
+        <Route path='/about/leadership/fred-danback/' element = {<FredDanback/>}/>
+        <Route path='/about/leadership/peter-akolbert/' element = {<PeterAKolbert/>}/>
+        <Route path='/about/leadership/rich-caldwell/' element = {<RichCaldwell/>}/>
+        <Route path='/about/leadership/brian-dalton/' element = {<BrianDalton/>}/>
+        <Route path='/about/leadership/veronique-grenon/' element = {<VeroniqueGrenon/>}/>
+        <Route path='/about/leadership/ross-hess/' element = {<RossHess/>}/>
+        <Route path='/about/leadership/melissa-johnson/' element = {<MelissaJohnson/>}/>
+        <Route path='/about/leadership/marc-lanzkowsky/' element = {<MarcLanzkowsky/>}/>
+        <Route path='/about/leadership/michael-letang/' element = {<MichaelLeTang/>}/>
+        <Route path='/about/leadership/steve-macaluso/' element = {<SteveMacaluso/>}/>
+        <Route path='/about/leadership/duane-perricelli/' element = {<DuanePerricelli/>}/>
+        <Route path='/about/leadership/rich-storey/' element = {<RichStorey/>}/>
+
         <Route path='/about/careers' element = {<Careers/>}/>
+        <Route path="/about/news-events" element = {<NewsAndEvents/>}/>
+        <Route path='/about/news-events/hic-a-minus-rating-assigned-by-am-best' element = {<HICAminus/>}/>
+        <Route path='/about/news-events/hra-parent-company-tdc-group-names-robert' element = {<HRAParentCompany/>}/>
         <Route path='/calendar' element = {<CustomerCalendar/>}/>     
+        
       </Routes>
    
     </div>
