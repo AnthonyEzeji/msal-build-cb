@@ -12,9 +12,28 @@
   }
   ```
 */
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import { BsPinMap } from 'react-icons/bs'
 export default function ContactUs() {
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+   
+    emailjs.sendForm( process.env.REACT_APP_EMAIL_SERVICE_ID,   process.env.REACT_APP_EMAIL_TEMPLATE_ID, form.current, process.env.REACT_APP_EMAIL_PUBLIC_KEY)
+      .then((result) => {
+          console.log(result.text);
+      Object.values(form?.current).forEach(input=>{
+        console.log(input)
+        input.value = ''
+      })
+      }, (error) => {
+          console.log(error.text);
+          alert(error.text)
+      });
+  };
+
   return (
     <div className="relative  px-32">
       <div className="absolute inset-0">
@@ -62,7 +81,7 @@ export default function ContactUs() {
         </div>
         <div className=" py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
           <div className="mx-auto max-w-lg lg:max-w-none">
-            <form action="#" method="POST" className="grid grid-cols-1 gap-y-6">
+            <form ref={form} onSubmit={sendEmail} className="grid grid-cols-1 gap-y-6">
               <div>
                 <label htmlFor="full-name" className="sr-only">
                   Full name
@@ -74,6 +93,7 @@ export default function ContactUs() {
                   autoComplete="name"
                   className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Full name"
+                  required
                 />
               </div>
               <div>
@@ -87,6 +107,7 @@ export default function ContactUs() {
                   autoComplete="email"
                   className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Email"
+                  required
                 />
               </div>
               <div>
@@ -113,6 +134,7 @@ export default function ContactUs() {
                   className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
                   placeholder="Message"
                   defaultValue={''}
+                  required
                 />
               </div>
               <div>

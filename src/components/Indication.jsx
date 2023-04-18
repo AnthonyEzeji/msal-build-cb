@@ -76,21 +76,21 @@ function Indication() {
                     <h1 className='block text-sm font-light mb-2 text-slate-700'>
                         First Name
                     </h1>
-                <input type="text" name="firstname" id="" onChange = {(e)=>{handleFirstNameChange(e)}} className='w-full border-none'/>
+                <input type="text" name="firstname" id="" onChange = {(e)=>{handleFirstNameChange(e)}} className='w-full border-none text-sm'/>
                 </div>
 
                 <div class="form-field" className=''>
                 <h1 className='block text-sm font-light mt-4 mb-2 text-slate-700'>
                         Email
                     </h1>
-                <input type="text" name="email" id="" className='w-full border-none'  />
+                <input type="text" name="email" id="" className='w-full border-none text-sm'  />
                 </div>
                
               <div class="form-field" className=''>
               <h1 className='block text-sm font-light mt-4 mb-2 text-slate-700'>
                         Zip Code
                     </h1>
-              <input type="text" name="zip" id="" className='w-full border-none'/>
+              <input type="text" name="zip" id="" className='w-full border-none text-sm'/>
               </div>
        
                 <Combobox as="div" value={selectedCounty} onChange={(e)=>handleCountyChange(e)} className='mt-4'>
@@ -161,7 +161,7 @@ function Indication() {
               <h1 className='block text-sm font-light mt-4 mb-2 text-slate-700'>
                         State/Region
                     </h1>
-              <input type="text" name="zip" id="" className='w-full border-none'/>
+              <input type="text" name="zip" id="" className='w-full border-none text-sm'/>
               </div>
        
                 <Combobox as="div" value={selectedSpecialty} onChange={(e)=>handleSpecialtyChange(e)} className='mt-4'>
