@@ -49,21 +49,8 @@ import NewsAndEvents from "./components/NewsAndEvents";
 import HICAminus from "./components/news/HICAminus";
 import HRAParentCompany from "./components/news/HRAParentCompany";
 
-import RobertAKauffman from "./components/leaderships/RobertAKauffman";
-import NoeleenDoelger from "./components/leaderships/NoeleenDoelger";
-import DavidLFeldman from "./components/leaderships/DavidLFeldman";
-import FredDanback from "./components/leaderships/FredDanback";
-import PeterAKolbert from "./components/leaderships/PeterAKolbert";
-import RichCaldwell from "./components/leaderships/RichCaldwell";
-import BrianDalton from "./components/leaderships/BrianDalton";
-import VeroniqueGrenon from "./components/leaderships/VeroniqueGrenon";
-import RossHess from "./components/leaderships/RossHess";
-import MelissaJohnson from "./components/leaderships/MelissaJohnson";
-import MarcLanzkowsky from "./components/leaderships/MarcLanzkowsky";
-import MichaelLeTang from "./components/leaderships/MichaelLeTang";
-import SteveMacaluso from "./components/leaderships/SteveMacaluso";
-import DuanePerricelli from "./components/leaderships/DuanePerricelli";
-import RichStorey from "./components/leaderships/RichStorey";
+import LeadershipDetails from "./components/LeadershipDetails";
+
 
 
 const About = () => {
@@ -127,21 +114,21 @@ function App() {
         <Route path='/blog' element = {<BlogsPage/>}/>
         <Route path='/about' element = {<AboutPage/>}/> 
         <Route path='/about/leadership' element = {<LeadershipPage/>}/>
-        <Route path='/about/leadership/robert-kauffman/' element = {<RobertAKauffman/>}/>
-        <Route path='/about/leadership/noeleen-doelger/' element = {<NoeleenDoelger/>}/>
-        <Route path='/about/leadership/david-lfeldman/' element = {<DavidLFeldman/>}/>
-        <Route path='/about/leadership/fred-danback/' element = {<FredDanback/>}/>
-        <Route path='/about/leadership/peter-akolbert/' element = {<PeterAKolbert/>}/>
-        <Route path='/about/leadership/rich-caldwell/' element = {<RichCaldwell/>}/>
-        <Route path='/about/leadership/brian-dalton/' element = {<BrianDalton/>}/>
-        <Route path='/about/leadership/veronique-grenon/' element = {<VeroniqueGrenon/>}/>
-        <Route path='/about/leadership/ross-hess/' element = {<RossHess/>}/>
-        <Route path='/about/leadership/melissa-johnson/' element = {<MelissaJohnson/>}/>
-        <Route path='/about/leadership/marc-lanzkowsky/' element = {<MarcLanzkowsky/>}/>
-        <Route path='/about/leadership/michael-letang/' element = {<MichaelLeTang/>}/>
-        <Route path='/about/leadership/steve-macaluso/' element = {<SteveMacaluso/>}/>
-        <Route path='/about/leadership/duane-perricelli/' element = {<DuanePerricelli/>}/>
-        <Route path='/about/leadership/rich-storey/' element = {<RichStorey/>}/>
+        <Route path='/about/leadership/robert-kauffman/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/noeleen-doelger/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/david-lfeldman/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/fred-danback/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/peter-akolbert/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/rich-caldwell/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/brian-dalton/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/veronique-grenon/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/ross-hess/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/melissa-johnson/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/marc-lanzkowsky/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/michael-letang/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/steve-macaluso/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/duane-perricelli/' element = {<LeadershipDetails/>}/>
+        <Route path='/about/leadership/rich-storey/' element = {<LeadershipDetails/>}/>
 
         <Route path='/about/careers' element = {<Careers/>}/>
         <Route path="/about/news-events" element = {<NewsAndEvents/>}/>
