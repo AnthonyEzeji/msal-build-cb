@@ -44,7 +44,8 @@ import SelfInsurance from "./components/SelfInsurance";
 import HospitalsPage from "./components/HospitalsPage";
 import NYPhysiciansPage from "./components/NYPhysiciansPage";
 import Indication from "./components/Indication";
-import VAP from "./components/VoluntaryAttendingPatients";
+import VAP from "./components/VoluntaryAttendingPhysicians";
+import APC from "./components/AdvancedPracticeClinicians";
 
 import NewsAndEvents from "./components/NewsAndEvents";
 import HICAminus from "./components/news/HICAminus";
@@ -83,6 +84,7 @@ function App() {
         <Route path ='/solutions/ny-physicians/indication/' element={<Indication/>}/>
         <Route path='/solutions/risk-transfer' element = {<RiskTransfer/>}/>
         <Route path='/solutions/ny-physicians/indication/voluntary-attending-physicians/' element = {<VAP/>}/>
+        <Route path='/solutions/ny-physicians/indication/advanced-practice-clinicians/' element = {<APC/>}/>
         <Route path='/solutions/patient-safety-and-risk-management' element = {<PatientSafety/>}/>
         <Route path='/solutions/claims-and-litigation' element = {<ClaimsAndLitigtion/>}/>
         <Route path='/solutions/self-insurance' element = {<SelfInsurance/>}/>

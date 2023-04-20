@@ -75,7 +75,7 @@ export default function NYPhysiciansPage() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
                  <a
-                href="#contactus"
+                href="/solutions/ny-physicians/indication"
                 className="rounded-md px-3.5 py-2.5 text-sm font-semibold items-center justify-center  border-transparent bg-red-600 text-white hover:bg-transparent hover:text-red-600 border-[1px] border-red-600 md:py-4 md:px-10 md:text-lg"
                 >
                 Request an indication
