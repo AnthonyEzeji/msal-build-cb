@@ -293,7 +293,12 @@ let account = instance.getActiveAccount()
 */
 //When an access token is set, we make a request to ms graph for the user's groups
  useEffect(() => {
-   RequestAccessToken()
+  if(isAuthenticated){
+    console.log(instance.getActiveAccount())
+    instance.setActiveAccount(instance.getAllAccounts()[0])
+    RequestAccessToken()
+  }
+   
 
  }, [isAuthenticated])
 
@@ -591,7 +596,7 @@ useEffect(() => {
               <a href="#" className="group block w-full flex-shrink-0">
                 <div className="flex items-center">
                   <div>
-                  <Avatar  className="hover:opacity-50"  >{<p>{instance.getActiveAccount()?.name?.split(',')[1][1]+instance.getActiveAccount()?.name?.split(',')[0][0]}</p>}</Avatar>
+                  <Avatar  className="hover:opacity-50"  >{instance.getActiveAccount()?.name!==undefined&&<p>{instance.getActiveAccount()?.name?.split(' ')[0][0]+instance.getActiveAccount()?.name?.split(' ')[1][0]}</p>}</Avatar>
                   </div>
                   <div className="ml-3">
                     <Link to="/" className="whitespace-nowrap text-base font-medium

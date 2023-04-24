@@ -41,6 +41,7 @@ let account = instance.getActiveAccount()
     };
     // Silently acquires an access token which is then attached to a request for Microsoft Graph data
     await instance.acquireTokenSilent(request).then((response) => {
+      console.log(response?.accessToken)
         setAccessToken(response?.accessToken);
     }).catch((e) => {
          instance.acquireTokenPopup(request).then((response) => {

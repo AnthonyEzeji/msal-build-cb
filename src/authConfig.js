@@ -3,67 +3,91 @@
  * Licensed under the MIT License.
  */
 
-import { LogLevel } from "@azure/msal-browser";
+import { LogLevel } from '@azure/msal-browser';
 
 /**
- * Configuration object to be passed to MSAL instance on creation. 
+ * 
+ * Enter here the user flows and custom policies for your B2C application
+ * To learn more about user flows, visit: https://docs.microsoft.com/en-us/azure/active-directory-b2c/user-flow-overview
+ * To learn more about custom policies, visit: https://docs.microsoft.com/en-us/azure/active-directory-b2c/custom-policy-overview
+ */
+export const b2cPolicies = {
+    names: {
+        signUpSignIn: 'B2C_1_HRA_susi_v2'
+    },
+    authorities: {
+        signUpSignIn: {
+            authority: 'https://tdchrab2c.b2clogin.com/tdchrab2c.onmicrosoft.com/B2C_1_HRA_susi_v3',
+        }
+    },
+    authorityDomain: 'tdchrab2c.b2clogin.com',
+};
+
+/**
+ * Configuration object to be passed to MSAL instance on creation.
  * For a full list of MSAL.js configuration parameters, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
  */
 export const msalConfig = {
     auth: {
-        clientId: "44358796-71a2-4177-95cc-4ad043f69474",
-        authority: "https://login.microsoftonline.com/55bba599-d659-4f2d-9f51-b09dd500b8c1", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
-        postLogoutRedirectUri: window.location.origin,
-        redirectUri: window.location.origin,
-        validateAuthority: true,
-// After being redirected to the "redirectUri" page, should user
-// be redirected back to the Url where their login originated from?
-        navigateToLoginRequestUrl: true
+        clientId: '8046f95e-45da-4a01-9dd2-2d0cc3b6e728', // This is the ONLY mandatory field that you need to supply.
+        authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose SUSI as your default authority.
+        knownAuthorities: [b2cPolicies.authorityDomain], // Mark your B2C tenant's domain as trusted.
+        redirectUri: window.location.origin, // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
+        postLogoutRedirectUri: window.location.origin, // Indicates the page to navigate after logout.
+        navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
     },
     cache: {
-        cacheLocation: "sessionStorage", // This configures where your cache will be stored
+        cacheLocation: 'sessionStorage', // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
-    system: {	
-        loggerOptions: {	
-            loggerCallback: (level, message, containsPii) => {	
-                if (containsPii) {		
-                    return;		
-                }		
-                switch (level) {		
-                    case LogLevel.Error:		
-                        console.error(message);		
-                        return;		
-                    case LogLevel.Info:		
-                        console.info(message);		
-                        return;		
-                    case LogLevel.Verbose:		
-                        console.debug(message);		
-                        return;		
-                    case LogLevel.Warning:		
-                        console.warn(message);		
-                        return;		
-                }	
-            }	
-        }	
-    }
+    system: {
+        loggerOptions: {
+            loggerCallback: (level, message, containsPii) => {
+                if (containsPii) {
+                    return;
+                }
+                switch (level) {
+                    case LogLevel.Error:
+                        console.error(message);
+                        return;
+                    case LogLevel.Info:
+                        console.info(message);
+                        return;
+                    case LogLevel.Verbose:
+                        console.debug(message);
+                        return;
+                    case LogLevel.Warning:
+                        console.warn(message);
+                        return;
+                    default:
+                        return;
+                }
+            },
+        },
+    },
 };
+
 
 /**
  * Scopes you add here will be prompted for user consent during sign-in.
  * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
- * For more information about OIDC scopes, visit: 
+ * For more information about OIDC scopes, visit:
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: ["User.Read"]
+    scopes: ["openid", "profile","8046f95e-45da-4a01-9dd2-2d0cc3b6e728"],
 };
 
+
 /**
- * Add here the scopes to request when obtaining an access token for MS Graph API. For more information, see:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
+ * An optional silentRequest object can be used to achieve silent SSO
+ * between applications by providing a "login_hint" property.
  */
+export const silentRequest = {
+    scopes: ["openid", "profile","8046f95e-45da-4a01-9dd2-2d0cc3b6e728"],
+    loginHint: "example@domain.net"
+};
 export const graphConfig = {
     graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me/memberOf',
     graphMePhotoEndpoint: 'https://graph.microsoft.com/v1.0/me/photo/',
