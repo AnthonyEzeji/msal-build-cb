@@ -3,6 +3,7 @@ import Vector from '../assets/Risk management-bro.svg'
 import Vector2 from '../assets/Orthopedic-bro.svg'
 import LossRun from './LossRun'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 export default function Example() {
   const [showLossRun, setShowLossRun] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +30,7 @@ export default function Example() {
           
           </div>} 
          <LossRun isLoading={isLoading} setIsLoading={setIsLoading} showLossRun={showLossRun} setShowLossRun={setShowLossRun} />
+     
          
         </div>
         <img className='max-w-[450px] w-auto h-auto' src = {Vector}></img>

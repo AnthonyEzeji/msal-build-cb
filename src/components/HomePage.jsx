@@ -20,6 +20,7 @@ import Carousel from './Carousel';
 import { useEffect } from 'react';
 import VideoHeroTabs from './VideoHeroTabs';
 import PreviewButtons from './personas/RMPreviewButtons';
+import Achievements from './Achievements';
 const HomePage = () => {
   let isAuthenticated = useIsAuthenticated()
   const [video, setVideo] = useState("https://player.vimeo.com/video/797037462?h=574d1d5649&autoplay=1&loop=1&background=1")
@@ -68,9 +69,10 @@ const HomePage = () => {
      
 
      <Carousel/>
-     <Catalog/>
+  
     <Splide/>
      <PPP></PPP>
+     <Achievements/>
      <BlogList></BlogList>
      <ContactUs></ContactUs>
      <FAQ></FAQ>

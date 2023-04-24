@@ -16,6 +16,52 @@ function HospitalsPage() {
       <Navbar />
 
       <div className="bg-white">
+      <div className="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
+      <div className="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+          <svg
+            className="absolute top-12 left-full translate-x-32 transform"
+            width={404}
+            height={384}
+            fill="none"
+            viewBox="0 0 404 384"
+          >
+            <defs>
+              <pattern
+                id="74b3fd99-0a6f-4271-bef2-e80eeafdf357"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={384} fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+          </svg>
+          <svg
+            className="absolute top-1/3 right-full -translate-y-1/2 -translate-x-32 transform"
+            width={404}
+            height={384}
+            fill="none"
+            viewBox="0 0 404 384"
+          >
+            
+            <defs>
+              <pattern
+                id="d3eb07ae-5182-43e6-857d-35c643af9034"
+                x={0}
+                y={0}
+                width={20}
+                height={20}
+                patternUnits="userSpaceOnUse"
+              >
+                <rect x={0} y={0} width={4} height={4} className="text-red-600" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect width={404} height={384} fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
+          </svg>
+        </div></div>
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-3xl py-24 sm:py-36 lg:py-42">
           <div className="text-center">
@@ -77,7 +123,7 @@ function HospitalsPage() {
                         <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">Self-Insurance Programs</h5>
                         <p class="text-sm text-gray-600">Design, setup and self-insurance adminitration services.</p>
                     </div>
-                    <a href="#" class="flex justify-between items-center group-hover:text-yellow-600">
+                    <a href="/solutions/self-insurance" class="flex justify-between items-center group-hover:text-yellow-600">
                         <span class="text-sm">Learn more</span>
                         <span class="-translate-x-4 opacity-0 text-2xl transition duration-300 group-hover:opacity-100 group-hover:translate-x-0">&#8594;</span>
                     </a>
@@ -91,7 +137,7 @@ function HospitalsPage() {
                         <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">Claims and Litigation Services</h5>
                         <p class="text-sm text-gray-600">Over 30 years experience handling hospital claims</p>
                     </div>
-                    <a href="#" class="flex justify-between items-center group-hover:text-yellow-600">
+                    <a href="/solutions/claims-and-litigation" class="flex justify-between items-center group-hover:text-yellow-600">
                         <span class="text-sm">Learn more</span>
                         <span class="-translate-x-4 opacity-0 text-2xl transition duration-300 group-hover:opacity-100 group-hover:translate-x-0">&#8594;</span>
                     </a>
@@ -106,7 +152,7 @@ function HospitalsPage() {
                         <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">Patient Safety and Risk Management</h5>
                         <p class="text-sm text-gray-600">Education, training and risk management best practices.</p>
                     </div>
-                    <a href="#" class="flex justify-between items-center group-hover:text-yellow-600">
+                    <a href="/solutions/patient-safety-and-risk-management" class="flex justify-between items-center group-hover:text-yellow-600">
                         <span class="text-sm">Learn more</span>
                         <span class="-translate-x-4 opacity-0 text-2xl transition duration-300 group-hover:opacity-100 group-hover:translate-x-0">&#8594;</span>
                     </a>
@@ -121,7 +167,7 @@ function HospitalsPage() {
                         <h5 class="text-xl text-gray-800 font-medium transition group-hover:text-yellow-600">Data Analytics Services</h5>
                         <p class="text-sm text-gray-600">Leveraging claims, risk, and clinical data in support of patient safety initiatives.</p>
                     </div>
-                    <a href="#" class="flex justify-between items-center group-hover:text-yellow-600">
+                    <a href="/solutions/hospitals/data-analytics" class="flex justify-between items-center group-hover:text-yellow-600">
                         <span class="text-sm">Learn more</span>
                         <span class="-translate-x-4 opacity-0 text-2xl transition duration-300 group-hover:opacity-100 group-hover:translate-x-0">&#8594;</span>
                     </a>
@@ -135,12 +181,6 @@ function HospitalsPage() {
 </div>
 
 
-
-
-
-    
-          
-      
      
       <section id ="contactus"> <ContactUs/> </section>
       
