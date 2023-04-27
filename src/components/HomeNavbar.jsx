@@ -34,6 +34,7 @@ import { VscLaw, VscPerson } from 'react-icons/vsc';
 import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
+import axios from 'axios';
 
 
 const features = [
@@ -118,12 +119,25 @@ export default function Example() {
      }
   };
   window.addEventListener('scroll', changeNavbarColor);
-  
+
+
+const callbackId = instance.addEventCallback( async message => {
+   if(message.eventType==='msal:loginSuccess'){
+    var activeAccount = instance.getAllAccounts()[0]
+    console.log(activeAccount)
+    await axios.get(`http://localhost:5000/users/${activeAccount.idTokenClaims.oid}/groups`).then(res=>{
+      console.log(res)
+    })
+
+   }
+});
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
          console.log(e);
      }); */
-     instance.loginRedirect(loginRequest).catch(e => {
+     instance.loginRedirect(loginRequest).then(response=>{
+      return instance
+     }).catch(e => {
        console.log(e);
    });
  }
@@ -452,7 +466,7 @@ const [showLogout, setShowLogout] = useState(false)
               </Popover>
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link style={{color:textColor}} to="/dashboard" className="whitespace-nowrap text-base 
+            <Link style={{color:textColor}} to="/" className="whitespace-nowrap text-base 
               hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
