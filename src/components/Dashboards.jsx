@@ -258,9 +258,7 @@ let account = instance.getActiveAccount()
         setAccessToken(response?.accessToken);
       
     }).catch((e) => {
-         instance.acquireTokenPopup(request).then((response) => {
-            setAccessToken(response?.accessToken);
-        });
+     
     });
   }
   

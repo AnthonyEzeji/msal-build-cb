@@ -34,6 +34,7 @@ import { VscLaw, VscPerson } from 'react-icons/vsc';
 import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
+import axios from 'axios';
 
 
 const features = [
@@ -102,6 +103,7 @@ export default function Example() {
 
   const [bg, setBg] = useState('bg-transparent')
   const [textColor, setTextColor] = useState('white')
+  const [account, Account] = useState(null)
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
   let params = useParams()
@@ -118,12 +120,57 @@ export default function Example() {
      }
   };
   window.addEventListener('scroll', changeNavbarColor);
+
+
+const callbackId = instance.addEventCallback( async message => {
+  console.log(message)
+   if(message.eventType==='msal:loginSuccess'){
+
+    var activeAccount = instance.getAllAccounts()[0]
+    console.log(activeAccount)
+    const request = {
+      ...loginRequest,
+      account: activeAccount
+  };
+
+  // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+  await instance.acquireTokenSilent(request).then((response) => {
   
+
+      axios.post(`http://localhost:5000/users/login`,{...activeAccount, accessToken:response?.accessToken}).then(res=>{
+        console.log(res.status)
+        if(res.data.hasOwnProperty('_id')){
+          window.sessionStorage.setItem('account', JSON.stringify(res.data))
+        }
+      })
+    
+  }).catch((e) => {
+    instance.acquireTokenPopup(request).then((response) => {
+      console.log('1')
+  });
+  });
+   
+   
+   
+   }
+   if(message.eventType==='msal:logoutSuccess'){
+    window.sessionStorage.clear()
+   }
+});
+useEffect(() => {
+  if(account){
+    console.log(account)
+  }
+
+}, [account])
+
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
          console.log(e);
      }); */
-     instance.loginRedirect(loginRequest).catch(e => {
+     instance.loginRedirect(loginRequest).then(response=>{
+      return instance
+     }).catch(e => {
        console.log(e);
    });
  }
@@ -452,7 +499,7 @@ const [showLogout, setShowLogout] = useState(false)
               </Popover>
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link style={{color:textColor}} to="/dashboard" className="whitespace-nowrap text-base 
+            <Link style={{color:textColor}} to="/" className="whitespace-nowrap text-base 
               hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
