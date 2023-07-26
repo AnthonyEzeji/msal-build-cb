@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-
+import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -34,6 +34,8 @@ import { VscLaw, VscPerson } from 'react-icons/vsc';
 import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
+import axios from 'axios';
+import ChatWindow from './ChatWindow';
 
 
 const features = [
@@ -102,6 +104,8 @@ export default function Example() {
 
   const [bg, setBg] = useState('bg-transparent')
   const [textColor, setTextColor] = useState('white')
+  const [showChat, setShowChat] = useState(false)
+  const [account, Account] = useState(null)
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
   let params = useParams()
@@ -118,12 +122,57 @@ export default function Example() {
      }
   };
   window.addEventListener('scroll', changeNavbarColor);
+
+
+const callbackId = instance.addEventCallback( async message => {
+  console.log(message)
+   if(message.eventType==='msal:loginSuccess'){
+
+    var activeAccount = instance.getAllAccounts()[0]
+    console.log(activeAccount)
+    const request = {
+      ...loginRequest,
+      account: activeAccount
+  };
+
+  // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+  await instance.acquireTokenSilent(request).then((response) => {
   
+
+      axios.post(`http://localhost:5000/users/login`,{...activeAccount, accessToken:response?.accessToken}).then(res=>{
+        console.log(res.status)
+        if(res.data.hasOwnProperty('_id')){
+          window.sessionStorage.setItem('account', JSON.stringify(res.data))
+        }
+      })
+    
+  }).catch((e) => {
+    instance.acquireTokenPopup(request).then((response) => {
+      console.log('1')
+  });
+  });
+   
+   
+   
+   }
+   if(message.eventType==='msal:logoutSuccess'){
+    window.sessionStorage.clear()
+   }
+});
+useEffect(() => {
+  if(account){
+    console.log(account)
+  }
+
+}, [account])
+
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
          console.log(e);
      }); */
-     instance.loginRedirect(loginRequest).catch(e => {
+     instance.loginRedirect(loginRequest).then(response=>{
+      return instance
+     }).catch(e => {
        console.log(e);
    });
  }
@@ -450,14 +499,21 @@ const [showLogout, setShowLogout] = useState(false)
                   </>
                 )}
               </Popover>
+              <div onClick={()=>setShowChat(!showChat)} className=' group flex w-fit h-fit items-center justify-center'>
+              <button  style={{color:textColor}} className='group-hover:text-gray-200  inline-flex items-center rounded-md  border-none text-base   focus:outline-none  '>
+            Chat
+          
+           </button>
+                 <ChatBubbleLeftRightIcon  style={{color:textColor}} className=' w-5 group-hover:text-gray-200'/>
+              </div>
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link style={{color:textColor}} to="/dashboard" className="whitespace-nowrap text-base 
+            <Link style={{color:textColor}} to="/" className="whitespace-nowrap text-base 
               hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
             
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-teal-700 text-center p-2 mb-2 rounded-md  text-white justify-center flex border-[1px] border-teal-700  flex-row  items-center hover:bg-transparent hover:text-teal-700' href ='https://clientportal.fojp.com/login.aspx'><p className ='px-2 text-sm'>Client Portal</p><BsBoxArrowInRight className=''/></a><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  >{<p className=''>{instance.getActiveAccount()?.name.split(',')[1][1]+instance.getActiveAccount()?.name.split(',')[0][0]}</p>}</Avatar></div>}
+            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-teal-700 text-center p-2 mb-2 rounded-md  text-white justify-center flex border-[1px] border-teal-700  flex-row  items-center hover:bg-transparent hover:text-teal-700' href ='https://clientportal.fojp.com/login.aspx'><p className ='px-2 text-sm'>Client Portal</p><BsBoxArrowInRight className=''/></a><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  >{<p className=''>{instance.getActiveAccount()?.name?.split(' ')[0][0]+instance.getActiveAccount()?.name?.split(' ')[1][0]}</p>}</Avatar></div>}
           </div>
         </div>
 
@@ -545,7 +601,7 @@ const [showLogout, setShowLogout] = useState(false)
           </Popover.Panel>
         </Transition>
       </Popover>
-      
+      {showChat&&<ChatWindow/>}
     
     </div>
   )
