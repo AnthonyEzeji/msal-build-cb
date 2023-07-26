@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-
+import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -35,6 +35,7 @@ import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
 import axios from 'axios';
+import ChatWindow from './ChatWindow';
 
 
 const features = [
@@ -103,6 +104,7 @@ export default function Example() {
 
   const [bg, setBg] = useState('bg-transparent')
   const [textColor, setTextColor] = useState('white')
+  const [showChat, setShowChat] = useState(false)
   const [account, Account] = useState(null)
   const { instance } = useMsal();
   let isAuthenticated = useIsAuthenticated()
@@ -497,6 +499,13 @@ const [showLogout, setShowLogout] = useState(false)
                   </>
                 )}
               </Popover>
+              <div onClick={()=>setShowChat(!showChat)} className=' group flex w-fit h-fit items-center justify-center'>
+              <button  style={{color:textColor}} className='group-hover:text-gray-200  inline-flex items-center rounded-md  border-none text-base   focus:outline-none  '>
+            Chat
+          
+           </button>
+                 <ChatBubbleLeftRightIcon  style={{color:textColor}} className=' w-5 group-hover:text-gray-200'/>
+              </div>
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link style={{color:textColor}} to="/" className="whitespace-nowrap text-base 
@@ -592,7 +601,7 @@ const [showLogout, setShowLogout] = useState(false)
           </Popover.Panel>
         </Transition>
       </Popover>
-      
+      {showChat&&<ChatWindow/>}
     
     </div>
   )
