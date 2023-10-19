@@ -32,6 +32,30 @@
     "react-vimeo": "^2.0.0",
     "react-vimeo-provider": "^0.0.4",
     "web-vitals": "^2.1.4",
+     "@azure/app-configuration": "^1.4.1",
+    "@azure/identity": "^3.3.0",
+
+    "@azure/openai": "^1.0.0-beta.4",
+    "@chatscope/chat-ui-kit-react": "^1.10.1",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
+
+    "@fluentui/react": "^8.105.3",
+    "@fluentui/react-icons": "^2.0.195",
+
+    "@popperjs/core": "^2.11.7",
+ 
+    "azure-openai": "^0.9.4",
+
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+ 
+    "react-markdown": "^8.0.7",
+
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
+    "remark-supersub": "^1.0.0",
+    "sass": "^1.64.2",
+ 
     "xlsx": "^0.18.5"
   },
   "scripts": {

@@ -499,13 +499,7 @@ const [showLogout, setShowLogout] = useState(false)
                   </>
                 )}
               </Popover>
-              <div onClick={()=>setShowChat(!showChat)} className=' group flex w-fit h-fit items-center justify-center'>
-              <button  style={{color:textColor}} className='group-hover:text-gray-200  inline-flex items-center rounded-md  border-none text-base   focus:outline-none  '>
-            Chat
-          
-           </button>
-                 <ChatBubbleLeftRightIcon  style={{color:textColor}} className=' w-5 group-hover:text-gray-200'/>
-              </div>
+            
             </Popover.Group>
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <Link style={{color:textColor}} to="/" className="whitespace-nowrap text-base 

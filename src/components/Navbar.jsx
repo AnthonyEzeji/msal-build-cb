@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-
+import TDCSILogo from '../assets/TDCSI Logo black and red.png'
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -34,9 +34,12 @@ import { VscLaw, VscPerson } from 'react-icons/vsc';
 import * as  tb from 'react-icons/tb'
 import * as  md from 'react-icons/md'
 import * as  bi from 'react-icons/bi'
+import axios from 'axios';
+import Chat from '../pages/chat/Chat';
+import { Chat16Regular, Chat20Regular, Chat24Regular } from '@fluentui/react-icons';
 
 
-const features = [
+const solutionsFeatures = [
   {
     name: 'Analytics',
     href: '/solutions/hospitals/data-analytics',
@@ -49,7 +52,7 @@ const features = [
     description: 'Patient Safety And Risk Management.',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Risk Transfer', href: '/solutions/risk-transfer', description: "Risk Transfer.", icon: ShieldCheckIcon },
+  { name: 'Risk Transfer', href: '#', description: "Risk Transfer.", icon: ShieldCheckIcon },
   {
     name: 'Claims And Litigation Services',
     href: '/solutions/claims-and-litigation',
@@ -62,6 +65,101 @@ const features = [
     description: 'Design, setup and self-insurance administration services.',
     icon: VscPerson,
   },
+]
+const mobileMenu = [
+  {
+    option: 'Solutions',
+    subOptions:[
+      {
+        name:'Analytics', 
+        href:'/solutions/hospitals/data-analytics',
+        description:'Get a better understanding of where your traffic is coming from.'
+      },
+      {
+        name:'Patient Safety And Risk Management', 
+        href:'/solutions/patient-safety-and-risk-management',
+        description:'Patient Safety and Risk Management'
+      },
+      {
+        name:'Risk Transfer', 
+        href:'/solutions/risk-transfer',
+        description:'Risk Transfer'
+      },
+      {
+        name:'Claims and Litigation', 
+        href:'/solutions/claims-and-litigation',
+        description:'Claims and litigation services.'
+      },  
+      {
+        name:'Self-Insured Programs', 
+        href:'/solutions/self-insurance',
+        description:'Design, setup and self-insurance administration services.'
+      }
+    ],
+   
+    icon:''
+  },
+  {
+    option: 'Who We Serve',
+    subOptions:[
+      {
+        name:'Hospitals', 
+        href:'/solutions/hospitals',
+        description:''
+      },
+      {
+        name:'NY Physicians', 
+        href:'/solutions/ny-physicians',
+        description:''
+      },
+     
+    ],
+   
+    icon:''
+  }, 
+  {
+    option: 'Insights',
+    subOptions:[
+      {
+        name:'Blogs', 
+        href:'/blog',
+        description:''
+      },
+     
+     
+    ],
+   
+    icon:''
+  },
+  {
+    option: 'About Us',
+    subOptions:[
+      {
+        name:'About Us', 
+        href:'/about',
+        description:''
+      },
+      {
+        name:'Leadership', 
+        href:'/about/leadership',
+        description:''
+      },
+      {
+        name:'Careers', 
+        href:'/about/careers',
+        description:''
+      },
+      {
+        name:'News and Events', 
+        href:'/about/news-events',
+        description:''
+      },
+     
+    ],
+   
+    icon:''
+  },
+  
 ]
 const callsToAction = [
   { name: 'Watch Demo', href: '#', icon: PlayIcon },
@@ -101,17 +199,83 @@ function classNames(...classes) {
 export default function Example() {
 
   const [bg, setBg] = useState('bg-transparent')
+  const [optionMenuToShow, setOptionMenuToShow] = useState(null)
+  const [textColor, setTextColor] = useState('black')
+  const isAuthenticated = useIsAuthenticated()
+  const [accessToken, setAccessToken] = useState(null)
   const { instance } = useMsal();
-  let isAuthenticated = useIsAuthenticated()
 
+  let params = useParams()
   
+ 
 
+  async function RequestAccessToken() {
+    
+  instance.setActiveAccount(instance.getAllAccounts()[0])
+  let account = instance.getActiveAccount()
+      
+   
+      const request = {
+          ...loginRequest,
+          account: account
+      };
   
+      // Silently acquires an access token which is then attached to a request for Microsoft Graph data
+      await instance.acquireTokenSilent(request).then((response) => {
+      
+          setAccessToken(response?.accessToken);
+        
+        
+      }).catch((e) => {
+           instance.acquireTokenPopup(request).then((response) => {
+              setAccessToken(response?.accessToken);
+          });
+      });
+    
+    
+   }
+async function getUserInfoFromEndpoint(){
+  let activeAccount = instance.getActiveAccount()
+  console.log(activeAccount)
+
+    await axios.get(`${process.env.REACT_APP_FUNCTION_ENDPOINT}api/getADRolesAssigned?code=${process.env.REACT_APP_ROLE_ASSIGN_KEY}&un=${activeAccount?.username}`).then(res=>{
+    
+      if(res.status === 200){
+        console.log(res.data[0])
+        window.sessionStorage.setItem('account', JSON.stringify(res.data[0]))
+        
+      }
+     
+    })
+}
+
+useEffect(() => {
+ 
+  
+ if(accessToken!==null){
+
+  getUserInfoFromEndpoint()
+ }
+}, [accessToken])
+
+
+const loginCallback = instance.addEventCallback(async message=>{
+  
+  if(message.eventType ==="msal:loginSuccess"){
+  
+    RequestAccessToken()
+    
+  }else if(message.eventType ==="msal:logoutSuccess"){
+    window.sessionStorage.removeItem('account')
+  }
+})
   const handleLogin = () => {
     /* instance.loginPopup(loginRequest).catch(e => {
          console.log(e);
      }); */
-     instance.loginRedirect(loginRequest).catch(e => {
+     instance.loginRedirect(loginRequest).then(response=>{
+      return instance
+     }).catch(e => {
        console.log(e);
    });
  }
@@ -124,334 +288,51 @@ export default function Example() {
     postLogoutRedirectUri: "/",
   });
 }
-const [authenticated, setAuthenticated] = useState(false)
-useEffect(() => {
-  if(isAuthenticated){
-    setAuthenticated(true)
-   
+ let imgs=[TDCSILogo,"https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80",HRALogo]
+const [showLogout, setShowLogout] = useState(false)
+
+function handleOptionClick(e){
+  if(e.target.id!==null && e.target.id!==undefined){
+    console.log(e.target.id)
+    if(optionMenuToShow===e.target.id){
+      setOptionMenuToShow(null)
+    }else if(optionMenuToShow!==e.target.id){
+      setOptionMenuToShow(e.target.id)
+    }
+    
   }
 
-}, [])
-useEffect(() => {
-  console.log(instance.getAllAccounts()[0]?.name)
-  instance.setActiveAccount(instance.getAllAccounts()[0])
-}, [authenticated])
-
- let imgs=["https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png","https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"]
-const [showLogout, setShowLogout] = useState(false)
+}
+const [showChat, setShowChat] = useState(false)
   return (
-    <div className="fixed w-screen z-40 top-0 drop-shadow-md border-b border-gray-300" id='nav'>
-      <Popover className="relative bg-slate-50 " style={{backgroundColor:bg}}>
-        <div className="mx-auto max-w-7xl px-4 py-1 sm:px-6 bg-slate-50 sticky">
-          <div className="flex items-center justify-between  md:justify-between md:space-x-10">
-            <div className="flex justify-start  lg:w-0 lg:flex-1  ">
+    <div className="fixed  w-screen z-40 top-0 drop-shadow-md" id='nav'>
+      <Popover className="relative bg-slate-50  ">
+        <div className="mx-auto max-w-7xl py-1 px-4 sm:px-6 bg-transparent sticky">
+          <div className="flex items-center justify-between  md:justify-between md:space-x-10 ">
+            <div className="flex justify-start lg:w-0 lg:flex-1  ">
               <Link to="/">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-12 w-auto  text-black"
-                  src={'https://www.healthcareriskadvisors.com/siteassets/images/13225_sbu-logos_hra_red-blk_300x73.png'}
+                  className=" w-auto h-12  text-white"
+                  src={imgs[0]}
                   alt=""
                 />
               </Link>
             </div>
-            <div className="-my-2 -mr-2 flex md:hidden ">
+            <div className="-my-2 -mr-2 flex lg:hidden ">
             <Popover.Button className="inline-flex items-center justify-center rounded-md  p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-300  border-[1px] border-slate-400">
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
             </div>
-            <Popover.Group as="nav" className="hidden space-x-10 lg:flex absolute left-[30%] ">
-              <Popover className="relative" >
-                {({ open }) => (
-                  <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? 'text-black' : 'text-black',
-                        'group inline-flex items-center rounded-md  border-none text-base  focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-black '
-                      )}
-                    >
-                      <span>Solutions</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? 'text-black' : 'text-black',
-                          'ml-2 h-5 w-5 group-hover:text-black'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
-
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform px-2 sm:px-0 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2">
-                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                            {features.map((item) => (
-                              <a
-                                key={item.name}
-                                href={item.href}
-                                className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
-                              >
-                                <item.icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true" />
-                                <div className="ml-4">
-                                  <p className="text-base font-medium text-slate-900">{item.name}</p>
-                                  <p className="mt-1 text-sm text-slate-800">{item.description}</p>
-                                </div>
-                              </a>
-                            ))}
-                          </div>
-                          <div className="space-y-6 bg-slate-50 px-5 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
-                            {callsToAction.map((item) => (
-                              <div key={item.name} className="flow-root">
-                                <a
-                                  href={item.href}
-                                  className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-slate-900 hover:bg-slate-100"
-                                >
-                                  <item.icon className="h-6 w-6 flex-shrink-0 text-slate-400" aria-hidden="true" />
-                                  <span className="ml-3">{item.name}</span>
-                                </a>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </Popover.Panel>
-                     </Transition>
-                  </>
-                )}
-              </Popover>
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? 'text-black' : 'text-black',
-                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-black '
-                      )}
-                    >
-                      <span>Clients</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? 'text-black' : 'text-black',
-                          'ml-2 h-5 w-5 group-hover:text-black'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
-
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform px-2 sm:px-0 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2">
-                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                           
-                              <a
-                                
-                                href='/solutions/hospitals/'
-                                className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
-                              >
-                              <BuildingOffice2Icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
-                                <div className="ml-4">
-                                  <p className="text-base font-medium text-slate-900">Hospitals</p>
-                                  <p className="mt-1 text-sm text-slate-800">Comprehensive insurance and risk management advisory services for hospitals and healthcare organizations.
-
-
-</p>
-                                </div>
-                              </a>
-                              <a
-                                
-                                href='/solutions/ny-physicians/'
-                                className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
-                              >
-                              <AiOutlineMedicineBox className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
-                                <div className="ml-4">
-                                  <p className="text-base font-medium text-slate-900">New York Physicians</p>
-                                  <p className="mt-1 text-sm text-slate-800">As part of The Doctors Company, we provide New York physicians and affiliated healthcare providers with a portfolio of flexible coverage options to meet your MPL needs.
-
-
-
-
-
-</p>
-                                </div>
-                              </a>
-                            
-                          </div>
-                         
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? 'text-black' : 'text-black',
-                        'group inline-flex items-center rounded-md  border-none text-base   focus:outline-none focus:ring-2 focus:ring-red-500 hover:text-black '
-                      )}
-                    >
-                      <span>Insights</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? 'text-black' : 'text-black',
-                          'ml-2 h-5 w-5 group-hover:text-black'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
-
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 transform px-2 sm:px-0">
-                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                       
-                              <a
-                                key=''
-                                href='/blog'
-                                className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
-                              >
-                            
-                             <BsFileText className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true"/>
-                                <div className="ml-4">
-                                  <p className="text-base font-medium text-slate-900">Blogs</p>
-                                  <p className="mt-1 text-sm text-black">Read blogs and insights.</p>
-                                </div>
-                              </a>
-                            
-                          </div>
-                          <div className="bg-slate-50 px-5 py-5 sm:px-8 sm:py-8">
-                            <div>
-                              <h3 className="text-base font-medium text-slate-800">Recent Posts</h3>
-                              <ul role="list" className="mt-4 space-y-4">
-                                {recentPosts.map((item) => (
-                                  <li key={item.id} className="truncate text-base">
-                                    <a href={item.href} className="font-medium text-slate-900 hover:text-slate-700">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="mt-5 text-sm">
-                              <a href="#" className="font-medium text-red-600 hover:text-red-500">
-                                View all posts
-                                <span aria-hidden="true"> &rarr;</span>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
-
-              
-
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? 'text-black' : 'text-black',
-                        'group inline-flex items-center rounded-md  text-base  focus:outline-none focus:ring-2 focus:ring-red-500'
-                      )}
-                    >
-                      <span>About Us</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? 'text-black' : 'text-black',
-                          'ml-2 h-5 w-5 group-hover:text-black'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
-
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 transform px-2 sm:px-0">
-                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                            {resources.map((item) => (
-                              <a
-                                key={item.name}
-                                href={item.href}
-                                className="-m-3 flex items-start rounded-lg p-3 hover:bg-slate-50"
-                              >
-                                <item.icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true" />
-                                <div className="ml-4">
-                                  <p className="text-base font-medium text-slate-900">{item.name}</p>
-                                  <p className="mt-1 text-sm text-slate-800">{item.description}</p>
-                                </div>
-                              </a>
-                            ))}
-                          </div>
-                          <div className="bg-slate-50 px-5 py-5 sm:px-8 sm:py-8">
-                            <div>
-                              <h3 className="text-base font-medium text-slate-800">Recent Posts</h3>
-                              <ul role="list" className="mt-4 space-y-4">
-                                {recentPosts.map((item) => (
-                                  <li key={item.id} className="truncate text-base">
-                                    <a href={item.href} className="font-medium text-slate-900 hover:text-slate-700">
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="mt-5 text-sm">
-                              <a href="#" className="font-medium text-red-600 hover:text-red-500">
-                                View all posts
-                                <span aria-hidden="true"> &rarr;</span>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
-            </Popover.Group>
+          
            {!isAuthenticated?<div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link to="/dashboard" className="whitespace-nowrap text-base 
-             text-black hover:text-slate-900" onClick={handleLogin}>
+            <Link style={{color:textColor}} to="/" className="whitespace-nowrap text-base 
+              hover:text-slate-900" onClick={handleLogin}>
                 Sign in
               </Link>
-             
             
-            </div>:<div   className=' hidden md:flex items-center relative z-40  p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-teal-700 text-center p-2 mb-2 rounded-md  text-white justify-center flex border-[1px] border-teal-700  flex-row  items-center hover:bg-transparent hover:text-teal-700' href ='https://clientportal.fojp.com/login.aspx'><p className ='px-2 text-sm'>Client Portal</p><BsBoxArrowInRight className=''/></a><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  >{<p className=''>{instance.getActiveAccount()?.name?.split(' ')[0][0]+instance.getActiveAccount()?.name?.split(' ')[1][0]}</p>}</Avatar></div>}
+      </div>:<div   className=' hidden lg:flex items-center relative z-10   p-2 rounded-sm w-fit '>{showLogout&&<div className = 'rounded-md absolute right-0 top-[60px] z-10 bg-zinc-200 p-4 flex flex-col justify-center'><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>}<Avatar style={{backgroundColor:'white', color:'gray'}} onClick={()=>setShowLogout(!showLogout)} className="hover:text-red-600 border border-gray-300 text-black bg-white"  ><p className='text-sm'>{isAuthenticated&&instance.getActiveAccount()?.name.split(' ')[0][0]+instance.getActiveAccount()?.name.split(' ')[1][0]}</p></Avatar><button onClick={()=>setShowChat(!showChat)}  className='m-2 p-2  bg-white text-gray-500 font-light hover:bg-transparent border-[1px] rounded-md hover:text-slate-600 border-gray-300 flex items-center'>Chat<Chat20Regular className='text-red-500'></Chat20Regular></button></div>}
           </div>
         </div>
 
@@ -468,7 +349,9 @@ const [showLogout, setShowLogout] = useState(false)
             focus
             className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition lg:hidden"
           >
-            <div className="divide-y-2 divide-slate-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+         
+            <div className="divide-y-2 h-screen overflow-y-scroll relative  divide-slate-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            
               <div className="px-5 pt-5 pb-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -478,6 +361,7 @@ const [showLogout, setShowLogout] = useState(false)
                       alt="Your Company"
                     />
                   </div>
+             
                   <div className="-mr-2">
                     <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                       <span className="sr-only">Close menu</span>
@@ -485,61 +369,52 @@ const [showLogout, setShowLogout] = useState(false)
                     </Popover.Button>
                   </div>
                 </div>
-                <div className="mt-6">
-                  <nav className="grid gap-y-8">
-                    {features.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-m-3 flex items-center rounded-md p-3 hover:bg-slate-50"
-                      >
-                        <item.icon className="h-6 w-6 flex-shrink-0 text-red-600" aria-hidden="true" />
-                        <span className="ml-3 text-base font-medium text-slate-900">{item.name}</span>
-                      </a>
+                <div class = 'account' className='py-5'>
+                  {!isAuthenticated? <button  className="bg-red-600 text-center text-white w-full p-3 font-semibold border-[1px] hover:text-red-600 hover:bg-transparent hover:border-red-600 rounded-md" onClick={handleLogin}>
+                    Sign in
+                  </button>  : <div  className="bg-gray-200 text-center text-slate-700 w-full p-1 my-2 font-semibold border-[1px] border-gray-300   rounded-md" onClick={handleLogin}>
+                    <p className='border-b-[1px] border-slate-400 mx-5 pb-2 mb-2'>{instance.getActiveAccount()?.username}</p>
+                   < div className = 'rounded-md  right-0 top-[60px] z-20 bg-zinc-200 p-4 flex flex-col justify-center'><a className='bg-teal-700 text-center p-2 mb-2 rounded-md  text-white justify-center flex border-[1px] border-teal-700  flex-row  items-center hover:bg-transparent hover:text-teal-700' href ='https://clientportal.fojp.com/login.aspx'><p className ='px-2 text-sm'>Client Portal</p><BsBoxArrowInRight className=''/></a><a className='bg-slate-700 text-center p-2 rounded-md  text-white justify-center flex border-[1px] border-slate-600  flex-row  items-center hover:bg-transparent hover:text-slate-600' href ='/dashboard'><p className ='px-2'>Dashboard</p><BsBoxArrowInRight className=''/></a><button onClick={()=>handleLogout()} className = 'p-2 bg-red-600 text-white font-semibold border-[1px] rounded-md mt-2 border-red-600 hover:bg-transparent hover:text-red-600'>Logout</button></div>
+
+                    
+                  </div>}
+                 
+                     
+              </div>
+                <div className="mt-2">
+                  <nav className="grid gap-y-4 ">
+                    {mobileMenu.map((option) => (
+                      <div className=''>
+  <div className=' '>
+                        <p id={option.option} className='text-lg font-semibold' onClick = {(e)=>handleOptionClick(e)}>{option.option}</p>
+                       <div> {optionMenuToShow===option.option&&<ul className=' absolute top-20 left-0  z-30 bg-gray-200 min-h-[500px] max-w-full p-2 rounded-sm w-full flex flex-col items-end'>
+                        <button className='w-full flex justify-center items-center ' onClick={()=>setOptionMenuToShow(null)}>{option.option}<md.MdClose className = 'text-red-600 font-bold'></md.MdClose></button>
+                          {option.subOptions.map((subOption)=>{
+                            return (
+                            <li className='w-full my-2  '>
+                              <a  href={subOption.href}>
+                                <p className='w-full hover:bg-gray-300 bg-slate-100 p-2 ' >{subOption.name}</p>
+                              </a>
+                            </li>)
+                            
+})}
+                        </ul>}</div>
+                        
+                      </div>
+                      </div>
+
+                    
+                
                     ))}
                   </nav>
                 </div>
               </div>
-              <div className="space-y-6 py-6 px-5">
-                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                  <a href="#" className="text-base font-medium text-slate-900 hover:text-slate-700">
-                    Pricing
-                  </a>
-
-                  <a href="#" className="text-base font-medium text-slate-900 hover:text-slate-700">
-                    Docs
-                  </a>
-                  {resources.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="text-base font-medium text-slate-900 hover:text-slate-700"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-                <div>
-                  <a
-                    href="#"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-red-700"
-                  >
-                    Sign up
-                  </a>
-                  <p className="mt-6 text-center text-base font-medium text-slate-800">
-                    Existing customer?
-                    <Link to="/dashboard" className="whitespace-nowrap text-base font-medium
-             text-red-600 ml-2 hover:text-slate-900" onClick={handleLogin}>
-                Sign in
-              </Link>
-                  </p>
-                </div>
-              </div>
+            
             </div>
           </Popover.Panel>
         </Transition>
       </Popover>
-      
+      {showChat&&<Chat></Chat>}
     
     </div>
   )
